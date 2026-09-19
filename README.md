@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VEX Website
+This is the website for Raider Robotics VexU,
+built with [Next.js](https://nextjs.org) website utilizing [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
-
+## Development Setup:
+#### Clone the repository
+If you haven't already, clone the repository and navigate into it:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/msoe-vex/vex-website.git
+cd vex-website
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Install Node.js
+If you don't already have Node.js installed download and install it from [here](https://https://nodejs.org/en/download).
+you can verify the installation with:
+```bash
+node --version
+npm --version
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Install pnpm
+this project uses pnpm as it's package manager. Install pnpm with:
+```bash
+npm install -g pnpm
+```
+Verify the installation with:
+```bash
+pnpm --version
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Install project dependencies
+Install the dependencies:
+```bash
+pnpm install -g typescript ts-node
+pnpm install
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Start development server
+Run: 
+```bash
+pnpm dev
+```
+This runs the projects prebuilds, and starts the Next.js development server.
+Once running, you can open [http://localhost:3000](http://localhost:3000) in your browser.
+---
+#### Created by Avery Benjamin <benjamina@msoe.edu> (Akiisqt)
