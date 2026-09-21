@@ -43,5 +43,6 @@ pnpm dev
 ```
 This runs the projects prebuilds, and starts the Next.js development server.
 Once running, you can open [http://localhost:3000](http://localhost:3000) in your browser.
+
 ---
 #### Created by Avery Benjamin <benjamina@msoe.edu> (Akiisqt)

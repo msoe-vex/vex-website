@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_Tamma_2, Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/app/components/header";
+import Header from "@/app/components/header/index";
 import SubFooter from "@/app/components/subfooter";
 import Footer from "@/app/components/footer";
 
