@@ -6,9 +6,9 @@ import "./local.css"
 
 const items = [
     { label: "Top", href: "/#top" },
-    { label: "Sponsors", href: "/#Sponsors" },
-    { label: "Mission", href: "/#Mission" },
-    { label: "Projects", href: "/#Projects" },
+    { label: "Sponsors", href: "/home#sponsors" },
+    { label: "Mission", href: "/home#mission" },
+    { label: "Projects", href: "/home#projects" },
     { label: "Members", href: "/members" },
 ]
 
@@ -17,8 +17,13 @@ export default function Header() {
         <header id="top">
             <nav id="navheader">
                 <NavLink className="navbutton-logo" href="/home">
-                    <Image 
+                    <Image className="header-logo-white"
                         src="/branding/RR_Logo_White.png" 
+                        alt="Raider Robotics" 
+                        width="500" height="250"
+                    />
+                    <Image className="header-logo-red"
+                        src="/branding/RR_Logo.png" 
                         alt="Raider Robotics" 
                         width="500" height="250"
                     />

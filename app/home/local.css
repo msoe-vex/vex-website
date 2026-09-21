@@ -1,0 +1,22 @@
+main-header-div {
+    position: relative;
+    width: fit-content;
+    height: 800px;
+}
+
+#header-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#header-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 775px;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}

@@ -4,13 +4,14 @@ import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 const MIN_MOUSE_DIST = 65;
-const DOT_RADIUS = 1;
+const DOT_RADIUS = 2;
 const DOT_DIAMETER = DOT_RADIUS * 2;
 const LINE_DISTANCE = 75;
+const LINE_WIDTH = 3;
 const MIN_DOT_SPEED = 0.15;
 const MAX_DOT_SPEED = 0.45;
 
-const DOT_DENSITY = 0.15;
+const DOT_DENSITY = 0.25;
 
 let mouse_x = Number.MIN_SAFE_INTEGER;
 let mouse_y = Number.MIN_SAFE_INTEGER;
@@ -28,7 +29,7 @@ interface HeaderBackgroundProps {
 }
 
 export function set_mouse_position(
-    e: React.MouseEvent<HTMLCanvasElement>
+    e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
 ): void {
     const canvas = e.currentTarget;
     const BOUNDING_BOX = canvas.getBoundingClientRect();
@@ -146,6 +147,7 @@ export default function HeaderBackground({
                         ctx.beginPath();
                         ctx.moveTo(dot_1.x, dot_1.y);
                         ctx.lineTo(dot_2.x, dot_2.y);
+                        ctx.lineWidth = LINE_WIDTH;
 
                         if (currentTheme === "dark") {
                             ctx.strokeStyle = `rgba(225, 29, 72, ${

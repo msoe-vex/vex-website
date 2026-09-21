@@ -3,8 +3,11 @@
     width: 100%;
     padding: 0;
     align-self: center;
+    z-index: 100;
+    top: 0;
+    position: sticky;
 
-    background: rgba(220, 220, 225, 0.55);
+    background: rgba(220, 220, 225, 0.75);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
@@ -28,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     height: 100%;
     flex: .2 0 0px;
@@ -60,6 +64,17 @@
     height: 45px;
     object-fit: contain;
     transform: skewX(-30deg);
+
+    transition: opacity .5s ease;
+}
+
+.header-logo-white {
+    opacity: 1;
+}
+
+.header-logo-red {
+    position: absolute;
+    opacity: 0;
 }
 
 .navbutton-logo:hover {
@@ -72,14 +87,11 @@
         inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
-.navbutton-logo:hover img {
-        filter: brightness(0) saturate(100%)
-        invert(13%)
-        sepia(99%)
-        saturate(6485%)
-        hue-rotate(345deg)
-        brightness(83%)
-        contrast(107%);
+.navbutton-logo:hover .header-logo-white {
+    opacity: 0;
+}
+.navbutton-logo:hover .header-logo-red {
+    opacity: 1;
 }
 
 
