@@ -32,6 +32,7 @@ pnpm --version
 #### Install project dependencies
 Install the dependencies:
 ```bash
+pnpm approve-builds
 pnpm install -g typescript ts-node
 pnpm install
 ```
