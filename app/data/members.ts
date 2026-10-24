@@ -11,6 +11,7 @@ export interface Member {
     major?: string;
     image?: string;
     github?: string;
+    linkedin?: string;
     contributions?: string;
 }
 
@@ -37,6 +38,7 @@ export const members: Member[] = [
         major: "Computer Engineering",
         image: "/branding/RR_Icon.png",
         github: "https://github.com/Akiisqt",
+        linkedin: "https://www.linkedin.com/in/Akiisqt",
         contributions: "Odometry state estimator, autonomous motion profiling, and web development."
     },
     {

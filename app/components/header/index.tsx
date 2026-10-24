@@ -21,13 +21,17 @@ export default function Header() {
                         className="header-logo-white"
                         src="/branding/RR_Logo_White.png" 
                         alt="Raider Robotics" 
-                        width="500" height="250"
+                        width={500}
+                        height={250}
+                        style={{ width: "auto", height: "auto", maxHeight: "40px" }}
                     />
                     <Image
                         className="header-logo-red"
                         src="/branding/RR_Logo.png" 
                         alt="Raider Robotics" 
-                        width="500" height="250"
+                        width={500}
+                        height={250}
+                        style={{ width: "auto", height: "auto", maxHeight: "40px" }}
                     />
                 </NavLink>
                 

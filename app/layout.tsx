@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${noto.variable} ${baloo.variable} scroll-smooth`}>
+    <html lang="en" className={`${noto.variable} ${baloo.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <body className="bg-[#0d0d0d] text-white min-h-screen flex flex-col font-sans selection:bg-[#c5050c] selection:text-white">
         {/* Meeting Banner scrolls with document, above navbar */}
         <MeetingBanner />

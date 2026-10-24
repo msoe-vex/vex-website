@@ -64,7 +64,8 @@
 
 .navbutton-logo img {
     width: auto;
-    height: 40px;
+    height: auto;
+    max-height: 40px;
     object-fit: contain;
     transform: skewX(-20deg);
     transition: opacity 0.35s ease, transform 0.25s ease;
@@ -167,4 +168,50 @@
 
 .navbutton-row-link:hover span {
     color: #ffffff;
+}
+
+/* MOBILE RESPONSIVENESS (< 640px) */
+@media (max-width: 640px) {
+    #top {
+        height: 52px;
+    }
+
+    #navheader {
+        gap: 4px;
+    }
+
+    .navbutton-logo {
+        margin-left: -20px;
+        padding-left: 26px;
+        padding-right: 12px;
+        flex: 0.3 0 0px;
+    }
+
+    .navbutton-logo img {
+        height: 28px;
+    }
+
+    .navbutton-row {
+        gap: 3px;
+    }
+
+    .navbutton-row-link {
+        min-width: 52px;
+        padding: 0 8px;
+        letter-spacing: 0.02em;
+    }
+
+    .navbutton-row-link:last-child {
+        margin-right: -20px;
+        padding-right: 26px;
+    }
+
+    .navbutton-row-link span {
+        font-size: 0.78rem;
+        letter-spacing: 0.02em;
+    }
+
+    .navbutton-row-link:hover {
+        flex: 1.25 1 0;
+    }
 }

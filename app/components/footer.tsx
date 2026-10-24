@@ -22,6 +22,7 @@ export default function Footer() {
                                 src="/sponsors/MSOE.png"
                                 alt="Milwaukee School of Engineering"
                                 fill
+                                sizes="(max-width: 640px) 96px, 112px"
                                 style={{ objectFit: "contain" }}
                             />
                         </a>
@@ -34,6 +35,7 @@ export default function Footer() {
                                 src="/branding/RR_Logo.png"
                                 alt="Raider Robotics Red Logo"
                                 fill
+                                sizes="(max-width: 640px) 112px, 144px"
                                 style={{ objectFit: "contain" }}
                             />
                         </Link>
@@ -51,6 +53,7 @@ export default function Footer() {
                                 src="/branding/vex_logo.png"
                                 alt="VEX Robotics"
                                 fill
+                                sizes="(max-width: 640px) 96px, 112px"
                                 style={{ objectFit: "contain" }}
                             />
                         </a>

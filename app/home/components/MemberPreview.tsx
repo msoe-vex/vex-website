@@ -100,6 +100,7 @@ export default function MemberPreview() {
                                                     src={member.image}
                                                     alt={member.name}
                                                     fill
+                                                    sizes="48px"
                                                     style={{ objectFit: "contain" }}
                                                 />
                                             </div>

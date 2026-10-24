@@ -125,7 +125,7 @@ export default function ProjectsPage() {
                                                 width={150}
                                                 height={95}
                                                 className="opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                                                style={{ objectFit: "contain" }}
+                                                style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                                             />
                                         )}
                                     </div>

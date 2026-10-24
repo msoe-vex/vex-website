@@ -158,6 +158,7 @@ export default function MembersPage() {
                                                     src={member.image}
                                                     alt={member.name}
                                                     fill
+                                                    sizes="56px"
                                                     style={{ objectFit: "contain" }}
                                                 />
                                             </div>
@@ -179,16 +180,28 @@ export default function MembersPage() {
                                     )}
                                 </div>
 
-                                {member.github && (
-                                    <div className="border-t border-[#222222] pt-3 flex justify-end">
-                                        <a
-                                            href={member.github}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
-                                        >
-                                            GitHub Profile ↗
-                                        </a>
+                                {(member.github || member.linkedin) && (
+                                    <div className="border-t border-[#222222] pt-3 flex items-center justify-end gap-3">
+                                        {member.github && (
+                                            <a
+                                                href={member.github}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
+                                            >
+                                                GitHub ↗
+                                            </a>
+                                        )}
+                                        {member.linkedin && (
+                                            <a
+                                                href={member.linkedin}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-xs font-bold text-[#0A66C2] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
+                                            >
+                                                LinkedIn ↗
+                                            </a>
+                                        )}
                                     </div>
                                 )}
                             </div>

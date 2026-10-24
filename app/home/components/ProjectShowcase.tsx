@@ -65,7 +65,7 @@ export default function ProjectShowcase() {
                                                 width={140}
                                                 height={90}
                                                 className="opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                                                style={{ objectFit: "contain" }}
+                                                style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                                             />
                                         )}
                                     </div>

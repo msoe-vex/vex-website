@@ -1,49 +1,59 @@
-# VEX Website
-This is the website for Raider Robotics VexU,
-built with [Next.js](https://nextjs.org) website utilizing [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Raider Robotics Website (msoe-vex/website)
 
+Official web portal for **Raider Robotics**, the competitive collegiate VEX U robotics team at the **Milwaukee School of Engineering (MSOE)**.
 
-## Development Setup:
-#### Clone the repository
-If you haven't already, clone the repository and navigate into it:
-```bash
-git clone https://github.com/msoe-vex/vex-website.git
-cd vex-website
-```
+Built with [Next.js](https://nextjs.org) (App Router, Turbopack), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
 
-#### Install Node.js
-If you don't already have Node.js installed download and install it from [here](https://https://nodejs.org/en/download).
-you can verify the installation with:
-```bash
-node --version
-npm --version
-```
+---
 
-#### Install pnpm
-this project uses pnpm as it's package manager. Install pnpm with:
-```bash
-npm install -g pnpm
-```
-Verify the installation with:
-```bash
-pnpm --version
-```
+## 🚀 Quick Start & Development Setup
 
-#### Install project dependencies
-Install the dependencies:
-```bash
-pnpm approve-builds
-pnpm install -g typescript ts-node
-pnpm install
-```
+### Prerequisites
+- **Node.js**: v18.18+ or v20+ ([Download Node.js](https://nodejs.org/))
+- **pnpm**: This project strictly uses `pnpm` as its package manager.
+  ```bash
+  npm install -g pnpm
+  ```
 
-#### Start development server
-Run: 
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/msoe-vex/website.git
+   cd website
+   ```
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+### Running Locally
+Start the development server with automatic prebuild feature generation:
 ```bash
 pnpm dev
 ```
-This runs the projects prebuilds, and starts the Next.js development server.
-Once running, you can open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Linting & Code Quality
+Always ensure code passes ESLint before opening a PR:
+```bash
+npx eslint --no-warn-ignored app/
+```
 
 ---
-#### Created by Avery Benjamin <benjamina@msoe.edu> (Akiisqt)
+
+## 📂 Content & Static Data Architecture
+
+All static website content, rosters, project catalogs, and UI copy are centralized in `app/data/` for simple updates without touching component logic:
+
+| File | Purpose | What to Edit |
+| :--- | :--- | :--- |
+| [`app/data/locales.ts`](app/data/locales.ts) | **UI Text & Copy** | Section titles, mission statement, engineering pillars, contact buttons, and footer copyright text. |
+| [`app/data/projects.ts`](app/data/projects.ts) | **Project Catalog** | Robot platform builds, season tags, technical highlights, awards won, and GitHub repo links. |
+| [`app/data/members.ts`](app/data/members.ts) | **Team Roster** | Current & alumni member profiles, roles, subsystem (`Controls`, `Design`, `Eboard`), graduation year, GitHub, and LinkedIn links. |
+| [`app/data/events.ts`](app/data/events.ts) | **Calendar & Schedule** | Recurring weekly meetings, competition dates, workshop sessions, and room locations. |
+| [`app/data/announcements.ts`](app/data/announcements.ts) | **Meeting Banner** | Top announcement bar logic computing the next meeting day (Tuesday/Thursday) and location. |
+| [`app/data/sponsors.ts`](app/data/sponsors.ts) | **Sponsors Marquee** | Company names, logo image filenames in `public/sponsors/`, and external partner URLs. |
+
+---
+
+#### Created by Avery Benjamin ([@Akiisqt](https://github.com/Akiisqt))
