@@ -131,7 +131,7 @@ export default function MembersPage() {
                                     {/* Main Row: Big Square Image on left, Name/Role/Major/Contributions on right */}
                                     <div className="flex items-start gap-4">
                                         {member.image && (
-                                            <div className="chamfer-thumb-outer w-24 h-24 sm:w-28 sm:h-28 aspect-square flex-shrink-0">
+                                            <div className="chamfer-thumb-outer w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
                                                 <div className="chamfer-thumb-inner bg-[#222226]">
                                                     <Image
                                                         src={member.image || "/branding/RR_Icon.png"}

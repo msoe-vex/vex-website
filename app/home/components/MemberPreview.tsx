@@ -90,7 +90,7 @@ export default function MemberPreview() {
                                     {/* Main Row: Big Square Image on left, Name/Major/Contributions on right */}
                                     <div className="flex items-start gap-4">
                                         {member.image && (
-                                            <div className="chamfer-thumb-outer w-20 h-20 sm:w-24 sm:h-24 aspect-square flex-shrink-0">
+                                            <div className="chamfer-thumb-outer w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
                                                 <div className="chamfer-thumb-inner bg-[#222226]">
                                                     <Image
                                                         src={member.image || "/branding/RR_Icon.png"}
