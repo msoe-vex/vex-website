@@ -6,7 +6,7 @@ Built with [Next.js](https://nextjs.org) (App Router, Turbopack), [TypeScript](h
 
 ---
 
-## 🚀 Quick Start & Development Setup
+## Quick Start & Development Setup
 
 ### Prerequisites
 - **Node.js**: v18.18+ or v20+ ([Download Node.js](https://nodejs.org/))
@@ -40,13 +40,13 @@ pnpm type-check    # Verify TypeScript compilation (tsc --noEmit)
 pnpm test          # Run Playwright smoke test (verifies site compiles, runs & is usable)
 ```
 
-### 🤖 Continuous Integration & Deployment (CI/CD)
+### Continuous Integration & Deployment (CI/CD)
 * **Pull Requests**: Every PR against `main` automatically triggers the **CI Smoke & Quality Gate** workflow (`.github/workflows/ci.yml`), verifying that the codebase passes ESLint, compiles TypeScript, starts up and passes the usability smoke test, and builds the production static export.
 * **Production Deployment**: Pushes/merges to `main` automatically run verification and publish the static export to GitHub Pages (`.github/workflows/deploy.yml`) on `msoevex.com`.
 
 ---
 
-## 📂 Content & Static Data Architecture
+## Content & Static Data Architecture
 
 All static website content, rosters, project catalogs, and UI copy are centralized in `app/data/` for simple updates without touching component logic:
 
