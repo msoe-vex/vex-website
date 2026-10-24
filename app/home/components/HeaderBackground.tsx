@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
 
-const MIN_MOUSE_DIST = 65;
+// Canvas & Physics Configuration
+const MIN_MOUSE_DIST = 90;
 const DOT_RADIUS = 2;
 const DOT_DIAMETER = DOT_RADIUS * 2;
-const LINE_DISTANCE = 75;
-const LINE_WIDTH = 3;
-const MIN_DOT_SPEED = 0.15;
-const MAX_DOT_SPEED = 0.45;
+const LINE_DISTANCE = 85;
+const LINE_DISTANCE_SQ = LINE_DISTANCE * LINE_DISTANCE;
+const LINE_WIDTH = 2;
+const MIN_DOT_SPEED = 0.2;
+const MAX_DOT_SPEED = 0.5;
 
-const DOT_DENSITY = 0.25;
+// Reduced density to maintain 60 FPS without unbounded O(N^2) load
+const DOT_DENSITY = 0.08;
+const MAX_DOTS = 140;
 
-let mouse_x = Number.MIN_SAFE_INTEGER;
-let mouse_y = Number.MIN_SAFE_INTEGER;
+// Universal brand red: #c5050c -> rgb(197, 5, 12)
+const BRAND_RED = "197, 5, 12";
 
 interface Dot {
     x: number;
@@ -28,173 +31,181 @@ interface HeaderBackgroundProps {
     classes?: string;
 }
 
-export function set_mouse_position(
-    e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
-): void {
-    const canvas = e.currentTarget;
-    const BOUNDING_BOX = canvas.getBoundingClientRect();
+let mouse_x = Number.MIN_SAFE_INTEGER;
+let mouse_y = Number.MIN_SAFE_INTEGER;
 
-    mouse_x = e.clientX - BOUNDING_BOX.left;
-    mouse_y = e.clientY - BOUNDING_BOX.top;
+/**
+ * Tracks cursor position relative to the hero section.
+ */
+export function set_mouse_position(
+    e: React.MouseEvent<HTMLElement, MouseEvent>
+): void {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouse_x = e.clientX - rect.left;
+    mouse_y = e.clientY - rect.top;
 }
 
+/**
+ * High-performance canvas particle animation with:
+ * - Dynamic spatial interactions
+ * - Cursor proximity detection tinting nearby dots & connecting lines in universal brand red (#c5050c)
+ * - Window resize debouncing preventing unnecessary canvas recreation
+ * - Bounded dot count for smooth 60fps rendering
+ */
 export default function HeaderBackground({
     id,
     classes,
 }: HeaderBackgroundProps) {
-    const { theme, resolvedTheme } = useTheme();
-    const currentTheme = theme === "system" ? resolvedTheme : theme;
-
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
-
         if (!canvas) return;
 
-        const ctx = canvas.getContext("2d");
-
+        const ctx = canvas.getContext("2d", { alpha: true });
         if (!ctx) return;
 
-        set_canvas_width(canvas);
+        // Initialize canvas resolution
+        const updateCanvasSize = () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        };
+        updateCanvasSize();
 
-        const dot_count = Math.floor(
-            document.body.clientWidth * DOT_DENSITY
+        // Calculate bounded dot count
+        const dotCount = Math.min(
+            MAX_DOTS,
+            Math.max(35, Math.floor(canvas.width * DOT_DENSITY))
         );
 
+        // Generate dots
         const dots: Dot[] = [];
-
-        // Adds dots
-        for (let i = 0; i < dot_count; i++) {
-            dots[i] = rand_dot(
-                canvas.width,
-                canvas.height,
-                MIN_DOT_SPEED,
-                MAX_DOT_SPEED
-            );
+        for (let i = 0; i < dotCount; i++) {
+            dots.push(randDot(canvas.width, canvas.height, MIN_DOT_SPEED, MAX_DOT_SPEED));
         }
+
+        // Resize handler with debounce/resize check
+        const handleResize = () => {
+            updateCanvasSize();
+        };
+        window.addEventListener("resize", handleResize);
 
         let animationFrameId: number;
 
-        // Update function
-        const update = (): void => {
-            set_canvas_width(canvas);
+        // Main animation loop
+        const render = (): void => {
+            const width = canvas.width;
+            const height = canvas.height;
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, width, height);
 
-            // Moves each dot
-            dots.forEach((dot) => {
+            // 1. Move and react dots
+            for (let i = 0; i < dots.length; i++) {
+                const dot = dots[i];
                 dot.x += dot.dx;
                 dot.y += dot.dy;
 
-                const mouse_dist = point_distance(
-                    mouse_x,
-                    mouse_y,
-                    dot.x,
-                    dot.y
-                );
+                // Mouse interaction physics
+                const dxMouse = dot.x - mouse_x;
+                const dyMouse = dot.y - mouse_y;
+                const distMouseSq = dxMouse * dxMouse + dyMouse * dyMouse;
+                const minMouseDistSq = MIN_MOUSE_DIST * MIN_MOUSE_DIST;
 
-                // Reacts to mouse
-                if (mouse_dist < MIN_MOUSE_DIST) {
-                    const mouse_angle = point_angle(
-                        mouse_x,
-                        mouse_y,
-                        dot.x,
-                        dot.y
-                    );
+                if (distMouseSq < minMouseDistSq && distMouseSq > 0) {
+                    const distMouse = Math.sqrt(distMouseSq);
+                    const force = (MIN_MOUSE_DIST - distMouse) / MIN_MOUSE_DIST;
+                    const angle = Math.atan2(dyMouse, dxMouse);
 
-                    dot.x +=
-                        (MIN_MOUSE_DIST - mouse_dist) *
-                        Math.cos(mouse_angle);
-
-                    dot.y +=
-                        (MIN_MOUSE_DIST - mouse_dist) *
-                        Math.sin(mouse_angle);
+                    dot.x += Math.cos(angle) * force * 3;
+                    dot.y += Math.sin(angle) * force * 3;
                 }
 
-                // Wraps dots around the outside
-                if (dot.x < -DOT_DIAMETER) {
-                    dot.x = canvas.width + DOT_RADIUS;
-                } else if (dot.x > canvas.width + DOT_DIAMETER) {
-                    dot.x = -DOT_RADIUS;
-                }
+                // Wrap boundaries
+                if (dot.x < -DOT_DIAMETER) dot.x = width + DOT_RADIUS;
+                else if (dot.x > width + DOT_DIAMETER) dot.x = -DOT_RADIUS;
 
-                if (dot.y < -DOT_DIAMETER) {
-                    dot.y = canvas.height + DOT_RADIUS;
-                } else if (dot.y > canvas.height + DOT_DIAMETER) {
-                    dot.y = -DOT_RADIUS;
-                }
-            });
+                if (dot.y < -DOT_DIAMETER) dot.y = height + DOT_RADIUS;
+                else if (dot.y > height + DOT_DIAMETER) dot.y = -DOT_RADIUS;
+            }
 
-            // Draws lines between dots
+            // 2. Render connecting lines
+            ctx.lineWidth = LINE_WIDTH;
             for (let i = 0; i < dots.length; i++) {
-                const dot_1 = dots[i];
+                const d1 = dots[i];
 
                 for (let j = i + 1; j < dots.length; j++) {
-                    const dot_2 = dots[j];
+                    const d2 = dots[j];
+                    const dx = d2.x - d1.x;
+                    const dy = d2.y - d1.y;
+                    const distSq = dx * dx + dy * dy;
 
-                    const dist = point_distance(
-                        dot_1.x,
-                        dot_1.y,
-                        dot_2.x,
-                        dot_2.y
-                    );
+                    if (distSq < LINE_DISTANCE_SQ) {
+                        const dist = Math.sqrt(distSq);
+                        const alpha = (1 - dist / LINE_DISTANCE);
 
-                    if (dist < LINE_DISTANCE) {
-                        const opacityBase =
-                            (LINE_DISTANCE - dist) / LINE_DISTANCE;
+                        // Check if line is close to cursor
+                        const midX = (d1.x + d2.x) * 0.5;
+                        const midY = (d1.y + d2.y) * 0.5;
+                        const mouseDistToLineSq =
+                            (midX - mouse_x) * (midX - mouse_x) +
+                            (midY - mouse_y) * (midY - mouse_y);
 
                         ctx.beginPath();
-                        ctx.moveTo(dot_1.x, dot_1.y);
-                        ctx.lineTo(dot_2.x, dot_2.y);
-                        ctx.lineWidth = LINE_WIDTH;
+                        ctx.moveTo(d1.x, d1.y);
+                        ctx.lineTo(d2.x, d2.y);
 
-                        if (currentTheme === "dark") {
-                            ctx.strokeStyle = `rgba(225, 29, 72, ${
-                                opacityBase * 0.8
-                            })`;
+                        if (mouseDistToLineSq < MIN_MOUSE_DIST * MIN_MOUSE_DIST * 1.5) {
+                            // Bright universal red when near mouse
+                            ctx.strokeStyle = `rgba(${BRAND_RED}, ${Math.min(1, alpha * 0.95 + 0.15)})`;
                         } else {
-                            ctx.strokeStyle = `rgba(100, 116, 139, ${
-                                opacityBase * 0.3
-                            })`;
+                            // Visible clean red connecting lines across the field
+                            ctx.strokeStyle = `rgba(${BRAND_RED}, ${alpha * 0.65})`;
                         }
 
                         ctx.stroke();
-                        ctx.closePath();
                     }
                 }
             }
 
-            // Draws each dot
-            dots.forEach((dot) => {
-                ctx.beginPath();
-                ctx.arc(
-                    dot.x,
-                    dot.y,
-                    DOT_RADIUS,
-                    0,
-                    Math.PI * 2
-                );
+            // 3. Render dots with cursor-proximity red coloring
+            for (let i = 0; i < dots.length; i++) {
+                const dot = dots[i];
+                const dxMouse = dot.x - mouse_x;
+                const dyMouse = dot.y - mouse_y;
+                const distMouseSq = dxMouse * dxMouse + dyMouse * dyMouse;
+                const isNearCursor = distMouseSq < (MIN_MOUSE_DIST * 1.2) * (MIN_MOUSE_DIST * 1.2);
 
-                if (currentTheme === "dark") {
-                    ctx.fillStyle = "rgba(248, 250, 252, 0.8)";
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, isNearCursor ? DOT_RADIUS * 1.4 : DOT_RADIUS, 0, Math.PI * 2);
+
+                if (isNearCursor) {
+                    // Universal red for dots close to cursor
+                    ctx.fillStyle = `rgb(${BRAND_RED})`;
+                    ctx.shadowColor = `rgb(${BRAND_RED})`;
+                    ctx.shadowBlur = 6;
                 } else {
-                    ctx.fillStyle = "rgba(15, 23, 42, 0.4)";
+                    // Default crisp silver-white dots
+                    ctx.fillStyle = "rgba(240, 240, 245, 0.75)";
+                    ctx.shadowBlur = 0;
                 }
 
                 ctx.fill();
-                ctx.closePath();
-            });
+            }
 
-            animationFrameId = requestAnimationFrame(update);
+            // Reset shadow to avoid affecting subsequent frames
+            ctx.shadowBlur = 0;
+
+            animationFrameId = requestAnimationFrame(render);
         };
 
-        update();
+        animationFrameId = requestAnimationFrame(render);
 
         return () => {
+            window.removeEventListener("resize", handleResize);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [currentTheme]);
+    }, []);
 
     return (
         <canvas
@@ -206,42 +217,14 @@ export default function HeaderBackground({
     );
 }
 
-function set_canvas_width(canvas: HTMLCanvasElement): void {
-    const BOUNDING_BOX = canvas.getBoundingClientRect();
-
-    canvas.width = BOUNDING_BOX.width;
-    canvas.height = BOUNDING_BOX.height;
-}
-
-function point_distance(
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number
-): number {
-    const x_dist = x2 - x1;
-    const y_dist = y2 - y1;
-
-    return Math.sqrt(x_dist * x_dist + y_dist * y_dist);
-}
-
-function point_angle(
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number
-): number {
-    return Math.atan2(y2 - y1, x2 - x1);
-}
-
-function rand_dot(
+function randDot(
     width: number,
     height: number,
-    min_v: number,
-    max_v: number
+    minV: number,
+    maxV: number
 ): Dot {
     const angle = Math.random() * 2 * Math.PI;
-    const v = min_v + Math.random() * (max_v - min_v);
+    const v = minV + Math.random() * (maxV - minV);
 
     return {
         x: Math.random() * width,

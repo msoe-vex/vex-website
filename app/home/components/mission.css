@@ -1,0 +1,5 @@
+.mission-card {
+    /* Chamfer with negative slope y = -x on the bottom-left corner */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}

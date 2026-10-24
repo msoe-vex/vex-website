@@ -42,7 +42,7 @@ const sponsors : Sponsor[] = [
     },
     {
         alt: "Polymath Inc",
-        img: "Ploymath_Inc.png",
+        img: "Polymath_Inc.png",
         link: "http://www.polymathinc.com/",
     },
 ];

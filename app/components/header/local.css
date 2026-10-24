@@ -1,5 +1,5 @@
 #top {
-    height: 70px;
+    height: 64px;
     width: 100%;
     padding: 0;
     align-self: center;
@@ -7,24 +7,25 @@
     top: 0;
     position: sticky;
 
-    background: rgba(220, 220, 225, 0.75);
+    background: rgba(15, 15, 18, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-bottom: 3px solid #c5050c;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
 
     overflow: hidden;
-
     box-sizing: border-box;
 }
 
 #navheader {
     display: flex;
     align-items: stretch;
-
     width: 100%;
     height: 100%;
+    gap: 10px;
+    padding: 0;
+    overflow: hidden;
 }
 
 .navbutton-logo {
@@ -34,22 +35,24 @@
     position: relative;
 
     height: 100%;
-    flex: .2 0 0px;
+    flex: .22 0 0px;
 
-    margin-left: -20px;
-    padding: 0 20px;
+    /* Bleed off the left screen edge so the slant doesn't expose any gap */
+    margin-left: -35px;
+    padding-left: 45px;
+    padding-right: 25px;
 
     box-sizing: border-box;
 
-    color: #e9e9ec;
-    background: rgba(65, 65, 75, 0.48);
-
+    color: #ffffff;
+    background: rgba(28, 28, 34, 0.65);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
 
-    transform: skewX(30deg);
+    /* Negative slope y = -x: skewX(20deg) */
+    transform: skewX(20deg);
 
     transition:
         flex-basis 0.25s ease,
@@ -61,11 +64,10 @@
 
 .navbutton-logo img {
     width: auto;
-    height: 45px;
+    height: 40px;
     object-fit: contain;
-    transform: skewX(-30deg);
-
-    transition: opacity .5s ease;
+    transform: skewX(-20deg);
+    transition: opacity 0.35s ease, transform 0.25s ease;
 }
 
 .header-logo-white {
@@ -78,13 +80,9 @@
 }
 
 .navbutton-logo:hover {
-    flex-basis: 180px;
-
-    background: rgba(35, 35, 45, 0.78);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.22),
-        inset 0 0 15px rgba(255, 255, 255, 0.05);
+    flex-basis: 190px;
+    background: rgba(38, 38, 46, 0.85);
+    box-shadow: inset 0 0 15px rgba(197, 5, 12, 0.3);
 }
 
 .navbutton-logo:hover .header-logo-white {
@@ -92,21 +90,17 @@
 }
 .navbutton-logo:hover .header-logo-red {
     opacity: 1;
+    transform: skewX(-20deg) scale(1.05);
 }
-
 
 /* BUTTON CONTAINER */
 .navbutton-row {
     display: flex;
     align-items: stretch;
-
-    flex: .75;
+    flex: 1;
     height: 100%;
-
-    margin-left: auto;
-    gap: 6px;
+    gap: 10px;
 }
-
 
 /* BUTTONS */
 .navbutton-row-link {
@@ -115,62 +109,62 @@
     justify-content: center;
 
     height: 100%;
-
-    /* Equal starting sizes */
     flex: 1 1 0;
 
-    min-width: 100px;
-    padding: 0 24px;
+    min-width: 90px;
+    padding: 0 20px;
 
     box-sizing: border-box;
 
-    color: #e9e9ec;
+    color: #e5e7eb;
     text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 
-    background: rgba(65, 65, 75, 0.48);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(28, 28, 34, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
 
-    transform: skewX(30deg);
+    /* Negative slope y = -x: skewX(20deg) */
+    transform: skewX(20deg);
 
     transition:
-        flex 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease,
-        transform 0.25s ease;
+        flex 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
+/* Bleed the right-most button (Members) off the right screen edge */
 .navbutton-row-link:last-child {
-    margin-right: -20px;
+    margin-right: -35px;
+    padding-right: 45px;
 }
 
-/* Keep text straight */
+/* Keep text upright */
 .navbutton-row-link span {
-    transform: skewX(-30deg);
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    font-family: var(--font-heading);
+    transform: skewX(-20deg);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-family: var(--font-heading, var(--font-noto-sans, sans-serif));
 }
 
 /* HOVER */
 .navbutton-row-link:hover {
-    /* Takes more actual layout space */
-    flex: 2 1 0;
-
-    color: white;
-
-    background: rgba(35, 35, 45, 0.78);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.22),
-        inset 0 0 15px rgba(255, 255, 255, 0.05);
-
-    transform: skewX(30deg) scale(1.02);
-
+    flex: 1.6 1 0;
+    color: #ffffff;
+    background: rgba(197, 5, 12, 0.85);
+    border-color: rgba(239, 68, 68, 0.8);
+    box-shadow: 0 4px 25px rgba(197, 5, 12, 0.5);
     z-index: 2;
+}
+
+.navbutton-row-link:hover span {
+    color: #ffffff;
 }

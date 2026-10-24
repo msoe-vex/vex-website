@@ -1,10 +1,59 @@
+import locales from "@/app/data/locales";
+
 export default function SubFooter() {
     return (
-        <footer>
-            <h2>Contact Us</h2>
-            <a href="mailto:msoerobotics@gmail.com">
-                Email: msoerobotics@gmail.com
-            </a>
-        </footer>
-    )
+        <section id="contact" className="bg-[#141416] border-t-2 border-[#2b2b2b] py-10 px-4 text-white">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
+                        <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
+                        <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            {locales.contact.sectionSubtitle}
+                        </span>
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight uppercase">
+                        {locales.contact.heading}
+                    </h2>
+                    <p className="text-gray-400 text-xs md:text-sm max-w-xl">
+                        {locales.contact.description}
+                    </p>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                    <a
+                        href={locales.contact.discordUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2"
+                        style={{
+                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
+                        }}
+                    >
+                        <span>{locales.contact.discordButton}</span>
+                        <span>↗</span>
+                    </a>
+                    <a
+                        href={`mailto:${locales.contact.emailAddress}`}
+                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg"
+                        style={{
+                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
+                        }}
+                    >
+                        {locales.contact.emailButton}
+                    </a>
+                    <a
+                        href={locales.contact.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-5 py-2.5 bg-[#222226] hover:bg-[#2e2e34] text-gray-200 hover:text-white border border-[#3a3a3a] text-xs font-bold uppercase tracking-wider transition-colors"
+                        style={{
+                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
+                        }}
+                    >
+                        {locales.contact.githubButton}
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
 }
