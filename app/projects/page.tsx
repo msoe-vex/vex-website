@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import projects, { Project } from "@/app/data/projects";
+import locales from "@/app/data/locales";
 import Image from "next/image";
 
+const seasons = ["All", "2024-2025", "2023-2024", "2022-2023", "2021-2022"];
+
 export default function ProjectsPage() {
-    const seasons = ["All", ...Array.from(new Set(projects.map((p) => p.season)))];
-    const [selectedSeason, setSelectedSeason] = useState("All");
+    const [selectedSeason, setSelectedSeason] = useState<string>("All");
     const [highlightedId, setHighlightedId] = useState<string | null>(null);
 
     useEffect(() => {
@@ -15,8 +17,8 @@ export default function ProjectsPage() {
             if (hash.startsWith("#select#")) {
                 const targetId = hash.replace("#select#", "");
                 setHighlightedId(targetId);
-                const targetProject = projects.find((p) => p.id === targetId);
-                if (targetProject) {
+                const targetProj = projects.find((p) => p.id === targetId);
+                if (targetProj) {
                     setSelectedSeason("All");
                 }
                 setTimeout(() => {
@@ -49,38 +51,34 @@ export default function ProjectsPage() {
                 <div className="border-b-2 border-[#2b2b2b] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
-                            <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
+                            <span className="section-diamond" />
                             <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
-                                Robot Architecture & History
+                                {locales.projects.pageSubtitle}
                             </span>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
-                            Projects & Robot Builds
+                            {locales.projects.archiveTitle}
                         </h1>
                     </div>
                     <p className="text-gray-400 text-xs md:text-sm max-w-md">
-                        Complete archive of Raider Robotics competitive robot platforms, custom sub-assemblies, mechanical specifications, awards, and open-source codebases.
+                        {locales.projects.pageDescription}
                     </p>
                 </div>
 
                 {/* Season Filter Bar */}
                 <div className="flex items-center gap-2 bg-[#141416] p-3 border border-[#26262b]">
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mr-2">
-                        Filter Season:
+                        {locales.projects.filterLabel}
                     </span>
                     {seasons.map((season) => (
                         <button
                             key={season}
                             onClick={() => setSelectedSeason(season)}
-                            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider transition-all ${
+                            className={`px-3 py-1 text-xs font-bold uppercase tracking-wider transition-all clip-chamfer-btn ${
                                 selectedSeason === season
                                     ? "bg-[#c5050c] text-white shadow-md"
                                     : "bg-[#222222] text-gray-400 hover:text-white hover:bg-[#2c2c32]"
                             }`}
-                            style={{
-                                /* Chamfer with negative slope y = -x on bottom-left */
-                                clipPath: "polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px))"
-                            }}
                         >
                             {season}
                         </button>
@@ -127,7 +125,7 @@ export default function ProjectsPage() {
 
                                     {/* Body (Text section) */}
                                     <div className="p-5 flex flex-col gap-3 flex-1">
-                                        <h2 className="text-xl font-bold text-white group-hover:text-[#f87171] transition-colors">
+                                        <h2 className="text-xl font-bold text-white group-hover:text-[#c5050c] transition-colors">
                                             {project.title}
                                         </h2>
                                         <p className="text-xs text-gray-300 leading-relaxed">
@@ -138,7 +136,7 @@ export default function ProjectsPage() {
                                         {project.highlights && project.highlights.length > 0 && (
                                             <div className="flex flex-col gap-1.5 pt-2 border-t border-[#26262b]">
                                                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                                                    Technical Highlights
+                                                    {locales.projects.technicalHighlights}
                                                 </span>
                                                 <ul className="text-xs text-gray-300 list-disc list-inside space-y-1">
                                                     {project.highlights.map((item, idx) => (
@@ -148,13 +146,13 @@ export default function ProjectsPage() {
                                             </div>
                                         )}
 
-                                        {/* Awards: In the text section, pushed to the bottom */}
+                                        {/* Awards: Pinned to bottom of text section */}
                                         {project.awards && project.awards.length > 0 && (
-                                            <div className="flex flex-wrap gap-1 pt-2 mt-auto">
+                                            <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
                                                 {project.awards.map((award, idx) => (
                                                     <span
                                                         key={idx}
-                                                        className="inline-block bg-[#242428] text-yellow-400 border border-yellow-500/30 text-[11px] font-semibold px-2 py-0.5"
+                                                        className="inline-block bg-[#242428] text-yellow-400 border border-yellow-500/30 text-[10px] font-semibold px-2 py-0.5"
                                                     >
                                                         🏆 {award}
                                                     </span>
@@ -164,17 +162,16 @@ export default function ProjectsPage() {
                                     </div>
                                 </div>
 
-                                {/* GitHub Action */}
+                                {/* Link / Action Footer */}
                                 {project.githubUrl && (
-                                    <div className="p-3 bg-[#111114] border-t border-[#26262b] flex items-center justify-between">
-                                        <span className="text-xs text-gray-400 font-mono">Source Code & CAD</span>
+                                    <div className="p-4 bg-[#111114] border-t border-[#26262b] flex items-center justify-between">
                                         <a
                                             href={project.githubUrl}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
                                         >
-                                            GitHub ↗
+                                            {locales.projects.sourceLink} ↗
                                         </a>
                                     </div>
                                 )}

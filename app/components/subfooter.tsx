@@ -8,7 +8,7 @@ export default function SubFooter() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
+                            <span className="section-diamond" />
                             <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
                                 {locales.contact.sectionSubtitle}
                             </span>
@@ -38,23 +38,25 @@ export default function SubFooter() {
                     </a>
                     <a
                         href={`mailto:${locales.contact.emailAddress}`}
-                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg"
+                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2"
                         style={{
                             clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
                         }}
                     >
-                        {locales.contact.emailButton}
+                        <span>{locales.contact.emailButton}</span>
+                        <span>↗</span>
                     </a>
                     <a
                         href={locales.contact.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-5 py-2.5 bg-[#222226] hover:bg-[#2e2e34] text-gray-200 hover:text-white border border-[#3a3a3a] text-xs font-bold uppercase tracking-wider transition-colors"
+                        className="px-5 py-2.5 bg-[#222226] hover:bg-[#2e2e34] text-gray-200 hover:text-white border border-[#3a3a3a] text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2"
                         style={{
                             clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
                         }}
                     >
-                        {locales.contact.githubButton}
+                        <span>{locales.contact.githubButton}</span>
+                        <span>↗</span>
                     </a>
                 </div>
             </div>

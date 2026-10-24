@@ -47,13 +47,16 @@ export const locales = {
         sectionSubtitle: "Engineering & Legacy",
         recentTitle: "Recent Projects & Robots",
         archiveTitle: "Projects & Robot Builds",
+        pageSubtitle: "Robot Architecture & History",
         recentCta: "View All Projects & Archive →",
         pageDescription:
             "Complete archive of Raider Robotics competitive robot platforms, custom sub-assemblies, mechanical specifications, awards, and open-source codebases.",
         homeDescription:
             "Explore our competitive robot builds, custom mechanical sub-assemblies, open-source code repositories, and season tournament achievements.",
         cardCta: "Learn more in Projects",
-        sourceLink: "Source Code & CAD"
+        sourceLink: "Source Code & CAD",
+        filterLabel: "Filter Season:",
+        technicalHighlights: "Technical Highlights"
     },
     members: {
         sectionSubtitle: "Team Leadership",
@@ -99,4 +102,3 @@ export const locales = {
 };
 
 export default locales;
-

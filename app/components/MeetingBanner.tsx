@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import meetingAnnouncement, { getNextMeetingText } from "@/app/data/announcements";
+import meetingAnnouncement, { getNextMeetingDetails } from "@/app/data/announcements";
 import Link from "next/link";
 
 /**
@@ -9,8 +9,7 @@ import Link from "next/link";
  * Scrolls naturally with the page content above the navigation bar.
  */
 export default function MeetingBanner() {
-    // Initialize announcement text directly from dynamic calculation without synchronous set-state in effect
-    const [announcementText] = useState(() => getNextMeetingText().text);
+    const [details] = useState(() => getNextMeetingDetails());
 
     if (!meetingAnnouncement.show) return null;
 
@@ -20,17 +19,15 @@ export default function MeetingBanner() {
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-2 h-2 bg-[#c5050c] rotate-45 animate-pulse" />
                     <span className="font-semibold text-gray-200">
-                        {announcementText}
+                        {details.text}
                     </span>
                 </div>
-                {meetingAnnouncement.link && (
-                    <Link
-                        href={meetingAnnouncement.link}
-                        className="text-[#f87171] hover:text-white underline underline-offset-2 transition-colors uppercase font-bold text-xs"
-                    >
-                        Directions / Calendar →
-                    </Link>
-                )}
+                <Link
+                    href={details.link}
+                    className="text-[#c5050c] hover:text-white underline underline-offset-2 transition-colors uppercase font-bold text-xs"
+                >
+                    Directions / Calendar →
+                </Link>
             </div>
         </aside>
     );

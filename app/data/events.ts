@@ -22,16 +22,6 @@ export const DEFAULT_LOCATION = "We Energies STEM Center at MSOE";
 
 export const recurringEvents: RecurringEvent[] = [
     {
-        id: "rec-general-meeting",
-        title: "Weekly General Team Meeting",
-        dayOfWeek: "Thursday",
-        frequency: "Weekly",
-        time: "6:00 PM - 8:00 PM",
-        location: DEFAULT_LOCATION,
-        locationUrl: STEM_CENTER_URL,
-        description: "Full team sync covering weekly sprint updates, subsystem milestones, match strategies, and open workshop hours."
-    },
-    {
         id: "rec-build-session",
         title: "Subsystem Build & CAD Open Lab",
         dayOfWeek: "Tuesday",
@@ -50,6 +40,16 @@ export const recurringEvents: RecurringEvent[] = [
         location: DEFAULT_LOCATION,
         locationUrl: STEM_CENTER_URL,
         description: "Autonomous pathing tuning, odometry calibration, PID testing, and driver practice on the official game field."
+    },
+    {
+        id: "rec-general-meeting",
+        title: "Weekly General Team Meeting",
+        dayOfWeek: "Thursday",
+        frequency: "Weekly",
+        time: "6:00 PM - 8:00 PM",
+        location: DEFAULT_LOCATION,
+        locationUrl: STEM_CENTER_URL,
+        description: "Full team sync covering weekly sprint updates, subsystem milestones, match strategies, and open workshop hours."
     }
 ];
 

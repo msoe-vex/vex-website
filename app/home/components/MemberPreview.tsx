@@ -49,7 +49,7 @@ export default function MemberPreview() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
+                            <span className="section-diamond" />
                             <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
                                 {locales.members.sectionSubtitle}
                             </span>
