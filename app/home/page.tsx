@@ -44,6 +44,7 @@ export default function Home() {
                             alt="Raider Robotics"
                             fill
                             priority
+                            loading="eager"
                             sizes="(max-width: 640px) 288px, (max-width: 768px) 384px, 440px"
                             className="transition-opacity duration-300 group-hover:opacity-0"
                             style={{ objectFit: "contain" }}
@@ -52,6 +53,7 @@ export default function Home() {
                             src="/branding/RR_Logo.png"
                             alt="Raider Robotics"
                             fill
+                            loading="eager"
                             sizes="(max-width: 640px) 288px, (max-width: 768px) 384px, 440px"
                             className="opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
                             style={{ objectFit: "contain" }}

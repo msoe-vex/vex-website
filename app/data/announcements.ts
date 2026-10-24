@@ -1,4 +1,4 @@
-import { DEFAULT_LOCATION } from "./events";
+import { recurringEvents, DEFAULT_LOCATION } from "./events";
 
 export interface Announcement {
     show: boolean;
@@ -11,9 +11,9 @@ export interface Announcement {
 
 /**
  * Computes the upcoming meeting text dynamically based on the current day of the week:
- * - Tuesdays: Build & CAD lab at 5:30 PM (id: rec-build-session)
- * - Wednesdays: Controls & Autonomous at 6:00 PM (id: rec-controls-session)
- * - Thursdays: General team meeting at 6:00 PM (id: rec-general-meeting)
+ * - Mondays: General Team Meeting & Collaboration at 6:00 PM (id: rec-meeting-mon)
+ * - Wednesdays: General Team Meeting & Collaboration at 6:00 PM (id: rec-meeting-wed)
+ * - Fridays: General Team Meeting & Collaboration at 6:00 PM (id: rec-meeting-fri)
  */
 export function getNextMeetingDetails(): {
     text: string;
@@ -25,33 +25,33 @@ export function getNextMeetingDetails(): {
     const now = new Date();
     const day = now.getDay(); // 0: Sun, 1: Mon, 2: Tue, 3: Wed, 4: Thu, 5: Fri, 6: Sat
 
-    let meetingDayName = "Tuesday";
-    let meetingTime = "5:30 PM";
-    let meetingType = "Build & CAD Lab";
-    let eventId = "rec-build-session";
+    let meetingDayName = "Monday";
+    let eventId = "rec-meeting-mon";
 
-    if (day === 4) {
-        meetingDayName = "Today (Thursday)";
-        meetingTime = "6:00 PM";
-        meetingType = "General Team Meeting";
-        eventId = "rec-general-meeting";
+    if (day === 1) {
+        meetingDayName = "Today (Monday)";
+        eventId = "rec-meeting-mon";
+    } else if (day === 2) {
+        meetingDayName = "Wednesday";
+        eventId = "rec-meeting-wed";
     } else if (day === 3) {
         meetingDayName = "Today (Wednesday)";
-        meetingTime = "6:00 PM";
-        meetingType = "Controls Programming";
-        eventId = "rec-controls-session";
-    } else if (day === 2) {
-        meetingDayName = "Today (Tuesday)";
-        meetingTime = "5:30 PM";
-        meetingType = "Build & CAD Lab";
-        eventId = "rec-build-session";
-    } else if (day > 4) {
-        // Friday or Saturday -> Next is Tuesday build session
-        meetingDayName = "Tuesday";
-        meetingTime = "5:30 PM";
-        meetingType = "Build & CAD Lab";
-        eventId = "rec-build-session";
+        eventId = "rec-meeting-wed";
+    } else if (day === 4) {
+        meetingDayName = "Friday";
+        eventId = "rec-meeting-fri";
+    } else if (day === 5) {
+        meetingDayName = "Today (Friday)";
+        eventId = "rec-meeting-fri";
+    } else {
+        // Saturday (6) or Sunday (0) -> Next is Monday
+        meetingDayName = "Monday";
+        eventId = "rec-meeting-mon";
     }
+
+    const targetEvent = recurringEvents.find((e) => e.id === eventId);
+    const meetingTime = targetEvent ? targetEvent.time.split(" - ")[0] : "6:00 PM";
+    const meetingType = targetEvent ? targetEvent.title : "General Team Meeting and Collaboration";
 
     const text = `Next Meeting: ${meetingDayName} at ${meetingTime} (${meetingType}) at the ${DEFAULT_LOCATION}`;
     const link = `/events#select#${eventId}`;
@@ -67,11 +67,16 @@ export function getNextMeetingDetails(): {
 
 export const meetingAnnouncement: Announcement = {
     show: true,
-    text: "Next Meeting: Tuesday at 5:30 PM (Build & CAD Lab) at the We Energies STEM Center at MSOE",
-    date: "Tuesday @ 5:30 PM",
-    location: DEFAULT_LOCATION,
-    eventId: "rec-build-session",
-    link: "/events#select#rec-build-session"
+    ...(() => {
+        const details = getNextMeetingDetails();
+        return {
+            text: details.text,
+            date: details.dateStr,
+            location: details.location,
+            eventId: details.eventId,
+            link: details.link
+        };
+    })()
 };
 
 export default meetingAnnouncement;

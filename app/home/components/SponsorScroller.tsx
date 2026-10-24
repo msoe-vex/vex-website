@@ -30,7 +30,7 @@ export default function SponsorScroller() {
                         </p>
                         <a
                             href={`mailto:${locales.contact.emailAddress}?subject=${encodeURIComponent(locales.sponsors.sponsorSubject)}`}
-                            className="inline-flex items-center px-4 py-1.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors clip-angle-action"
+                            className="inline-flex items-center px-4 py-1.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors clip-chamfer-btn"
                         >
                             {locales.sponsors.ctaButton}
                         </a>
@@ -52,10 +52,7 @@ export default function SponsorScroller() {
                                     href={sponsor.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="sponsor-card group flex items-center justify-between gap-4 p-3 bg-[#1e1e22] hover:bg-[#28282e] border-l-4 border-transparent hover:border-[#c5050c] transition-all duration-200 flex-shrink-0 min-w-[220px]"
-                                    style={{
-                                        clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
-                                    }}
+                                    className="sponsor-card group flex items-center justify-between gap-4 p-3 bg-[#1e1e22] hover:bg-[#28282e] border-l-4 border-transparent hover:border-[#c5050c] transition-all duration-200 flex-shrink-0 min-w-[220px] clip-chamfer-btn"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center">

@@ -3,10 +3,6 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
-.clip-angle-action {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-}
-
 .sponsor-track-horizontal {
     display: flex;
     width: max-content;

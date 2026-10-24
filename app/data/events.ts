@@ -22,85 +22,53 @@ export const DEFAULT_LOCATION = "We Energies STEM Center at MSOE";
 
 export const recurringEvents: RecurringEvent[] = [
     {
-        id: "rec-build-session",
-        title: "Subsystem Build & CAD Open Lab",
-        dayOfWeek: "Tuesday",
+        id: "rec-meeting-mon",
+        title: "General Team Meeting and Collaboration",
+        dayOfWeek: "Monday",
         frequency: "Weekly",
-        time: "5:30 PM - 8:30 PM",
+        time: "6:00 PM - 9:00 PM",
         location: DEFAULT_LOCATION,
         locationUrl: STEM_CENTER_URL,
-        description: "Dedicated prototyping, CNC milling, 3D printing, and mechanical robot assembly."
+        description: "Work on robot and related systems."
     },
     {
-        id: "rec-controls-session",
-        title: "Controls & Autonomous Programming",
+        id: "rec-meeting-wed",
+        title: "General Team Meeting and Collaboration",
         dayOfWeek: "Wednesday",
         frequency: "Weekly",
-        time: "6:00 PM - 8:00 PM",
+        time: "6:00 PM - 9:00 PM",
         location: DEFAULT_LOCATION,
         locationUrl: STEM_CENTER_URL,
-        description: "Autonomous pathing tuning, odometry calibration, PID testing, and driver practice on the official game field."
+        description: "Work on robot and related systems."
     },
     {
-        id: "rec-general-meeting",
-        title: "Weekly General Team Meeting",
-        dayOfWeek: "Thursday",
+        id: "rec-meeting-fri",
+        title: "General Team Meeting and Collaboration",
+        dayOfWeek: "Friday",
         frequency: "Weekly",
-        time: "6:00 PM - 8:00 PM",
+        time: "6:00 PM - 9:00 PM",
         location: DEFAULT_LOCATION,
         locationUrl: STEM_CENTER_URL,
-        description: "Full team sync covering weekly sprint updates, subsystem milestones, match strategies, and open workshop hours."
+        description: "Work on robot and related systems."
     }
 ];
 
 export const customEvents: CustomEvent[] = [
-    {
-        id: "evt-kickoff",
-        title: "VEX U Season Strategy Workshop",
-        date: "September 12, 2026",
-        category: "Workshop",
-        time: "10:00 AM - 4:00 PM",
-        location: DEFAULT_LOCATION,
-        locationUrl: STEM_CENTER_URL,
-        description: "In-depth game analysis, rules breakdown, CAD brainstorm, and subsystem assignment."
-    },
-    {
-        id: "evt-midwest-qualifier",
-        title: "Midwest VEX U Invitational",
-        date: "December 05, 2026",
-        category: "Competition",
-        time: "8:00 AM - 6:00 PM",
-        location: "Purdue University Armory",
-        locationUrl: "https://www.purdue.edu/",
-        description: "Collegiate regional qualifier competing against Midwest universities for World Championship qualification slots."
-    },
-    {
-        id: "evt-stem-outreach",
-        title: "MSOE STEM Center Youth Robotics Day",
-        date: "February 20, 2027",
-        category: "Outreach",
-        time: "9:00 AM - 2:00 PM",
-        location: DEFAULT_LOCATION,
-        locationUrl: STEM_CENTER_URL,
-        description: "Mentoring high school and middle school VEX V5 teams, running live demo matches, and judging practice skills."
-    },
-    {
-        id: "evt-vex-worlds",
-        title: "VEX U World Championship 2027",
-        date: "April 24 - April 27, 2027",
-        category: "Competition",
-        time: "All Day",
-        location: "Kay Bailey Hutchison Convention Center, Dallas, TX",
-        locationUrl: "https://www.vexrobotics.com/vexu",
-        description: "The pinnacle collegiate championship featuring top international university robotics programs."
-    }
+    // {
+    //     id: "evt-kickoff",
+    //     title: "VEX U Season Strategy Workshop",
+    //     date: "September 12, 2026",
+    //     category: "Workshop",
+    //     time: "10:00 AM - 4:00 PM",
+    //     location: DEFAULT_LOCATION,
+    //     locationUrl: STEM_CENTER_URL,
+    //     description: "In-depth game analysis, rules breakdown, CAD brainstorm, and subsystem assignment."
+    // },
 ];
 
 const eventsData = {
     recurringEvents,
-    customEvents,
-    DEFAULT_LOCATION,
-    STEM_CENTER_URL
+    customEvents
 };
 
 export default eventsData;

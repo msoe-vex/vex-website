@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import meetingAnnouncement, { getNextMeetingDetails } from "@/app/data/announcements";
+import locales from "@/app/data/locales";
 import Link from "next/link";
 
 /**
@@ -26,7 +27,7 @@ export default function MeetingBanner() {
                     href={details.link}
                     className="text-[#c5050c] hover:text-white underline underline-offset-2 transition-colors uppercase font-bold text-xs"
                 >
-                    Directions / Calendar →
+                    {locales.events.bannerLink}
                 </Link>
             </div>
         </aside>

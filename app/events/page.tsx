@@ -1,34 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { recurringEvents, customEvents, DEFAULT_LOCATION, STEM_CENTER_URL } from "@/app/data/events";
 import locales from "@/app/data/locales";
+import { getEventsSchema } from "@/app/data/seo";
+import { useHashSelection } from "@/app/util/useHashSelection";
 
 export default function EventsPage() {
-    const [highlightedId, setHighlightedId] = useState<string | null>(null);
-
-    useEffect(() => {
-        const handleHash = () => {
-            const hash = window.location.hash;
-            if (hash.startsWith("#select#")) {
-                const targetId = hash.replace("#select#", "");
-                setHighlightedId(targetId);
-                setTimeout(() => {
-                    const el = document.getElementById(targetId);
-                    if (el) {
-                        el.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }
-                }, 100);
-            }
-        };
-
-        handleHash();
-        window.addEventListener("hashchange", handleHash);
-        return () => window.removeEventListener("hashchange", handleHash);
-    }, []);
+    const highlightedId = useHashSelection();
 
     return (
         <main className="min-h-screen bg-[#0d0d0d] text-white py-12 px-4">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(getEventsSchema()) }}
+            />
             <div className="max-w-6xl mx-auto flex flex-col gap-10">
                 {/* Header */}
                 <div className="border-b-2 border-[#2b2b2b] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -108,7 +93,7 @@ export default function EventsPage() {
                                                     )}
                                                 </div>
                                             </td>
-                                            <td className="py-3.5 px-4 font-mono text-gray-300 whitespace-nowrap">
+                                            <td className="py-3.5 px-4 text-gray-300 whitespace-nowrap">
                                                 {event.time}
                                             </td>
                                             <td className="py-3.5 px-4">
@@ -163,7 +148,14 @@ export default function EventsPage() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-[#222228]">
-                                {customEvents.map((event) => {
+                                {customEvents.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={4} className="py-8 px-4 text-center text-gray-400">
+                                            {locales.events.emptyEventsText}
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    customEvents.map((event) => {
                                     const isSelected = highlightedId === event.id;
 
                                     return (
@@ -176,7 +168,7 @@ export default function EventsPage() {
                                                     : "hover:bg-[#1a1a1f]"
                                             }`}
                                         >
-                                            <td className="py-3.5 px-4 font-mono font-bold text-white whitespace-nowrap">
+                                            <td className="py-3.5 px-4 font-bold text-white whitespace-nowrap">
                                                 <div className="flex items-center gap-2">
                                                     <span>{event.date}</span>
                                                     {isSelected && (
@@ -223,7 +215,8 @@ export default function EventsPage() {
                                             </td>
                                         </tr>
                                     );
-                                })}
+                                })
+                                )}
                             </tbody>
                         </table>
                     </div>

@@ -88,4 +88,30 @@ export const projects: Project[] = [
     }
 ];
 
+/**
+ * Comparator sorting primarily by season descending and secondarily by orderIndex descending.
+ */
+export function compareProjects(a: Project, b: Project): number {
+    if (a.season !== b.season) {
+        return b.season.localeCompare(a.season);
+    }
+    return b.orderIndex - a.orderIndex;
+}
+
+/**
+ * Returns a sorted clone of the projects list.
+ */
+export function getSortedProjects(list: Project[] = projects): Project[] {
+    return [...list].sort(compareProjects);
+}
+
+/**
+ * Dynamically derives unique sorted seasons from the projects archive with "All" prepended.
+ */
+export function getAvailableSeasons(list: Project[] = projects): string[] {
+    const seasonSet = new Set(list.map((p) => p.season));
+    const sorted = Array.from(seasonSet).sort().reverse();
+    return ["All", ...sorted];
+}
+
 export default projects;

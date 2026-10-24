@@ -43,7 +43,7 @@ export default function MemberPreview() {
     if (eboardList.length === 0) return null;
 
     return (
-        <section id="members-preview" className="py-8 px-4 bg-[#0d0d0f] text-white border-t border-[#1f1f23]">
+        <section id="members-preview" className="py-8 px-4 bg-[#0d0d0d] text-white border-t border-[#1f1f23]">
             <div className="max-w-7xl mx-auto flex flex-col gap-6">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
@@ -75,53 +75,55 @@ export default function MemberPreview() {
                         >
                             <Link
                                 href={`/members#select#${member.id}`}
-                                className="chamfer-card-inner bg-[#161619] p-5 flex flex-col justify-between gap-3 cursor-pointer h-full"
+                                className="chamfer-card-inner bg-[#161619] flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                             >
-                                <div className="flex flex-col gap-3">
+                                <div className="p-5 flex flex-col gap-3 flex-1">
                                     <div className="flex items-center justify-between">
                                         <span className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]">
                                             {member.role}
                                         </span>
-                                        <span className="text-xs text-gray-400 font-mono">
+                                        <span className="text-xs text-gray-400">
                                             Class of {member.gradYear}
                                         </span>
                                     </div>
 
-                                    <div className="flex items-center gap-3">
+                                    {/* Main Row: Big Square Image on left, Name/Major/Contributions on right */}
+                                    <div className="flex items-start gap-4">
                                         {member.image && (
-                                            <div
-                                                className="relative w-12 h-12 flex-shrink-0 bg-[#222226] border border-[#333338] p-1 overflow-hidden"
-                                                style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 6px 100%, 0 calc(100% - 6px))" }}
-                                            >
-                                                <Image
-                                                    src={member.image}
-                                                    alt={member.name}
-                                                    fill
-                                                    sizes="48px"
-                                                    style={{ objectFit: "contain" }}
-                                                />
+                                            <div className="chamfer-thumb-outer w-20 h-20 sm:w-24 sm:h-24 aspect-square flex-shrink-0">
+                                                <div className="chamfer-thumb-inner bg-[#222226]">
+                                                    <Image
+                                                        src={member.image || "/branding/RR_Icon.png"}
+                                                        alt={member.name}
+                                                        fill
+                                                        priority
+                                                        loading="eager"
+                                                        sizes="(max-width: 640px) 80px, 96px"
+                                                        style={{ objectFit: "cover", objectPosition: "center" }}
+                                                    />
+                                                </div>
                                             </div>
                                         )}
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white group-hover:text-[#c5050c] transition-colors leading-snug">
+                                        <div className="flex flex-col flex-1 min-w-0">
+                                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#c5050c] transition-colors leading-tight">
                                                 {member.name}
                                             </h3>
                                             {member.major && (
-                                                <p className="text-xs font-semibold text-gray-400">
+                                                <p className="text-xs font-semibold text-gray-400 mt-1">
                                                     {member.major}
+                                                </p>
+                                            )}
+                                            {member.contributions && (
+                                                <p className="text-xs text-gray-400 leading-relaxed mt-2 line-clamp-3">
+                                                    {member.contributions}
                                                 </p>
                                             )}
                                         </div>
                                     </div>
-
-                                    {member.contributions && (
-                                        <p className="text-xs text-gray-400 leading-relaxed border-t border-[#26262b] pt-2 line-clamp-2">
-                                            {member.contributions}
-                                        </p>
-                                    )}
                                 </div>
 
-                                <div className="pt-2 border-t border-[#222226] flex items-center justify-between text-xs font-bold text-[#c5050c] group-hover:text-white uppercase tracking-wider">
+                                {/* Bottom Card Prompt with darker background and clear divide matching ProjectShowcase */}
+                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#c5050c] group-hover:text-white uppercase tracking-wider">
                                     <span>{locales.members.cardCta}</span>
                                     <span>→</span>
                                 </div>

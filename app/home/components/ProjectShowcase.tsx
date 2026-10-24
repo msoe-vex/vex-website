@@ -1,17 +1,10 @@
-import projects, { Project } from "@/app/data/projects";
+import { Project, getSortedProjects } from "@/app/data/projects";
 import locales from "@/app/data/locales";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProjectShowcase() {
-    const sortedProjects = [...projects].sort((a, b) => {
-        if (a.season !== b.season) {
-            return b.season.localeCompare(a.season);
-        }
-        return b.orderIndex - a.orderIndex;
-    });
-
-    const recentProjects = sortedProjects.slice(0, 3);
+    const recentProjects = getSortedProjects().slice(0, 3);
 
     return (
         <section id="projects" className="py-8 px-4 bg-[#111111] text-white">

@@ -28,20 +28,14 @@ export default function SubFooter() {
                         href={locales.contact.discordUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2"
-                        style={{
-                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
-                        }}
+                        className="px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2 clip-chamfer-btn"
                     >
                         <span>{locales.contact.discordButton}</span>
                         <span>↗</span>
                     </a>
                     <a
                         href={`mailto:${locales.contact.emailAddress}`}
-                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2"
-                        style={{
-                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
-                        }}
+                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2 clip-chamfer-btn"
                     >
                         <span>{locales.contact.emailButton}</span>
                         <span>↗</span>
@@ -50,10 +44,7 @@ export default function SubFooter() {
                         href={locales.contact.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-5 py-2.5 bg-[#222226] hover:bg-[#2e2e34] text-gray-200 hover:text-white border border-[#3a3a3a] text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2"
-                        style={{
-                            clipPath: "polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px))"
-                        }}
+                        className="px-5 py-2.5 bg-[#222226] hover:bg-[#2e2e34] text-gray-200 hover:text-white border border-[#3a3a3a] text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 clip-chamfer-btn"
                     >
                         <span>{locales.contact.githubButton}</span>
                         <span>↗</span>

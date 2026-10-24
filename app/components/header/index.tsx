@@ -23,6 +23,8 @@ export default function Header() {
                         alt="Raider Robotics" 
                         width={500}
                         height={250}
+                        priority
+                        loading="eager"
                         style={{ width: "auto", height: "auto", maxHeight: "40px" }}
                     />
                     <Image
@@ -31,6 +33,7 @@ export default function Header() {
                         alt="Raider Robotics" 
                         width={500}
                         height={250}
+                        loading="eager"
                         style={{ width: "auto", height: "auto", maxHeight: "40px" }}
                     />
                 </NavLink>

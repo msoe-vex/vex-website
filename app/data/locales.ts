@@ -14,22 +14,22 @@ export const locales = {
     mission: {
         title: "Our Mission",
         statement:
-            "Raider Robotics empowers Milwaukee School of Engineering students to push the frontiers of competitive collegiate robotics. Through hands-on multidisciplinary engineering, rigorous iterative design, and open peer collaboration, we design, build, and program world-class autonomous and driver-controlled machines for the global VEX U competition stage.",
+            "Raider Robotics empowers Milwaukee School of Engineering students to push the frontiers of competitive collegiate robotics. Through hands-on multidisciplinary engineering, rigorous iterative design, and open peer collaboration, we design, build, and program world-class autonomous and driver-controlled machines for VEX U competitions.",
         pillars: [
             {
                 number: "01",
-                label: "INNOVATE",
-                description: "Custom CAD, CNC/3D printed manufacturing, and pneumatic systems."
+                label: "OUTREACH",
+                description: "Grow local elementary through high school STEM programs, creating opportunities for lower-income schools through mentorship and resource sharing."
             },
             {
                 number: "02",
-                label: "CODE",
-                description: "Advanced odometry, motion profiling, and autonomous strategy."
+                label: "INNOVATE",
+                description: "Custom CAD models, software and manufacturing systems, for competitive robotics that push the boundaries."
             },
             {
                 number: "03",
-                label: "COMPETE",
-                description: "Representing MSOE at national qualifiers and the VEX U World Championship."
+                label: "DEVELOP",
+                description: "Representing MSOE as professionals and a leader in competitive robotics through our members made into leaders."
             }
         ]
     },
@@ -77,7 +77,9 @@ export const locales = {
         homeLabLabel: "Home Lab Location:",
         directionsLink: "Campus Center Directions & Info ↗",
         recurringTitle: "Weekly Recurring Meetings",
-        customTitle: "Upcoming Competitions & Milestones"
+        customTitle: "Upcoming Competitions & Milestones",
+        emptyEventsText: "No upcoming competitions or special events scheduled at this time. Check back soon!",
+        bannerLink: "Directions / Calendar →"
     },
     contact: {
         sectionSubtitle: "Connect With Raider Robotics",

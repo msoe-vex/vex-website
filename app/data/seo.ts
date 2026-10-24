@@ -1,3 +1,5 @@
+import { recurringEvents, DEFAULT_LOCATION } from "./events";
+
 /**
  * Centralized SEO configurations, structured JSON-LD schemas, and crawl metadata.
  */
@@ -68,58 +70,31 @@ export function getEventsSchema() {
     return {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        itemListElement: [
-            {
-                "@type": "Event",
-                position: 1,
-                name: "Subsystem Build & CAD Open Lab",
-                description: "Prototyping, CNC milling, 3D printing, and robot mechanical assembly.",
-                eventSchedule: {
-                    "@type": "Schedule",
-                    repeatFrequency: "P1W",
-                    byDay: "https://schema.org/Tuesday",
-                    startTime: "17:30",
-                    endTime: "20:30"
-                },
-                location: {
-                    "@type": "Place",
-                    name: "We Energies STEM Center at MSOE",
-                    address: {
-                        "@type": "PostalAddress",
-                        streetAddress: "1440 N Market St",
-                        addressLocality: "Milwaukee",
-                        addressRegion: "WI",
-                        postalCode: "53202",
-                        addressCountry: "US"
-                    }
-                }
+        itemListElement: recurringEvents.map((event, index) => ({
+            "@type": "Event",
+            position: index + 1,
+            name: event.title,
+            description: event.description,
+            eventSchedule: {
+                "@type": "Schedule",
+                repeatFrequency: "P1W",
+                byDay: `https://schema.org/${event.dayOfWeek}`,
+                startTime: "18:00",
+                endTime: "21:00"
             },
-            {
-                "@type": "Event",
-                position: 2,
-                name: "Weekly General Team Meeting",
-                description: "Full team sync covering sprint updates, match strategies, and open workshop hours.",
-                eventSchedule: {
-                    "@type": "Schedule",
-                    repeatFrequency: "P1W",
-                    byDay: "https://schema.org/Thursday",
-                    startTime: "18:00",
-                    endTime: "20:00"
-                },
-                location: {
-                    "@type": "Place",
-                    name: "We Energies STEM Center at MSOE",
-                    address: {
-                        "@type": "PostalAddress",
-                        streetAddress: "1440 N Market St",
-                        addressLocality: "Milwaukee",
-                        addressRegion: "WI",
-                        postalCode: "53202",
-                        addressCountry: "US"
-                    }
+            location: {
+                "@type": "Place",
+                name: DEFAULT_LOCATION,
+                address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "1440 N Market St",
+                    addressLocality: "Milwaukee",
+                    addressRegion: "WI",
+                    postalCode: "53202",
+                    addressCountry: "US"
                 }
             }
-        ]
+        }))
     };
 }
 

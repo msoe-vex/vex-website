@@ -1,48 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import projects, { Project } from "@/app/data/projects";
+import { useState, useCallback } from "react";
+import projects, { Project, getAvailableSeasons, getSortedProjects } from "@/app/data/projects";
 import locales from "@/app/data/locales";
+import { useHashSelection } from "@/app/util/useHashSelection";
 import Image from "next/image";
 
-const seasons = ["All", "2024-2025", "2023-2024", "2022-2023", "2021-2022"];
+const seasons = getAvailableSeasons();
 
 export default function ProjectsPage() {
     const [selectedSeason, setSelectedSeason] = useState<string>("All");
-    const [highlightedId, setHighlightedId] = useState<string | null>(null);
 
-    useEffect(() => {
-        const handleHash = () => {
-            const hash = window.location.hash;
-            if (hash.startsWith("#select#")) {
-                const targetId = hash.replace("#select#", "");
-                setHighlightedId(targetId);
-                const targetProj = projects.find((p) => p.id === targetId);
-                if (targetProj) {
-                    setSelectedSeason("All");
-                }
-                setTimeout(() => {
-                    const el = document.getElementById(targetId);
-                    if (el) {
-                        el.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }
-                }, 100);
-            }
-        };
-
-        handleHash();
-        window.addEventListener("hashchange", handleHash);
-        return () => window.removeEventListener("hashchange", handleHash);
+    const onHashSelect = useCallback((targetId: string) => {
+        const targetProj = projects.find((p) => p.id === targetId);
+        if (targetProj) {
+            setSelectedSeason("All");
+        }
     }, []);
 
-    const filteredProjects = [...projects]
-        .filter((p) => selectedSeason === "All" || p.season === selectedSeason)
-        .sort((a, b) => {
-            if (a.season !== b.season) {
-                return b.season.localeCompare(a.season);
-            }
-            return b.orderIndex - a.orderIndex;
-        });
+    const highlightedId = useHashSelection(onHashSelect);
+
+    const filteredProjects = getSortedProjects(
+        projects.filter((p) => selectedSeason === "All" || p.season === selectedSeason)
+    );
 
     return (
         <main className="min-h-screen bg-[#0d0d0d] text-white py-12 px-4">
@@ -87,7 +67,7 @@ export default function ProjectsPage() {
 
                 {/* All Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredProjects.map((project: Project) => {
+                    {filteredProjects.map((project: Project, index: number) => {
                         const isSelected = highlightedId === project.id;
 
                         return (
@@ -117,6 +97,8 @@ export default function ProjectsPage() {
                                                 alt={project.title}
                                                 width={150}
                                                 height={95}
+                                                priority={index < 3}
+                                                loading={index < 3 ? "eager" : "lazy"}
                                                 className="opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                                                 style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
                                             />
