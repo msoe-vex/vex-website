@@ -15,8 +15,35 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    name: Code Quality & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check code formatting & lint
+        run: pnpm lint
+
+      - name: Verify TypeScript compiles (Typecheck)
+        run: pnpm type-check
+
   build:
-    name: Build & Export
+    name: Build & Package Static Export
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -33,19 +60,8 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Check code formatting & lint
-        run: pnpm lint
-
-      - name: Verify TypeScript compiles (Typecheck)
-        run: pnpm type-check
 
       - name: Build and Export Static Site
         run: pnpm build
@@ -61,8 +77,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [validate, build]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
