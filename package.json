@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm prebuild && next dev",
-    "prebuild": "ts-node scripts/runPrebuildScripts.ts",
+    "prebuild": "ts-node-esm scripts/runPrebuildScripts.ts",
     "build": "pnpm prebuild && next build",
     "start": "next start",
     "lint": "eslint",
