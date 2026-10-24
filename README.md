@@ -1,6 +1,6 @@
 # Raider Robotics Website (msoe-vex/website)
 
-Official web portal for **Raider Robotics**, the competitive collegiate VEX U robotics team at the **Milwaukee School of Engineering (MSOE)**.
+Official web site for **Raider Robotics**, the competitive collegiate VEX U robotics team at the **Milwaukee School of Engineering (MSOE)**.
 
 Built with [Next.js](https://nextjs.org) (App Router, Turbopack), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
 
@@ -33,11 +33,16 @@ pnpm dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Linting & Code Quality
-Always ensure code passes ESLint before opening a PR:
+### Code Quality & Smoke Testing
 ```bash
-npx eslint --no-warn-ignored app/
+pnpm lint          # Run ESLint
+pnpm type-check    # Verify TypeScript compilation (tsc --noEmit)
+pnpm test          # Run Playwright smoke test (verifies site compiles, runs & is usable)
 ```
+
+### 🤖 Continuous Integration & Deployment (CI/CD)
+* **Pull Requests**: Every PR against `main` automatically triggers the **CI Smoke & Quality Gate** workflow (`.github/workflows/ci.yml`), verifying that the codebase passes ESLint, compiles TypeScript, starts up and passes the usability smoke test, and builds the production static export.
+* **Production Deployment**: Pushes/merges to `main` automatically run verification and publish the static export to GitHub Pages (`.github/workflows/deploy.yml`) on `msoevex.com`.
 
 ---
 

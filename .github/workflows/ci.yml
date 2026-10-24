@@ -1,0 +1,50 @@
+name: CI Smoke & Quality Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Verify Website Compiles, Runs & Is Usable
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check code formatting & lint
+        run: pnpm lint
+
+      - name: Verify TypeScript compiles (Typecheck)
+        run: pnpm type-check
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Smoke test (Verify site boots, routes load & navigation works)
+        run: pnpm test
+
+      - name: Verify static production export build
+        run: pnpm build
+
+      - name: Upload Playwright Report on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
