@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "pnpm prebuild && next dev",
-    "prebuild": "node --loader ts-node/esm --no-warnings=ExperimentalWarning scripts/runPrebuildScripts.ts",
-    "build": "pnpm prebuild && next build",
+    "prebuild": "tsx scripts/runPrebuildScripts.ts",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
@@ -28,6 +28,7 @@
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   },
   "packageManager": "pnpm@12.4.2"
