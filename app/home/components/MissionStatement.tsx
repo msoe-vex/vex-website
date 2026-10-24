@@ -24,7 +24,7 @@ export default function MissionStatement() {
                         {locales.mission.pillars.map((pillar) => (
                             <div key={pillar.number} className="flex flex-col">
                                 <span className="font-extrabold text-[#c5050c] text-base md:text-lg">
-                                    {pillar.number} {'//'} {pillar.label}
+                                    {pillar.number} {'\\\\'} {pillar.label}
                                 </span>
                                 <span className="text-[11px] text-gray-600 mt-0.5">
                                     {pillar.description}

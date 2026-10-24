@@ -93,19 +93,14 @@ export default function ProjectsPage() {
                         const isSelected = highlightedId === project.id;
 
                         return (
-                            <article
-                                id={project.id}
+                            <div
                                 key={project.id}
-                                className={`bg-[#161619] border transition-all duration-500 flex flex-col justify-between overflow-hidden group shadow-xl h-full ${
-                                    isSelected
-                                        ? "border-[#c5050c] ring-2 ring-[#c5050c] shadow-[0_0_25px_rgba(197,5,12,0.6)] scale-[1.02]"
-                                        : "border-[#2b2b2b] hover:border-[#c5050c]"
-                                }`}
-                                style={{
-                                    /* Chamfer with negative slope y = -x on bottom-left */
-                                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px))"
-                                }}
+                                className={`chamfer-card-outer group shadow-xl h-full ${isSelected ? "selected" : ""}`}
                             >
+                                <article
+                                    id={project.id}
+                                    className="chamfer-card-inner bg-[#161619] flex flex-col justify-between overflow-hidden h-full"
+                                >
                                 {/* Top Content Section */}
                                 <div className="flex flex-col flex-1">
                                     {/* Header / Graphic */}
@@ -183,7 +178,8 @@ export default function ProjectsPage() {
                                         </a>
                                     </div>
                                 )}
-                            </article>
+                                </article>
+                            </div>
                         );
                     })}
                 </div>

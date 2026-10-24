@@ -42,15 +42,11 @@ export default function ProjectShowcase() {
                     {recentProjects.map((project: Project) => (
                         <div
                             key={project.id}
-                            className="relative group transition-all duration-300 hover:z-20 h-full"
+                            className="chamfer-card-outer group hover:z-20 h-full"
                         >
                             <Link
                                 href={`/projects#select#${project.id}`}
-                                className="relative bg-[#181818] border border-[#2b2b2b] group-hover:border-[#c5050c] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg cursor-pointer h-full"
-                                style={{
-                                    /* Chamfer with negative slope y = -x on bottom-left, inset border safe */
-                                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px))"
-                                }}
+                                className="chamfer-card-inner bg-[#181818] flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                             >
                                 <div className="flex flex-col flex-1">
                                     {/* Card Image / Season Banner */}

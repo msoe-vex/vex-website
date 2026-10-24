@@ -2,24 +2,28 @@ import locales from "@/app/data/locales";
 
 export default function SubFooter() {
     return (
-        <section id="contact" className="bg-[#141416] border-t-2 border-[#2b2b2b] py-10 px-4 text-white">
-            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-                <div className="flex flex-col gap-1.5">
-                    <div className="flex items-center justify-center md:justify-start gap-2">
-                        <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
-                        <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
-                            {locales.contact.sectionSubtitle}
-                        </span>
+        <section id="contact" className="py-8 px-4 bg-[#141416] border-t-2 border-[#2b2b2b] text-white">
+            <div className="max-w-7xl mx-auto flex flex-col gap-6">
+                {/* Section Header: Aligned identically with Sponsors, Projects, and Members */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="w-2.5 h-2.5 bg-[#c5050c] rotate-45" />
+                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                                {locales.contact.sectionSubtitle}
+                            </span>
+                        </div>
+                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
+                            {locales.contact.heading}
+                        </h2>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight uppercase">
-                        {locales.contact.heading}
-                    </h2>
-                    <p className="text-gray-400 text-xs md:text-sm max-w-xl">
+                    <p className="text-gray-400 text-xs md:text-sm max-w-md">
                         {locales.contact.description}
                     </p>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-3">
+                {/* Contact Action Buttons */}
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                     <a
                         href={locales.contact.discordUrl}
                         target="_blank"

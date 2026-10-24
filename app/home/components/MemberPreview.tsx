@@ -71,14 +71,11 @@ export default function MemberPreview() {
                     {eboardList.map((member) => (
                         <div
                             key={member.id}
-                            className="relative group transition-all duration-300 hover:z-20 h-full"
+                            className="chamfer-card-outer group hover:z-20 h-full"
                         >
                             <Link
                                 href={`/members#select#${member.id}`}
-                                className="relative bg-[#161619] border border-[#2b2b2b] group-hover:border-[#c5050c] transition-all duration-300 p-5 flex flex-col justify-between gap-3 shadow-lg cursor-pointer h-full"
-                                style={{
-                                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px))"
-                                }}
+                                className="chamfer-card-inner bg-[#161619] p-5 flex flex-col justify-between gap-3 cursor-pointer h-full"
                             >
                                 <div className="flex flex-col gap-3">
                                     <div className="flex items-center justify-between">

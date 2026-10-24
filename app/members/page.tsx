@@ -121,18 +121,13 @@ export default function MembersPage() {
 
                         return (
                             <div
-                                id={member.id}
                                 key={member.id}
-                                className={`bg-[#161616] border transition-all duration-500 p-6 flex flex-col justify-between gap-4 group ${
-                                    isSelected
-                                        ? "border-[#c5050c] ring-2 ring-[#c5050c] shadow-[0_0_25px_rgba(197,5,12,0.6)] scale-[1.02]"
-                                        : "border-[#2b2b2b] hover:border-[#c5050c]"
-                                }`}
-                                style={{
-                                    /* Chamfer with negative slope y = -x on bottom-left */
-                                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px))"
-                                }}
+                                className={`chamfer-card-outer group ${isSelected ? "selected" : ""}`}
                             >
+                                <div
+                                    id={member.id}
+                                    className="chamfer-card-inner bg-[#161616] p-6 flex flex-col justify-between gap-4 h-full"
+                                >
                                 <div className="flex flex-col gap-3">
                                     <div className="flex items-center justify-between">
                                         <span className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[11px] uppercase tracking-wider border border-[#333333]">
@@ -204,6 +199,7 @@ export default function MembersPage() {
                                         )}
                                     </div>
                                 )}
+                                </div>
                             </div>
                         );
                     })}
