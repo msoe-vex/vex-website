@@ -7,7 +7,7 @@ export const siteConfig = {
     name: "Raider Robotics",
     shortName: "Raider Robotics VEX U",
     description: "Milwaukee School of Engineering's Collegiate VEX U Robotics Team. Designing, building, and programming autonomous and driver-controlled robots for the global stage.",
-    url: "https://msoe-vex.github.io", // Default GitHub Pages / custom production domain
+    url: "https://www.msoevex.com", // Official team domain
     ogImage: "/branding/RR_Logo.png",
     keywords: [
         "Raider Robotics",
