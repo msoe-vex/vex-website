@@ -32,7 +32,7 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "packageManager": "pnpm@12.4.2"
 }
