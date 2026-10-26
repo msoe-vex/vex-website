@@ -94,7 +94,8 @@ export const members: Member[] = [
         major: "Computer Science",
         image: "/members/corbin-schaffer.jpg",
         github: "https://github.com/IVemesisRunner",
-        linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/"
+        linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/",
+        contributions: "2nd year member, that works on the AI game layout and strategy.\n"
     },
 {
         id: "avery-benjamin",
