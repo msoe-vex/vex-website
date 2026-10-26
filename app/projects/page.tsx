@@ -87,7 +87,7 @@ export default function ProjectsPage() {
                                             {project.season}
                                         </div>
                                         {isSelected && (
-                                            <div className="absolute top-2 right-2 bg-yellow-500 text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-wider z-10 animate-bounce">
+                                            <div className="absolute top-2 right-2 badge-selected z-10">
                                                 Selected
                                             </div>
                                         )}
@@ -134,9 +134,9 @@ export default function ProjectsPage() {
                                                 {project.awards.map((award, idx) => (
                                                     <span
                                                         key={idx}
-                                                        className="inline-block bg-[#242428] text-yellow-400 border border-yellow-500/30 text-[10px] font-semibold px-2 py-0.5"
+                                                        className="badge-award"
                                                     >
-                                                        🏆 {award}
+                                                        {award}
                                                     </span>
                                                 ))}
                                             </div>

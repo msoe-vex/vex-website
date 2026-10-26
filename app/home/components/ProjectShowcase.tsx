@@ -88,9 +88,9 @@ export default function ProjectShowcase() {
                                                 {project.awards.map((award, idx) => (
                                                     <span
                                                         key={idx}
-                                                        className="inline-block bg-[#242428] text-yellow-400 border border-yellow-500/30 text-[10px] font-semibold px-1.5 py-0.5"
+                                                        className="badge-award"
                                                     >
-                                                        🏆 {award}
+                                                        {award}
                                                     </span>
                                                 ))}
                                             </div>

@@ -75,7 +75,7 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
 
     return (
         <div className="min-h-screen bg-[#0d0d0d] text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-[#161616] border border-[#2b2b2b] p-6 sm:p-8 shadow-2xl relative">
+            <div className="w-full max-w-lg dash-card p-6 sm:p-8 shadow-2xl relative">
                 {/* Accent top border */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-[#c5050c]" />
 
@@ -126,7 +126,7 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                             onClick={() => setShowConfigPrompt(!showConfigPrompt)}
                             className="text-[10px] text-gray-400 hover:text-white underline cursor-pointer"
                         >
-                            {showConfigPrompt ? "Hide Settings" : "Configure OAuth / Check Callback URL ⚙"}
+                            {showConfigPrompt ? "Hide Settings" : "Configure OAuth / Check Callback URL"}
                         </button>
                     </div>
 
@@ -216,7 +216,7 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                     ) : (
                         <form onSubmit={handlePatSubmit} className="flex flex-col gap-4">
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                <label className="dash-label">
                                     GitHub Personal Access Token (PAT)
                                 </label>
                                 <div className="relative">
@@ -226,7 +226,7 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                                         onChange={(e) => setTokenInput(e.target.value)}
                                         placeholder="github_pat_... or ghp_..."
                                         required
-                                        className="w-full bg-[#202020] border border-[#333333] px-3 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#c5050c] font-mono pr-16"
+                                        className="dash-input font-mono pr-16"
                                     />
                                     <button
                                         type="button"
@@ -241,7 +241,7 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                             <button
                                 type="submit"
                                 disabled={loading || !tokenInput.trim()}
-                                className="w-full bg-[#c5050c] hover:bg-[#a0040a] disabled:opacity-50 text-white font-bold py-2.5 text-xs uppercase tracking-widest transition-all cursor-pointer flex items-center justify-center gap-2"
+                                className="w-full btn-primary py-2.5 tracking-widest flex items-center justify-center gap-2"
                             >
                                 {loading ? (
                                     <>

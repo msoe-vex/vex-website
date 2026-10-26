@@ -15,8 +15,18 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedMemberId, setSelectedMemberId] = useState<string>(members[0]?.id || "");
     const [filterStatus, setFilterStatus] = useState<"all" | MemberStatus>("all");
+    const [previewUrls, setPreviewUrls] = useState<Record<string, string>>({});
 
     const currentMember = members.find((m) => m.id === selectedMemberId) || members[0];
+
+    const getMemberImage = (m: Member) => {
+        return (
+            previewUrls[m.id] ||
+            (m.image ? previewUrls[m.image] : null) ||
+            m.image ||
+            "/branding/RR_Icon.png"
+        );
+    };
 
     const filteredMembers = members.filter((m) => {
         const matchesSearch =
@@ -72,7 +82,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Sidebar: Member Directory */}
-            <div className="lg:col-span-4 bg-[#141416] border border-[#2b2b2b] p-4 flex flex-col gap-4">
+            <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-sm font-black uppercase tracking-wider text-white">
                         Team Directory ({members.length})
@@ -92,7 +102,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                         placeholder="Search by name or role..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#c5050c]"
+                        className="dash-input"
                     />
                     <div className="flex gap-1">
                         {(["all", "active", "alumni"] as const).map((status) => (
@@ -119,20 +129,24 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                             <div
                                 key={m.id}
                                 onClick={() => setSelectedMemberId(m.id)}
-                                className={`p-2.5 text-left transition-all border cursor-pointer flex items-center justify-between ${
+                                className={`dash-list-item ${
                                     isSelected
-                                        ? "bg-[#222226] border-[#c5050c] text-white"
-                                        : "bg-[#18181b] border-transparent hover:border-[#333333] text-gray-300"
+                                        ? "dash-list-item-active"
+                                        : "dash-list-item-inactive"
                                 }`}
                             >
                                 <div className="flex items-center gap-2.5 min-w-0">
                                     <div className="relative w-8 h-8 rounded-full overflow-hidden bg-[#2a2a2a] flex-shrink-0">
                                         <Image
-                                            src={m.image || "/branding/RR_Icon.png"}
+                                            src={getMemberImage(m)}
                                             alt={m.name}
                                             fill
                                             sizes="32px"
                                             style={{ objectFit: "cover" }}
+                                            unoptimized={
+                                                getMemberImage(m).startsWith("data:") ||
+                                                getMemberImage(m).startsWith("blob:")
+                                            }
                                         />
                                     </div>
                                     <div className="min-w-0">
@@ -151,7 +165,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
 
             {/* Middle: Edit Form */}
             {currentMember && (
-                <div className="lg:col-span-5 bg-[#141416] border border-[#2b2b2b] p-6 flex flex-col gap-4">
+                <div className="lg:col-span-5 dash-editor-card flex flex-col gap-4">
                     <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-3">
                         <div>
                             <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
@@ -169,49 +183,49 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Full Name
                             </label>
                             <input
                                 type="text"
                                 value={currentMember.name}
                                 onChange={(e) => handleUpdateField("name", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 ID Slug
                             </label>
                             <input
                                 type="text"
                                 value={currentMember.id}
                                 onChange={(e) => handleUpdateField("id", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input font-mono"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Team Role / Title
                             </label>
                             <input
                                 type="text"
                                 value={currentMember.role}
                                 onChange={(e) => handleUpdateField("role", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Status
                             </label>
                             <select
                                 value={currentMember.status}
                                 onChange={(e) => handleUpdateField("status", e.target.value as MemberStatus)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             >
                                 <option value="active">Active</option>
                                 <option value="alumni">Alumni</option>
@@ -219,7 +233,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                         </div>
 
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                            <label className="dash-label">
                                 Subsystems (Assigned Teams)
                             </label>
                             <div className="flex gap-2 flex-wrap">
@@ -244,7 +258,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Major
                             </label>
                             <input
@@ -252,24 +266,24 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                 value={currentMember.major || ""}
                                 onChange={(e) => handleUpdateField("major", e.target.value)}
                                 placeholder="e.g. Mechanical Engineering"
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Graduation Year
                             </label>
                             <input
                                 type="number"
                                 value={currentMember.gradYear || 2027}
                                 onChange={(e) => handleUpdateField("gradYear", Number(e.target.value))}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 LinkedIn URL
                             </label>
                             <input
@@ -277,12 +291,12 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                 value={currentMember.linkedin || ""}
                                 onChange={(e) => handleUpdateField("linkedin", e.target.value)}
                                 placeholder="https://linkedin.com/in/..."
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 GitHub URL
                             </label>
                             <input
@@ -290,17 +304,36 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                 value={currentMember.github || ""}
                                 onChange={(e) => handleUpdateField("github", e.target.value)}
                                 placeholder="https://github.com/..."
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2">
                             <ImageUploader
+                                key={`member-img-${currentMember.id}`}
                                 currentPath={currentMember.image}
+                                previewOverride={
+                                    previewUrls[currentMember.id] ||
+                                    (currentMember.image ? previewUrls[currentMember.image] : undefined)
+                                }
                                 targetDirectory="members"
                                 itemIdentifier={currentMember.id}
                                 onImageSelected={(path, upload) => {
                                     if (!currentMember) return;
+                                    if (upload?.previewUrl) {
+                                        setPreviewUrls((prev) => ({
+                                            ...prev,
+                                            [currentMember.id]: upload.previewUrl,
+                                            [path]: upload.previewUrl,
+                                        }));
+                                    } else {
+                                        setPreviewUrls((prev) => {
+                                            const copy = { ...prev };
+                                            delete copy[currentMember.id];
+                                            delete copy[path];
+                                            return copy;
+                                        });
+                                    }
                                     const updatedList = members.map((m) =>
                                         m.id === currentMember.id ? { ...m, image: path } : m
                                     );
@@ -327,7 +360,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                         {currentMember.subsystems.map((sub) => (
                                             <span
                                                 key={sub}
-                                                className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]"
+                                                className="subsystem-tag"
                                             >
                                                 {sub}
                                             </span>
@@ -343,12 +376,15 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                 <div className="flex items-start gap-4 mt-2">
                                     <div className="relative w-20 h-20 bg-[#222226] border border-[#333333] flex-shrink-0 overflow-hidden">
                                         <Image
-                                            src={currentMember.image || "/branding/RR_Icon.png"}
+                                            src={getMemberImage(currentMember)}
                                             alt={currentMember.name}
                                             fill
                                             sizes="80px"
                                             style={{ objectFit: "cover" }}
-                                            unoptimized={currentMember.image?.startsWith("data:")}
+                                            unoptimized={
+                                                getMemberImage(currentMember).startsWith("data:") ||
+                                                getMemberImage(currentMember).startsWith("blob:")
+                                            }
                                         />
                                     </div>
                                     <div className="flex flex-col min-w-0">

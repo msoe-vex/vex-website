@@ -87,7 +87,7 @@ export default function EventsPage() {
                                                         {event.dayOfWeek}
                                                     </span>
                                                     {isSelected && (
-                                                        <span className="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 uppercase tracking-wider animate-bounce">
+                                                        <span className="badge-selected">
                                                             Selected
                                                         </span>
                                                     )}
@@ -172,7 +172,7 @@ export default function EventsPage() {
                                                 <div className="flex items-center gap-2">
                                                     <span>{event.date}</span>
                                                     {isSelected && (
-                                                        <span className="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 uppercase tracking-wider animate-bounce">
+                                                        <span className="badge-selected">
                                                             Selected
                                                         </span>
                                                     )}

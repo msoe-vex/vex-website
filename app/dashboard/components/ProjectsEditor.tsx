@@ -14,8 +14,18 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
     const [selectedProjectId, setSelectedProjectId] = useState<string>(projects[0]?.id || "");
     const [newHighlight, setNewHighlight] = useState("");
     const [newAward, setNewAward] = useState("");
+    const [previewUrls, setPreviewUrls] = useState<Record<string, string>>({});
 
     const currentProject = projects.find((p) => p.id === selectedProjectId) || projects[0];
+
+    const getProjectImage = (p: Project) => {
+        return (
+            previewUrls[p.id] ||
+            (p.image ? previewUrls[p.image] : null) ||
+            p.image ||
+            "/branding/RR_Logo.png"
+        );
+    };
 
     const handleUpdateField = <K extends keyof Project>(field: K, value: Project[K]) => {
         if (!currentProject) return;
@@ -80,7 +90,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left: Project Catalog List */}
-            <div className="lg:col-span-4 bg-[#141416] border border-[#2b2b2b] p-4 flex flex-col gap-4">
+            <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-sm font-black uppercase tracking-wider text-white">
                         Robots & Projects ({projects.length})
@@ -100,20 +110,24 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                             <div
                                 key={p.id}
                                 onClick={() => setSelectedProjectId(p.id)}
-                                className={`p-3 text-left transition-all border cursor-pointer flex items-center justify-between ${
+                                className={`dash-list-item ${
                                     isSelected
-                                        ? "bg-[#222226] border-[#c5050c] text-white"
-                                        : "bg-[#18181b] border-transparent hover:border-[#333333] text-gray-300"
+                                        ? "dash-list-item-active"
+                                        : "dash-list-item-inactive"
                                 }`}
                             >
                                 <div className="flex items-center gap-3 min-w-0">
                                     <div className="relative w-10 h-10 bg-[#252525] border border-[#333] flex-shrink-0">
                                         <Image
-                                            src={p.image || "/branding/RR_Logo.png"}
+                                            src={getProjectImage(p)}
                                             alt={p.title}
                                             fill
                                             sizes="40px"
                                             style={{ objectFit: "contain" }}
+                                            unoptimized={
+                                                getProjectImage(p).startsWith("data:") ||
+                                                getProjectImage(p).startsWith("blob:")
+                                            }
                                         />
                                     </div>
                                     <div className="min-w-0">
@@ -130,7 +144,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
 
             {/* Middle: Edit Form */}
             {currentProject && (
-                <div className="lg:col-span-5 bg-[#141416] border border-[#2b2b2b] p-6 flex flex-col gap-4">
+                <div className="lg:col-span-5 dash-editor-card flex flex-col gap-4">
                     <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-3">
                         <div>
                             <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
@@ -148,19 +162,19 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Title
                             </label>
                             <input
                                 type="text"
                                 value={currentProject.title}
                                 onChange={(e) => handleUpdateField("title", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Season Tag
                             </label>
                             <input
@@ -168,49 +182,49 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                 value={currentProject.season}
                                 onChange={(e) => handleUpdateField("season", e.target.value)}
                                 placeholder="e.g. 2024-2025"
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2 sm:col-span-1">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Display Order Index
                             </label>
                             <input
                                 type="number"
                                 value={currentProject.orderIndex}
                                 onChange={(e) => handleUpdateField("orderIndex", Number(e.target.value))}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 Description
                             </label>
                             <textarea
                                 rows={3}
                                 value={currentProject.description}
                                 onChange={(e) => handleUpdateField("description", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-textarea"
                             />
                         </div>
 
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                            <label className="dash-label">
                                 GitHub URL
                             </label>
                             <input
                                 type="url"
                                 value={currentProject.githubUrl || ""}
                                 onChange={(e) => handleUpdateField("githubUrl", e.target.value)}
-                                className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                className="dash-input"
                             />
                         </div>
 
                         {/* Technical Highlights */}
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                            <label className="dash-label">
                                 Technical Highlights
                             </label>
                             <div className="flex gap-2 mb-2">
@@ -220,7 +234,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                     onChange={(e) => setNewHighlight(e.target.value)}
                                     placeholder="Add engineering highlight..."
                                     onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleAddHighlight())}
-                                    className="flex-1 bg-[#1e1e20] border border-[#333333] px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                    className="dash-input flex-1"
                                 />
                                 <button
                                     type="button"
@@ -251,7 +265,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
 
                         {/* Awards */}
                         <div className="col-span-2">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                            <label className="dash-label">
                                 Awards Won
                             </label>
                             <div className="flex gap-2 mb-2">
@@ -261,7 +275,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                     onChange={(e) => setNewAward(e.target.value)}
                                     placeholder="e.g. Design Award Finalist..."
                                     onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleAddAward())}
-                                    className="flex-1 bg-[#1e1e20] border border-[#333333] px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                    className="dash-input flex-1"
                                 />
                                 <button
                                     type="button"
@@ -275,9 +289,9 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                 {(currentProject.awards || []).map((a, i) => (
                                     <span
                                         key={i}
-                                        className="bg-[#242428] text-amber-300 text-[11px] font-bold px-2 py-0.5 border border-amber-600/30 flex items-center gap-1.5"
+                                        className="badge-award flex items-center gap-1.5"
                                     >
-                                        <span>🏆 {a}</span>
+                                        <span>{a}</span>
                                         <button
                                             type="button"
                                             onClick={() => handleRemoveAward(i)}
@@ -293,11 +307,30 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                         {/* Image Uploader */}
                         <div className="col-span-2">
                             <ImageUploader
+                                key={`project-img-${currentProject.id}`}
                                 currentPath={currentProject.image}
+                                previewOverride={
+                                    previewUrls[currentProject.id] ||
+                                    (currentProject.image ? previewUrls[currentProject.image] : undefined)
+                                }
                                 targetDirectory="projects"
                                 itemIdentifier={currentProject.id}
                                 onImageSelected={(path, upload) => {
                                     if (!currentProject) return;
+                                    if (upload?.previewUrl) {
+                                        setPreviewUrls((prev) => ({
+                                            ...prev,
+                                            [currentProject.id]: upload.previewUrl,
+                                            [path]: upload.previewUrl,
+                                        }));
+                                    } else {
+                                        setPreviewUrls((prev) => {
+                                            const copy = { ...prev };
+                                            delete copy[currentProject.id];
+                                            delete copy[path];
+                                            return copy;
+                                        });
+                                    }
                                     const updatedList = projects.map((p) =>
                                         p.id === currentProject.id ? { ...p, image: path } : p
                                     );
@@ -329,12 +362,15 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
 
                             <div className="relative w-full h-36 bg-[#202022] border border-[#333333] flex items-center justify-center overflow-hidden">
                                 <Image
-                                    src={currentProject.image || "/branding/RR_Logo.png"}
+                                    src={getProjectImage(currentProject)}
                                     alt={currentProject.title}
                                     fill
                                     sizes="250px"
                                     style={{ objectFit: "contain" }}
-                                    unoptimized={currentProject.image?.startsWith("data:")}
+                                    unoptimized={
+                                        getProjectImage(currentProject).startsWith("data:") ||
+                                        getProjectImage(currentProject).startsWith("blob:")
+                                    }
                                 />
                             </div>
 
@@ -361,9 +397,9 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                     {currentProject.awards.map((a, i) => (
                                         <span
                                             key={i}
-                                            className="text-[9px] bg-amber-950/60 text-amber-300 px-1.5 py-0.5 border border-amber-700/40"
+                                            className="badge-award"
                                         >
-                                            🏆 {a}
+                                            {a}
                                         </span>
                                     ))}
                                 </div>

@@ -74,7 +74,7 @@ export default function EventsEditor({
     };
 
     return (
-        <div className="bg-[#141416] border border-[#2b2b2b] p-6 flex flex-col gap-6">
+        <div className="dash-editor-card flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-4">
                 <div className="flex gap-2">
                     <button
@@ -115,7 +115,7 @@ export default function EventsEditor({
                             className="bg-[#1a1a1d] border border-[#2c2c30] p-4 grid grid-cols-1 md:grid-cols-12 gap-3"
                         >
                             <div className="md:col-span-3">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Day of Week
                                 </label>
                                 <select
@@ -126,7 +126,7 @@ export default function EventsEditor({
                                             dayOfWeek: e.target.value as RecurringEvent["dayOfWeek"],
                                         })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 >
                                     {[
                                         "Monday",
@@ -145,7 +145,7 @@ export default function EventsEditor({
                             </div>
 
                             <div className="md:col-span-3">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Time Range
                                 </label>
                                 <input
@@ -154,12 +154,12 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateRecurring(idx, { ...evt, time: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
                             <div className="md:col-span-5">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Meeting Title
                                 </label>
                                 <input
@@ -168,7 +168,7 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateRecurring(idx, { ...evt, title: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
@@ -182,7 +182,7 @@ export default function EventsEditor({
                             </div>
 
                             <div className="md:col-span-6">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Location
                                 </label>
                                 <input
@@ -191,12 +191,12 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateRecurring(idx, { ...evt, location: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
                             <div className="md:col-span-6">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Description / Agenda
                                 </label>
                                 <input
@@ -205,7 +205,7 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateRecurring(idx, { ...evt, description: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
                         </div>
@@ -226,7 +226,7 @@ export default function EventsEditor({
                             className="bg-[#1a1a1d] border border-[#2c2c30] p-4 grid grid-cols-1 md:grid-cols-12 gap-3"
                         >
                             <div className="md:col-span-3">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Date
                                 </label>
                                 <input
@@ -236,12 +236,12 @@ export default function EventsEditor({
                                         handleUpdateCustom(idx, { ...evt, date: e.target.value })
                                     }
                                     placeholder="e.g. November 14, 2026"
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
                             <div className="md:col-span-3">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Category
                                 </label>
                                 <select
@@ -252,7 +252,7 @@ export default function EventsEditor({
                                             category: e.target.value as CustomEvent["category"],
                                         })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 >
                                     {["Competition", "Workshop", "Outreach", "Social"].map((c) => (
                                         <option key={c} value={c}>
@@ -263,7 +263,7 @@ export default function EventsEditor({
                             </div>
 
                             <div className="md:col-span-5">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Event Title
                                 </label>
                                 <input
@@ -272,7 +272,7 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateCustom(idx, { ...evt, title: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
@@ -286,7 +286,7 @@ export default function EventsEditor({
                             </div>
 
                             <div className="md:col-span-4">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Time
                                 </label>
                                 <input
@@ -295,12 +295,12 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateCustom(idx, { ...evt, time: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
 
                             <div className="md:col-span-8">
-                                <label className="block text-[10px] font-bold uppercase text-gray-400 mb-1">
+                                <label className="dash-label">
                                     Location
                                 </label>
                                 <input
@@ -309,7 +309,7 @@ export default function EventsEditor({
                                     onChange={(e) =>
                                         handleUpdateCustom(idx, { ...evt, location: e.target.value })
                                     }
-                                    className="w-full bg-[#222226] border border-[#333333] px-2 py-1.5 text-xs text-white"
+                                    className="dash-input"
                                 />
                             </div>
                         </div>

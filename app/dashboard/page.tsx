@@ -81,11 +81,22 @@ export default function DashboardPage() {
     const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors);
     const [locales, setLocales] = useState<typeof rawLocales>(initialLocales);
 
+    // Dynamic Baseline State (updated after PR creation to allow successive PRs)
+    const [baselineMembers, setBaselineMembers] = useState<Member[]>(initialMembers);
+    const [baselineProjects, setBaselineProjects] = useState<Project[]>(initialProjects);
+    const [baselineRecurring, setBaselineRecurring] = useState<RecurringEvent[]>(initRecurring);
+    const [baselineCustom, setBaselineCustom] = useState<CustomEvent[]>(initCustom);
+    const [baselineBanner, setBaselineBanner] = useState<boolean>(initAnnouncement.show);
+    const [baselineSponsors, setBaselineSponsors] = useState<Sponsor[]>(initialSponsors);
+    const [baselineLocales, setBaselineLocales] = useState<typeof rawLocales>(initialLocales);
+
     // Media Uploads
     const [pendingUploads, setPendingUploads] = useState<PendingUpload[]>([]);
 
-    // Review Modal
+    // Review Modal Session
     const [isReviewOpen, setIsReviewOpen] = useState(false);
+    const [prSessionId, setPrSessionId] = useState(0);
+    const [discardCounter, setDiscardCounter] = useState(0);
 
     // Initial Auth Check & OAuth Code Callback
     useEffect(() => {
@@ -163,7 +174,7 @@ export default function DashboardPage() {
         const changes: PendingFileChange[] = [];
 
         // 1. Members
-        if (JSON.stringify(members) !== JSON.stringify(initialMembers)) {
+        if (JSON.stringify(members) !== JSON.stringify(baselineMembers)) {
             changes.push({
                 filePath: "app/data/members.ts",
                 description: `Updated team roster (${members.length} members)`,
@@ -172,7 +183,7 @@ export default function DashboardPage() {
         }
 
         // 2. Projects
-        if (JSON.stringify(projects) !== JSON.stringify(initialProjects)) {
+        if (JSON.stringify(projects) !== JSON.stringify(baselineProjects)) {
             changes.push({
                 filePath: "app/data/projects.ts",
                 description: `Updated robot catalog (${projects.length} projects)`,
@@ -182,8 +193,8 @@ export default function DashboardPage() {
 
         // 3. Events
         if (
-            JSON.stringify(recurringEvents) !== JSON.stringify(initRecurring) ||
-            JSON.stringify(customEvents) !== JSON.stringify(initCustom)
+            JSON.stringify(recurringEvents) !== JSON.stringify(baselineRecurring) ||
+            JSON.stringify(customEvents) !== JSON.stringify(baselineCustom)
         ) {
             changes.push({
                 filePath: "app/data/events.ts",
@@ -193,7 +204,7 @@ export default function DashboardPage() {
         }
 
         // 4. Announcements
-        if (showBanner !== initAnnouncement.show) {
+        if (showBanner !== baselineBanner) {
             changes.push({
                 filePath: "app/data/announcements.ts",
                 description: `Updated meeting banner visibility (show: ${showBanner})`,
@@ -202,7 +213,7 @@ export default function DashboardPage() {
         }
 
         // 5. Sponsors
-        if (JSON.stringify(sponsors) !== JSON.stringify(initialSponsors)) {
+        if (JSON.stringify(sponsors) !== JSON.stringify(baselineSponsors)) {
             changes.push({
                 filePath: "app/data/sponsors.ts",
                 description: `Updated sponsor partners (${sponsors.length} sponsors)`,
@@ -211,7 +222,7 @@ export default function DashboardPage() {
         }
 
         // 6. Locales
-        if (JSON.stringify(locales) !== JSON.stringify(initialLocales)) {
+        if (JSON.stringify(locales) !== JSON.stringify(baselineLocales)) {
             changes.push({
                 filePath: "app/data/locales.ts",
                 description: `Updated site copy and mission texts`,
@@ -220,13 +231,66 @@ export default function DashboardPage() {
         }
 
         return changes;
-    }, [members, projects, recurringEvents, customEvents, showBanner, sponsors, locales]);
+    }, [
+        members,
+        baselineMembers,
+        projects,
+        baselineProjects,
+        recurringEvents,
+        baselineRecurring,
+        customEvents,
+        baselineCustom,
+        showBanner,
+        baselineBanner,
+        sponsors,
+        baselineSponsors,
+        locales,
+        baselineLocales,
+    ]);
 
-    const totalModifiedCount = pendingChanges.length + pendingUploads.length;
+    // Only commit uploads that are actively referenced in current state
+    const activeUploads = useMemo(() => {
+        return pendingUploads.filter((u) => {
+            const webPath = u.targetPath.replace(/^public/, "");
+            const inMembers = members.some((m) => m.image === webPath);
+            const inProjects = projects.some((p) => p.image === webPath);
+            const inSponsors = sponsors.some(
+                (s) => s.img === webPath || `/sponsors/${s.img}` === webPath || s.img === webPath.replace(/^\/sponsors\//, "")
+            );
+            return inMembers || inProjects || inSponsors;
+        });
+    }, [pendingUploads, members, projects, sponsors]);
+
+    const totalModifiedCount = pendingChanges.length + activeUploads.length;
 
     const handlePrSuccess = () => {
+        // Reset diff baselines to current edited values so user can make another PR immediately
+        setBaselineMembers(JSON.parse(JSON.stringify(members)));
+        setBaselineProjects(JSON.parse(JSON.stringify(projects)));
+        setBaselineRecurring(JSON.parse(JSON.stringify(recurringEvents)));
+        setBaselineCustom(JSON.parse(JSON.stringify(customEvents)));
+        setBaselineBanner(showBanner);
+        setBaselineSponsors(JSON.parse(JSON.stringify(sponsors)));
+        setBaselineLocales(JSON.parse(JSON.stringify(locales)));
         // Clear pending uploads
         setPendingUploads([]);
+        // Force the next review modal mount to be completely clean
+        setPrSessionId((prev) => prev + 1);
+    };
+
+    const handleDiscard = () => {
+        // Revert all edited states back to the last submitted baseline
+        setMembers(JSON.parse(JSON.stringify(baselineMembers)));
+        setProjects(JSON.parse(JSON.stringify(baselineProjects)));
+        setRecurringEvents(JSON.parse(JSON.stringify(baselineRecurring)));
+        setCustomEvents(JSON.parse(JSON.stringify(baselineCustom)));
+        setShowBanner(baselineBanner);
+        setSponsors(JSON.parse(JSON.stringify(baselineSponsors)));
+        setLocales(JSON.parse(JSON.stringify(baselineLocales)));
+        // Clear any staged media uploads
+        setPendingUploads([]);
+        // Remount active editor to clear internal preview caches
+        setDiscardCounter((prev) => prev + 1);
     };
 
     // If not hydrated on client yet or loading initial auth
@@ -262,6 +326,7 @@ export default function DashboardPage() {
                 onSignOut={handleSignOut}
                 modifiedCount={totalModifiedCount}
                 onOpenReview={() => setIsReviewOpen(true)}
+                onDiscard={handleDiscard}
             />
 
             {/* Main Tabs Navigation */}
@@ -299,7 +364,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Dashboard Content Container */}
-            <div className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6">
+            <div key={discardCounter} className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6">
                 {activeTab === "members" && (
                     <MembersEditor
                         members={members}
@@ -357,14 +422,17 @@ export default function DashboardPage() {
             </div>
 
             {/* Review & PR Submission Modal */}
-            <DiffReviewModal
-                isOpen={isReviewOpen}
-                onClose={() => setIsReviewOpen(false)}
-                token={token}
-                pendingChanges={pendingChanges}
-                pendingUploads={pendingUploads}
-                onPrCreatedSuccess={handlePrSuccess}
-            />
+            {isReviewOpen && (
+                <DiffReviewModal
+                    key={prSessionId}
+                    isOpen={isReviewOpen}
+                    onClose={() => setIsReviewOpen(false)}
+                    token={token}
+                    pendingChanges={pendingChanges}
+                    pendingUploads={activeUploads}
+                    onPrCreatedSuccess={handlePrSuccess}
+                />
+            )}
         </main>
     );
 }

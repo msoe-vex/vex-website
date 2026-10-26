@@ -14,7 +14,7 @@ export default function AnnouncementsEditor({
     const details = getNextMeetingDetails();
 
     return (
-        <div className="bg-[#141416] border border-[#2b2b2b] p-6 flex flex-col gap-6">
+        <div className="dash-editor-card flex flex-col gap-6">
             <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-4">
                 <div>
                     <h2 className="text-base font-black uppercase tracking-tight text-white">

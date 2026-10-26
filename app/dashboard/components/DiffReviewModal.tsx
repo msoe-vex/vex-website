@@ -33,7 +33,7 @@ export default function DiffReviewModal({
     onPrCreatedSuccess,
 }: DiffReviewModalProps) {
     const [prTitle, setPrTitle] = useState(
-        `Update website data via Dashboard (${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" })})`
+        `Update website data via Dashboard (${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" })} ${new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })})`
     );
     const [prDescription, setPrDescription] = useState(
         "Automated content update submitted via Raider Robotics Web Dashboard."
@@ -48,13 +48,29 @@ export default function DiffReviewModal({
 
     if (!isOpen) return null;
 
+    const handleClose = () => {
+        setCreatedPr(null);
+        setErrorMessage(null);
+        setStatusMessage(null);
+        setPrTitle(
+            `Update website data via Dashboard (${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" })} ${new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })})`
+        );
+        setPrDescription("Automated content update submitted via Raider Robotics Web Dashboard.");
+        onClose();
+    };
+
+    const activePreviewPath =
+        pendingChanges.some((c) => c.filePath === previewingFile)
+            ? previewingFile
+            : pendingChanges[0]?.filePath || null;
+
     const currentPreviewContent =
-        pendingChanges.find((c) => c.filePath === previewingFile)?.generatedContent || "";
+        pendingChanges.find((c) => c.filePath === activePreviewPath)?.generatedContent || "";
 
     const handleSubmitPr = async () => {
         setIsSubmitting(true);
         setErrorMessage(null);
-        setStatusMessage("Initializing branch on msoe-vex/website...");
+        setStatusMessage("Initializing branch on msoe-vex/vex-website...");
 
         try {
             const timestamp = Date.now();
@@ -116,7 +132,7 @@ export default function DiffReviewModal({
 
     return (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-[#141416] border border-[#2b2b2b] w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl relative">
+            <div className="dash-card w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl relative">
                 {/* Header */}
                 <div className="p-5 border-b border-[#2b2b2b] flex items-center justify-between">
                     <div>
@@ -128,11 +144,14 @@ export default function DiffReviewModal({
                         </h2>
                     </div>
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         disabled={isSubmitting}
-                        className="text-gray-400 hover:text-white text-lg font-bold p-1 cursor-pointer"
+                        className="text-gray-400 hover:text-white p-1 cursor-pointer transition-colors"
+                        aria-label="Close"
                     >
-                        ✕
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </button>
                 </div>
 
@@ -141,8 +160,10 @@ export default function DiffReviewModal({
                     {/* Success state */}
                     {createdPr ? (
                         <div className="bg-emerald-950/40 border border-emerald-600/50 p-6 flex flex-col items-center text-center gap-3">
-                            <span className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white text-2xl font-bold">
-                                ✓
+                            <span className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center text-white">
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                </svg>
                             </span>
                             <h3 className="text-xl font-bold text-white">
                                 Pull Request Created Successfully!
@@ -150,14 +171,26 @@ export default function DiffReviewModal({
                             <p className="text-xs text-gray-300">
                                 PR <strong className="text-white">#{createdPr.number}</strong> has been opened into <code className="text-emerald-400">main</code>.
                             </p>
-                            <a
-                                href={createdPr.html_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-2 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors inline-flex items-center gap-2"
-                            >
-                                <span>View PR #{createdPr.number} on GitHub &rarr;</span>
-                            </a>
+                            <p className="text-xs text-gray-400 max-w-md">
+                                The dashboard diff baseline has been automatically reset. You can now close this review and immediately make and submit subsequent changes.
+                            </p>
+                            <div className="flex flex-wrap items-center justify-center gap-3 mt-3">
+                                <a
+                                    href={createdPr.html_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-[#1e1e20] hover:bg-[#2b2b2b] border border-[#3b3b3e] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors inline-flex items-center gap-2"
+                                >
+                                    <span>View PR #{createdPr.number} on GitHub &rarr;</span>
+                                </a>
+                                <button
+                                    type="button"
+                                    onClick={handleClose}
+                                    className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors cursor-pointer"
+                                >
+                                    Start New Changes
+                                </button>
+                            </div>
                         </div>
                     ) : (
                         <>
@@ -199,25 +232,25 @@ export default function DiffReviewModal({
                             {/* PR Title & Description */}
                             <div className="flex flex-col gap-3">
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Pull Request Title
                                     </label>
                                     <input
                                         type="text"
                                         value={prTitle}
                                         onChange={(e) => setPrTitle(e.target.value)}
-                                        className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                        className="dash-input"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Pull Request Description
                                     </label>
                                     <textarea
                                         rows={2}
                                         value={prDescription}
                                         onChange={(e) => setPrDescription(e.target.value)}
-                                        className="w-full bg-[#1e1e20] border border-[#333333] px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c5050c]"
+                                        className="dash-textarea"
                                     />
                                 </div>
                             </div>
@@ -236,7 +269,7 @@ export default function DiffReviewModal({
                                                     type="button"
                                                     onClick={() => setPreviewingFile(c.filePath)}
                                                     className={`px-2 py-0.5 text-[10px] font-mono cursor-pointer ${
-                                                        (previewingFile || pendingChanges[0]?.filePath) === c.filePath
+                                                        activePreviewPath === c.filePath
                                                             ? "bg-[#c5050c] text-white"
                                                             : "bg-[#252528] text-gray-400 hover:text-white"
                                                     }`}
@@ -267,15 +300,15 @@ export default function DiffReviewModal({
                 <div className="p-4 border-t border-[#2b2b2b] flex items-center justify-end gap-3 bg-[#111113]">
                     {createdPr ? (
                         <button
-                            onClick={onClose}
-                            className="bg-[#28282b] hover:bg-[#333] text-white text-xs font-bold uppercase tracking-wider px-4 py-2 cursor-pointer"
+                            onClick={handleClose}
+                            className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 cursor-pointer transition-colors"
                         >
-                            Close
+                            Start New Changes / Close
                         </button>
                     ) : (
                         <>
                             <button
-                                onClick={onClose}
+                                onClick={handleClose}
                                 disabled={isSubmitting}
                                 className="text-gray-400 hover:text-white text-xs font-bold uppercase tracking-wider px-4 py-2 cursor-pointer"
                             >

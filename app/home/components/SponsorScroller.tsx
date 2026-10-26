@@ -55,13 +55,13 @@ export default function SponsorScroller() {
                                     className="sponsor-card group flex items-center justify-between gap-4 p-3 bg-[#1e1e22] hover:bg-[#28282e] border-l-4 border-transparent hover:border-[#c5050c] transition-all duration-200 flex-shrink-0 min-w-[220px] clip-chamfer-btn"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center">
+                                        <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center overflow-hidden">
                                             <Image
                                                 src={`/sponsors/${sponsor.img}`}
                                                 alt={sponsor.alt}
-                                                width={70}
-                                                height={38}
-                                                style={{ width: "auto", height: "auto", objectFit: "contain", maxHeight: "100%", maxWidth: "100%" }}
+                                                fill
+                                                sizes="64px"
+                                                style={{ objectFit: "contain", padding: "2px" }}
                                             />
                                         </div>
                                         <span className="font-semibold text-xs sm:text-sm text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">

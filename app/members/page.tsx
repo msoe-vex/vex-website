@@ -126,7 +126,7 @@ export default function MembersPage() {
                                         </div>
                                         <div className="flex items-center gap-2 flex-shrink-0">
                                             {isSelected && (
-                                                <span className="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 uppercase tracking-wider animate-bounce">
+                                                <span className="badge-selected">
                                                     Selected
                                                 </span>
                                             )}

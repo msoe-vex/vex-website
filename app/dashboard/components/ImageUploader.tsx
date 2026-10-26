@@ -11,6 +11,7 @@ export interface PendingUpload {
 
 interface ImageUploaderProps {
     currentPath?: string;
+    previewOverride?: string; // Optional direct dataUrl preview
     targetDirectory: "members" | "projects" | "sponsors";
     itemIdentifier: string; // e.g. member id or project id
     onImageSelected: (imagePath: string, pendingUpload?: PendingUpload) => void;
@@ -18,13 +19,24 @@ interface ImageUploaderProps {
 
 export default function ImageUploader({
     currentPath,
+    previewOverride,
     targetDirectory,
     itemIdentifier,
     onImageSelected,
 }: ImageUploaderProps) {
-    const [preview, setPreview] = useState<string | null>(currentPath || null);
+    const effectivePreview = previewOverride || currentPath || null;
+    const [preview, setPreview] = useState<string | null>(effectivePreview);
+    const [prevCurrentPath, setPrevCurrentPath] = useState(currentPath);
+    const [prevOverride, setPrevOverride] = useState(previewOverride);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Keep preview in sync when currentPath or previewOverride props change externally
+    if (currentPath !== prevCurrentPath || previewOverride !== prevOverride) {
+        setPrevCurrentPath(currentPath);
+        setPrevOverride(previewOverride);
+        setPreview(previewOverride || currentPath || null);
+    }
 
     const handleFile = (file: File) => {
         if (!file.type.startsWith("image/")) {
@@ -49,6 +61,11 @@ export default function ImageUploader({
                 base64Content: base64Data,
                 previewUrl: dataUrl,
             });
+
+            // Clear input value so selecting the same file again triggers change event
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
         };
         reader.readAsDataURL(file);
     };
@@ -129,6 +146,7 @@ export default function ImageUploader({
                     onClick={() => {
                         setPreview("/branding/RR_Icon.png");
                         onImageSelected("/branding/RR_Icon.png");
+                        if (fileInputRef.current) fileInputRef.current.value = "";
                     }}
                     className="text-[10px] px-2 py-0.5 bg-[#252525] hover:bg-[#333333] text-gray-300 font-mono"
                 >
@@ -139,6 +157,7 @@ export default function ImageUploader({
                     onClick={() => {
                         setPreview("/branding/RR_Logo.png");
                         onImageSelected("/branding/RR_Logo.png");
+                        if (fileInputRef.current) fileInputRef.current.value = "";
                     }}
                     className="text-[10px] px-2 py-0.5 bg-[#252525] hover:bg-[#333333] text-gray-300 font-mono"
                 >

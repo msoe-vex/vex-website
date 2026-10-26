@@ -1,14 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: #0d0d0d;
+  --foreground: #ededed;
 
+  /* Raider Brand Colors */
+  --brand-red: #c5050c;
+  --brand-red-hover: #a0040a;
+  --brand-red-dark: #7a0307;
+  --brand-red-muted: rgba(197, 5, 12, 0.15);
+
+  /* Dark Theme Surfaces */
+  --surface-base: #0d0d0d;
+  --surface-card: #141416;
+  --surface-card-inner: #161618;
+  --surface-input: #1e1e20;
+  --surface-hover: #222226;
+  --surface-btn: #252528;
+  --surface-btn-hover: #333338;
+
+  /* Borders */
+  --border-subtle: #26262a;
+  --border-card: #2b2b2b;
+  --border-input: #333333;
+  --border-hover: #3a3a3e;
+
+  /* Gold / Yellow Accent Colors */
+  --gold-text: #facc15;
+  --gold-badge: #eab308;
+  --gold-bg: #242428;
+  --gold-border: rgba(234, 179, 8, 0.3);
+}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Brand Palette */
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-hover: var(--brand-red-hover);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-red-muted: var(--brand-red-muted);
+
+  /* Surface Palette */
+  --color-surface-base: var(--surface-base);
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-inner: var(--surface-card-inner);
+  --color-surface-input: var(--surface-input);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-btn: var(--surface-btn);
+  --color-surface-btn-hover: var(--surface-btn-hover);
+
+  /* Border Palette */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-card: var(--border-card);
+  --color-border-input: var(--border-input);
+  --color-border-hover: var(--border-hover);
+
+  /* Gold / Yellow Palette */
+  --color-gold-text: var(--gold-text);
+  --color-gold-badge: var(--gold-badge);
+  --color-gold-bg: var(--gold-bg);
+  --color-gold-border: var(--gold-border);
 
   --font-sans: var(--font-noto-sans);
   --font-heading: var(--font-baloo-tamma);
@@ -35,17 +88,17 @@ h1,h2,h3,h4,h5,h6 {
 .chamfer-card-outer {
   position: relative;
   padding: 1px;
-  background-color: #2b2b2b;
+  background-color: var(--border-card);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px));
   transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
 .chamfer-card-outer:hover {
-  background-color: #c5050c;
+  background-color: var(--brand-red);
 }
 
 .chamfer-card-outer.selected {
-  background-color: #c5050c;
+  background-color: var(--brand-red);
   filter: drop-shadow(0 0 12px rgba(197, 5, 12, 0.7));
 }
 
@@ -82,7 +135,213 @@ h1,h2,h3,h4,h5,h6 {
   display: inline-block;
   width: 0.625rem;
   height: 0.625rem;
-  background-color: #c5050c;
+  background-color: var(--brand-red);
   transform: rotate(45deg);
   flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Shared Badges & Chips
+   ========================================================================== */
+.badge-award {
+  display: inline-block;
+  background-color: var(--gold-bg);
+  color: var(--gold-text);
+  border: 1px solid var(--gold-border);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+}
+
+.badge-selected {
+  display: inline-block;
+  background-color: var(--gold-badge);
+  color: #000000;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 0.125rem 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: bounce 1s infinite;
+}
+
+.badge-season {
+  display: inline-block;
+  background-color: var(--brand-red);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0.125rem 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.subsystem-tag {
+  display: inline-block;
+  background-color: var(--surface-btn);
+  color: var(--brand-red);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--border-input);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Theme Surfaces & Card Panels
+   ========================================================================== */
+.dash-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-card);
+}
+
+.dash-sidebar-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-card);
+  padding: 1rem;
+}
+
+.dash-editor-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-card);
+  padding: 1.5rem;
+}
+
+/* ==========================================================================
+   Dashboard Form Elements
+   ========================================================================== */
+.dash-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  margin-bottom: 0.25rem;
+}
+
+.dash-input {
+  width: 100%;
+  background-color: var(--surface-input);
+  border: 1px solid var(--border-input);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #ffffff;
+  transition: border-color 0.15s ease;
+}
+
+.dash-input:focus {
+  outline: none;
+  border-color: var(--brand-red);
+}
+
+.dash-input::placeholder {
+  color: #6b7280;
+}
+
+.dash-textarea {
+  width: 100%;
+  background-color: var(--surface-input);
+  border: 1px solid var(--border-input);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: #ffffff;
+  transition: border-color 0.15s ease;
+}
+
+.dash-textarea:focus {
+  outline: none;
+  border-color: var(--brand-red);
+}
+
+.dash-textarea::placeholder {
+  color: #6b7280;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-red);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--brand-red-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-btn);
+  color: #e5e7eb;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-input);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--surface-btn-hover);
+  color: #ffffff;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Sidebar Item States
+   ========================================================================== */
+.dash-list-item {
+  width: 100%;
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  border-left-width: 4px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dash-list-item-active {
+  background-color: var(--surface-hover);
+  border-left-color: var(--brand-red);
+  color: #ffffff;
+}
+
+.dash-list-item-inactive {
+  background-color: #18181b;
+  border-left-color: transparent;
+  color: #d1d5db;
+}
+
+.dash-list-item-inactive:hover {
+  border-left-color: var(--border-input);
 }
