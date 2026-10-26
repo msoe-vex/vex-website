@@ -21,7 +21,8 @@ export default function MembersPage() {
     const highlightedId = useHashSelection(onHashSelect);
 
     const filteredMembers = members.filter((member) => {
-        const matchesSubsystem = selectedSubsystem === "All" || member.subsystem === selectedSubsystem;
+        const matchesSubsystem =
+            selectedSubsystem === "All" || member.subsystems.includes(selectedSubsystem);
         const matchesStatus = statusFilter === "all" || member.status === statusFilter;
         return matchesSubsystem && matchesStatus;
     });
@@ -112,11 +113,18 @@ export default function MembersPage() {
                                     className="chamfer-card-inner bg-[#161616] flex flex-col justify-between overflow-hidden h-full"
                                 >
                                 <div className="p-5 flex flex-col gap-3 flex-1">
-                                    <div className="flex items-center justify-between">
-                                        <span className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[11px] uppercase tracking-wider border border-[#333333]">
-                                            {member.subsystem}
-                                        </span>
-                                        <div className="flex items-center gap-2">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex flex-wrap items-center gap-1.5">
+                                            {member.subsystems.map((sub) => (
+                                                <span
+                                                    key={sub}
+                                                    className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[11px] uppercase tracking-wider border border-[#333333]"
+                                                >
+                                                    {sub}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             {isSelected && (
                                                 <span className="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 uppercase tracking-wider animate-bounce">
                                                     Selected

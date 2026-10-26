@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function getActiveEboard(): Member[] {
-    return members.filter((m) => m.subsystem === "Eboard" && m.status === "active");
+    return members.filter((m) => m.subsystems.includes("Eboard") && m.status === "active");
 }
 
 const initialEboard = getActiveEboard().slice(0, 3);
@@ -78,11 +78,18 @@ export default function MemberPreview() {
                                 className="chamfer-card-inner bg-[#161619] flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                             >
                                 <div className="p-5 flex flex-col gap-3 flex-1">
-                                    <div className="flex items-center justify-between">
-                                        <span className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]">
-                                            {member.role}
-                                        </span>
-                                        <span className="text-xs text-gray-400">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex flex-wrap items-center gap-1.5">
+                                            {member.subsystems.map((sub) => (
+                                                <span
+                                                    key={sub}
+                                                    className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]"
+                                                >
+                                                    {sub}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <span className="text-xs text-gray-400 flex-shrink-0">
                                             Class of {member.gradYear}
                                         </span>
                                     </div>
@@ -108,6 +115,9 @@ export default function MemberPreview() {
                                             <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#c5050c] transition-colors leading-tight">
                                                 {member.name}
                                             </h3>
+                                            <div className="text-xs text-[#c5050c] font-semibold mt-0.5">
+                                                {member.role}
+                                            </div>
                                             {member.major && (
                                                 <p className="text-xs font-semibold text-gray-400 mt-1">
                                                     {member.major}

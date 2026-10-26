@@ -54,7 +54,7 @@ All static website content, rosters, project catalogs, and UI copy are centraliz
 | :--- | :--- | :--- |
 | [`app/data/locales.ts`](app/data/locales.ts) | **UI Text & Copy** | Section titles, mission statement, engineering pillars, contact buttons, and footer copyright text. |
 | [`app/data/projects.ts`](app/data/projects.ts) | **Project Catalog** | Robot platform builds, season tags, technical highlights, awards won, and GitHub repo links. |
-| [`app/data/members.ts`](app/data/members.ts) | **Team Roster** | Current & alumni member profiles, roles, subsystem (`Controls`, `Design`, `Eboard`), graduation year, GitHub, and LinkedIn links. |
+| [`app/data/members.ts`](app/data/members.ts) | **Team Roster** | Current & alumni member profiles, roles, subsystems (`Controls`, `Design`, `Eboard`), graduation year, GitHub, and LinkedIn links. |
 | [`app/data/events.ts`](app/data/events.ts) | **Calendar & Schedule** | Recurring weekly meetings, competition dates, workshop sessions, and room locations. |
 | [`app/data/announcements.ts`](app/data/announcements.ts) | **Meeting Banner** | Top announcement bar logic computing the next meeting day (Tuesday/Thursday) and location. |
 | [`app/data/sponsors.ts`](app/data/sponsors.ts) | **Sponsors Marquee** | Company names, logo image filenames in `public/sponsors/`, and external partner URLs. |
