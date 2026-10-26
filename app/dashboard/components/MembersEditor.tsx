@@ -154,7 +154,13 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                         <p className="text-[10px] text-gray-400 truncate">{m.role}</p>
                                     </div>
                                 </div>
-                                <span className="text-[9px] font-mono uppercase bg-[#282828] px-1.5 py-0.5 text-gray-300 flex-shrink-0">
+                                <span
+                                    className={`text-[9px] font-mono uppercase px-1.5 py-0.5 border flex-shrink-0 ${
+                                        m.status === "active"
+                                            ? "bg-emerald-950/60 text-emerald-400 border-emerald-800/40"
+                                            : "bg-[#202022] text-gray-400 border-[#333333]"
+                                    }`}
+                                >
                                     {m.status}
                                 </span>
                             </div>
@@ -222,14 +228,30 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                             <label className="dash-label">
                                 Status
                             </label>
-                            <select
-                                value={currentMember.status}
-                                onChange={(e) => handleUpdateField("status", e.target.value as MemberStatus)}
-                                className="dash-input"
-                            >
-                                <option value="active">Active</option>
-                                <option value="alumni">Alumni</option>
-                            </select>
+                            <div className="flex gap-1.5">
+                                <button
+                                    type="button"
+                                    onClick={() => handleUpdateField("status", "active")}
+                                    className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors cursor-pointer ${
+                                        currentMember.status === "active"
+                                            ? "bg-[#c5050c] border-[#c5050c] text-white shadow-sm"
+                                            : "bg-[#1c1c1f] border-[#333333] text-gray-400 hover:text-white"
+                                    }`}
+                                >
+                                    Active
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleUpdateField("status", "alumni")}
+                                    className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors cursor-pointer ${
+                                        currentMember.status === "alumni"
+                                            ? "bg-[#c5050c] border-[#c5050c] text-white shadow-sm"
+                                            : "bg-[#1c1c1f] border-[#333333] text-gray-400 hover:text-white"
+                                    }`}
+                                >
+                                    Alumni
+                                </button>
+                            </div>
                         </div>
 
                         <div className="col-span-2">
@@ -279,6 +301,19 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                 value={currentMember.gradYear || 2027}
                                 onChange={(e) => handleUpdateField("gradYear", Number(e.target.value))}
                                 className="dash-input"
+                            />
+                        </div>
+
+                        <div className="col-span-2">
+                            <label className="dash-label">
+                                Contributions
+                            </label>
+                            <textarea
+                                rows={2}
+                                value={currentMember.contributions || ""}
+                                onChange={(e) => handleUpdateField("contributions", e.target.value)}
+                                placeholder="Write a sentence about what this member has contributed..."
+                                className="dash-textarea"
                             />
                         </div>
 
@@ -399,22 +434,41 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                                 {currentMember.major}
                                             </span>
                                         )}
+                                        {currentMember.contributions && (
+                                            <p className="text-xs text-gray-300 leading-relaxed mt-2 line-clamp-3">
+                                                {currentMember.contributions}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-2 mt-4 pt-3 border-t border-[#26262a]">
-                                {currentMember.linkedin && (
-                                    <span className="text-[10px] uppercase font-bold text-blue-400">
-                                        LinkedIn Linked
-                                    </span>
-                                )}
-                                {currentMember.github && (
-                                    <span className="text-[10px] uppercase font-bold text-gray-300">
-                                        GitHub Linked
-                                    </span>
-                                )}
-                            </div>
+                            {(currentMember.github || currentMember.linkedin) && (
+                                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[#26262a] text-xs font-bold uppercase tracking-wider">
+                                    {currentMember.linkedin && (
+                                        <a
+                                            href={currentMember.linkedin}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-[#0A66C2] hover:text-white flex items-center gap-1 transition-colors"
+                                        >
+                                            <span>LinkedIn</span>
+                                            <span>→</span>
+                                        </a>
+                                    )}
+                                    {currentMember.github && (
+                                        <a
+                                            href={currentMember.github}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-[#c5050c] hover:text-white flex items-center gap-1 transition-colors"
+                                        >
+                                            <span>GitHub</span>
+                                            <span>→</span>
+                                        </a>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
