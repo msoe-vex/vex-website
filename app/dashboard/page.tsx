@@ -384,7 +384,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Dashboard Content Container */}
-            <div key={discardCounter} className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6">
+            <div key={`dashboard-content-${discardCounter}`} className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6">
                 {activeTab === "members" && (
                     <MembersEditor
                         members={members}
@@ -444,7 +444,7 @@ export default function DashboardPage() {
             {/* Review & PR Submission Modal */}
             {isReviewOpen && (
                 <DiffReviewModal
-                    key={prSessionId}
+                    key={`diff-review-modal-${prSessionId}`}
                     isOpen={isReviewOpen}
                     onClose={() => setIsReviewOpen(false)}
                     token={token}

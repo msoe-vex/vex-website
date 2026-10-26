@@ -68,7 +68,7 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                         const isSelected = idx === selectedIdx;
                         return (
                             <div
-                                key={idx}
+                                key={`sponsor-${s.alt || idx}`}
                                 onClick={() => setSelectedIdx(idx)}
                                 className={`dash-list-item ${
                                     isSelected

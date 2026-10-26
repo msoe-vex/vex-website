@@ -247,7 +247,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                             <div className="flex flex-col gap-1">
                                 {(currentProject.highlights || []).map((h, i) => (
                                     <div
-                                        key={i}
+                                        key={`proj-highlight-${i}`}
                                         className="flex items-center justify-between bg-[#19191c] px-3 py-1 text-xs text-gray-300 border border-[#26262a]"
                                     >
                                         <span>• {h}</span>
@@ -288,7 +288,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                             <div className="flex flex-wrap gap-1.5">
                                 {(currentProject.awards || []).map((a, i) => (
                                     <span
-                                        key={i}
+                                        key={`proj-award-${i}`}
                                         className="badge-award flex items-center gap-1.5"
                                     >
                                         <span>{a}</span>
@@ -387,7 +387,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                         Highlights:
                                     </span>
                                     {currentProject.highlights.slice(0, 2).map((h, i) => (
-                                        <div key={i} className="truncate">• {h}</div>
+                                        <div key={`prev-highlight-${i}`} className="truncate">• {h}</div>
                                     ))}
                                 </div>
                             )}
@@ -396,7 +396,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                 <div className="flex flex-wrap gap-1 pt-2">
                                     {currentProject.awards.map((a, i) => (
                                         <span
-                                            key={i}
+                                            key={`prev-award-${i}`}
                                             className="badge-award"
                                         >
                                             {a}

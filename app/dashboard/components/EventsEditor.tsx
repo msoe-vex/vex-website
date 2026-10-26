@@ -111,7 +111,7 @@ export default function EventsEditor({
                 <div className="flex flex-col gap-4">
                     {recurringEvents.map((evt, idx) => (
                         <div
-                            key={evt.id || idx}
+                            key={evt.id || `rec-evt-${idx}`}
                             className="bg-[#1a1a1d] border border-[#2c2c30] p-4 grid grid-cols-1 md:grid-cols-12 gap-3"
                         >
                             <div className="md:col-span-3">
@@ -222,7 +222,7 @@ export default function EventsEditor({
                     )}
                     {customEvents.map((evt, idx) => (
                         <div
-                            key={evt.id || idx}
+                            key={evt.id || `cust-evt-${idx}`}
                             className="bg-[#1a1a1d] border border-[#2c2c30] p-4 grid grid-cols-1 md:grid-cols-12 gap-3"
                         >
                             <div className="md:col-span-3">
