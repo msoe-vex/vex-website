@@ -48,7 +48,13 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
             localStorage.setItem("msoe_vex_auth_worker_url", activeWorkerUrl);
         }
 
-        const redirectUri = typeof window !== "undefined" ? `${window.location.origin}/dashboard` : "";
+        // On production, omit redirect_uri so GitHub automatically uses the configured OAuth App callback URL.
+        // On localhost, specify the localhost callback URI.
+        const isLocalhost =
+            typeof window !== "undefined" &&
+            (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+
+        const redirectUri = isLocalhost ? `${window.location.origin}/dashboard` : "";
         const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${activeClientId}&scope=repo,read:org${
             redirectUri ? `&redirect_uri=${encodeURIComponent(redirectUri)}` : ""
         }`;
