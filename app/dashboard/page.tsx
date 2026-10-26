@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import {
+    useState,
+    useEffect,
+    useMemo,
+    useCallback,
+    useSyncExternalStore,
+} from "react";
 import initialMembers, { Member } from "@/app/data/members";
 import initialProjects, { Project } from "@/app/data/projects";
 import { recurringEvents as initRecurring, customEvents as initCustom, RecurringEvent, CustomEvent } from "@/app/data/events";
@@ -38,22 +44,30 @@ import {
     generateLocalesTs,
 } from "./generators/codeGenerators";
 
+const emptySubscribe = () => () => {};
+
+function useIsClient() {
+    return useSyncExternalStore(
+        emptySubscribe,
+        () => true,
+        () => false
+    );
+}
+
 type DashboardTab = "members" | "projects" | "events" | "announcements" | "sponsors" | "locales";
 
 export default function DashboardPage() {
+    const isClient = useIsClient();
+
     // Auth State
-    const [auth, setAuth] = useState<AuthStatus>(() => {
-        const stored = getStoredToken();
-        const hasCode = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("code");
-        return {
-            isAuthenticated: false,
-            isAuthorized: false,
-            user: null,
-            orgName: TARGET_ORG,
-            loading: Boolean(stored || hasCode),
-        };
+    const [auth, setAuth] = useState<AuthStatus>({
+        isAuthenticated: false,
+        isAuthorized: false,
+        user: null,
+        orgName: TARGET_ORG,
+        loading: true,
     });
-    const [token, setToken] = useState<string>(() => getStoredToken() || "");
+    const [token, setToken] = useState<string>("");
 
     // Active Tab
     const [activeTab, setActiveTab] = useState<DashboardTab>("members");
@@ -75,39 +89,42 @@ export default function DashboardPage() {
 
     // Initial Auth Check & OAuth Code Callback
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        const checkAuth = async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get("code");
             if (code) {
                 // Clear code parameter from URL
                 window.history.replaceState({}, document.title, window.location.pathname);
-                exchangeOAuthCode(code)
-                    .then(async (receivedToken) => {
-                        saveStoredToken(receivedToken);
-                        setToken(receivedToken);
-                        const res = await verifyGitHubAuth(receivedToken);
-                        setAuth({ ...res, loading: false });
-                    })
-                    .catch((err: unknown) => {
-                        setAuth({
-                            isAuthenticated: false,
-                            isAuthorized: false,
-                            user: null,
-                            orgName: TARGET_ORG,
-                            error: err instanceof Error ? err.message : "GitHub OAuth failed",
-                            loading: false,
-                        });
+                try {
+                    const receivedToken = await exchangeOAuthCode(code);
+                    saveStoredToken(receivedToken);
+                    setToken(receivedToken);
+                    const res = await verifyGitHubAuth(receivedToken);
+                    setAuth({ ...res, loading: false });
+                } catch (err: unknown) {
+                    setAuth({
+                        isAuthenticated: false,
+                        isAuthorized: false,
+                        user: null,
+                        orgName: TARGET_ORG,
+                        error: err instanceof Error ? err.message : "GitHub OAuth failed",
+                        loading: false,
                     });
+                }
                 return;
             }
-        }
 
-        const stored = getStoredToken();
-        if (stored) {
-            verifyGitHubAuth(stored).then((res) => {
+            const stored = getStoredToken();
+            if (stored) {
+                setToken(stored);
+                const res = await verifyGitHubAuth(stored);
                 setAuth({ ...res, loading: false });
-            });
-        }
+            } else {
+                setAuth((prev) => ({ ...prev, loading: false }));
+            }
+        };
+
+        checkAuth();
     }, []);
 
     const handleLogin = async (newToken: string) => {
@@ -212,8 +229,8 @@ export default function DashboardPage() {
         setPendingUploads([]);
     };
 
-    // If loading initial auth
-    if (auth.loading) {
+    // If not hydrated on client yet or loading initial auth
+    if (!isClient || auth.loading) {
         return (
             <div className="min-h-screen bg-[#0d0d0d] flex items-center justify-center text-white">
                 <div className="flex flex-col items-center gap-3">
