@@ -116,11 +116,34 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                         <span>Sign In with GitHub</span>
                     </button>
 
+                    <div className="flex justify-end">
+                        <button
+                            type="button"
+                            onClick={() => setShowConfigPrompt(!showConfigPrompt)}
+                            className="text-[10px] text-gray-400 hover:text-white underline cursor-pointer"
+                        >
+                            {showConfigPrompt ? "Hide Settings" : "Configure OAuth / Check Callback URL ⚙"}
+                        </button>
+                    </div>
+
                     {showConfigPrompt && (
                         <div className="bg-[#1c1c20] border border-[#333] p-4 text-xs flex flex-col gap-3">
                             <span className="text-gray-200 font-bold uppercase tracking-wider text-[11px]">
                                 Cloudflare Worker & GitHub OAuth Setup
                             </span>
+
+                            <div className="bg-[#121215] border border-[#2c2c32] p-2.5">
+                                <span className="text-[10px] text-gray-400 block font-bold uppercase mb-1">
+                                    Your GitHub &quot;Authorization callback URL&quot; must be:
+                                </span>
+                                <code className="text-[#c5050c] font-mono text-xs select-all block break-all font-bold">
+                                    {typeof window !== "undefined" ? `${window.location.origin}/dashboard` : ""}
+                                </code>
+                                <span className="text-[10px] text-gray-500 mt-1 block">
+                                    Copy this exact URL into your GitHub OAuth App settings under &quot;Authorization callback URL&quot;.
+                                </span>
+                            </div>
+
                             <div>
                                 <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
                                     GitHub App Client ID (Public)

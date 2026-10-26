@@ -80,21 +80,20 @@ export async function createBranch(
     baseBranch = "main"
 ): Promise<string> {
     // 1. Get SHA of base branch
-    const baseRefUrl = `https://api.github.com/repos/${TARGET_REPO}/git/ref/heads/${baseBranch}`;
-    const baseRefRes = await fetch(baseRefUrl, {
+    const branchRes = await fetch(`https://api.github.com/repos/${TARGET_REPO}/branches/${baseBranch}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/vnd.github.v3+json",
         },
     });
 
-    if (!baseRefRes.ok) {
-        const err = await baseRefRes.json().catch(() => ({}));
-        throw new Error(`Failed to read base branch '${baseBranch}': ${err.message || baseRefRes.status}`);
+    if (!branchRes.ok) {
+        const err = await branchRes.json().catch(() => ({}));
+        throw new Error(`Failed to read base branch '${baseBranch}': ${err.message || branchRes.status}`);
     }
 
-    const baseRefData = await baseRefRes.json();
-    const baseSha = baseRefData.object.sha;
+    const branchData = await branchRes.json();
+    const baseSha = branchData.commit.sha;
 
     // 2. Create new branch ref
     const createRefUrl = `https://api.github.com/repos/${TARGET_REPO}/git/refs`;
