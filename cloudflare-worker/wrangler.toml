@@ -1,0 +1,8 @@
+name = "raider-robotics"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+
+# Environment variables (set secrets via wrangler secret put CLIENT_SECRET)
+[vars]
+CLIENT_ID = ""
+

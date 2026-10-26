@@ -8,7 +8,7 @@ test.describe("Website Smoke & Usability Test", () => {
     await expect(page.locator("header")).toBeVisible();
 
     // 2. Main navigation routes load cleanly (HTTP 200)
-    for (const route of ["/projects", "/members", "/events"]) {
+    for (const route of ["/projects", "/members", "/events", "/dashboard"]) {
       const res = await page.goto(route);
       expect(res?.status()).toBe(200);
       await expect(page.locator("header")).toBeVisible();
@@ -22,4 +22,3 @@ test.describe("Website Smoke & Usability Test", () => {
     }
   });
 });
-

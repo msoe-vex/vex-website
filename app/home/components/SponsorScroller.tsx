@@ -61,7 +61,7 @@ export default function SponsorScroller() {
                                                 alt={sponsor.alt}
                                                 width={70}
                                                 height={38}
-                                                style={{ objectFit: "contain", maxHeight: "100%", maxWidth: "100%" }}
+                                                style={{ width: "auto", height: "auto", objectFit: "contain", maxHeight: "100%", maxWidth: "100%" }}
                                             />
                                         </div>
                                         <span className="font-semibold text-xs sm:text-sm text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">

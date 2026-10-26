@@ -4,20 +4,15 @@ import NavLink from "../navlink";
 import Image from "next/image";
 import "./local.css";
 
-// Topbar links: Top (scrolls to top of current page), Projects (/projects), Events (/events), Members (/members)
+// Topbar links: Projects (/projects), Events (/events), Members (/members), Dashboard (/dashboard)
 const items = [
-    { label: "Top", href: "#top" },
     { label: "Projects", href: "/projects" },
     { label: "Events", href: "/events" },
     { label: "Members", href: "/members" },
+    { label: "Dashboard", href: "/dashboard" },
 ];
 
 export default function Header() {
-    const handleTopClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
     return (
         <header id="site-header">
             <nav id="navheader">
@@ -49,7 +44,6 @@ export default function Header() {
                             key={item.label}
                             href={item.href}
                             className="navbutton-row-link"
-                            onClick={item.href === "#top" ? handleTopClick : undefined}
                         >
                             <span>{item.label}</span>
                         </NavLink>
