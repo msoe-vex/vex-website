@@ -138,7 +138,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2029,
         major: "Computer Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/members/charles-malohn.jpg",
         linkedin: "https://www.linkedin.com/in/6charles-malohn6/"
     },
 {
