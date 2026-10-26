@@ -145,7 +145,7 @@ export const members: Member[] = [
         id: "ben-reiser",
         name: "Ben Reiser",
         role: "Strategist",
-        subsystems: ["Eboard"],
+        subsystems: ["Eboard", "Design"],
         status: "active",
         gradYear: 2030,
         major: "Industrial Engineering",
