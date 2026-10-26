@@ -149,7 +149,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Industrial Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/members/ben-reiser.jpg",
         linkedin: "https://www.linkedin.com/in/benjreiser/"
     },
 {
