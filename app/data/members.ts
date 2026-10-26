@@ -49,7 +49,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2027,
         major: "Computer Science",
-        image: "/branding/RR_Icon.png",
+        image: "/members/andrew-needham.jpg",
         github: "https://github.com/aneedham0577",
         linkedin: "https://www.linkedin.com/in/aneedham0577/"
     },
