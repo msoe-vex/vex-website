@@ -60,10 +60,10 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                     />
                     <div>
                         <h1 className="text-2xl font-black uppercase tracking-tight text-white">
-                            Team Dashboard
+                            Web Dashboard
                         </h1>
                         <p className="text-xs text-gray-400 mt-1">
-                            Content Management & Pull Request Generator for <span className="text-[#c5050c] font-semibold">{TARGET_REPO}</span>
+                            Pull Request Generator for <span className="text-[#c5050c] font-semibold">{TARGET_REPO}</span>
                         </p>
                     </div>
                 </div>

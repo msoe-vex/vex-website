@@ -79,7 +79,7 @@ export const locales = {
         recurringTitle: "Weekly Recurring Meetings",
         customTitle: "Upcoming Competitions & Milestones",
         emptyEventsText: "No upcoming competitions or special events scheduled at this time. Check back soon!",
-        bannerLink: "Directions / Calendar →"
+        bannerLink: "More →"
     },
     contact: {
         sectionSubtitle: "Connect With Raider Robotics",
