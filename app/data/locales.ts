@@ -9,12 +9,11 @@ export const locales = {
         institution: "Milwaukee School of Engineering",
         institutionAbbr: "MSOE",
         tagline: "Milwaukee School of Engineering • Vex U Robotics",
-        missionSubtitle: "MSOE Vex U",
+        missionSubtitle: "MSOE Vex U"
     },
     mission: {
         title: "Our Mission",
-        statement:
-            "Raider Robotics empowers Milwaukee School of Engineering students to push the frontiers of competitive collegiate robotics. Through hands-on multidisciplinary engineering, rigorous iterative design, and open peer collaboration, we design, build, and program world-class autonomous and driver-controlled machines for VEX U competitions.",
+        statement: "Raider Robotics empowers Milwaukee School of Engineering students to push the frontiers of competitive collegiate robotics. Through hands-on multidisciplinary engineering, rigorous iterative design, and open peer collaboration, we design, build, and program world-class autonomous and driver-controlled machines for VEX U competitions.",
         pillars: [
             {
                 number: "01",
@@ -36,11 +35,9 @@ export const locales = {
     sponsors: {
         sectionSubtitle: "Partners & Backers",
         sectionTitle: "Our Sponsors",
-        description:
-            "Industry leaders and educational foundations powering materials, travel, and student engineering.",
-        longDescription:
-            "Raider Robotics is powered by pioneering industry leaders, educational supporters, and local community foundations. Their commitment fuels our materials, manufacturing, competition travel, and student mentorship.",
-        ctaButton: "Become a Sponsor →",
+        description: "Industry leaders and educational foundations powering materials, travel, and student engineering.",
+        longDescription: "Raider Robotics is powered by pioneering industry leaders, educational supporters, and local community foundations. Their commitment fuels our materials, manufacturing, competition travel, and student mentorship.",
+        ctaButton: "Become a Sponsor ↗",
         sponsorSubject: "Sponsorship Inquiry"
     },
     projects: {
@@ -49,10 +46,8 @@ export const locales = {
         archiveTitle: "Projects & Robot Builds",
         pageSubtitle: "Robot Architecture & History",
         recentCta: "View All Projects & Archive →",
-        pageDescription:
-            "Complete archive of Raider Robotics competitive robot platforms, custom sub-assemblies, mechanical specifications, awards, and open-source codebases.",
-        homeDescription:
-            "Explore our competitive robot builds, custom mechanical sub-assemblies, open-source code repositories, and season tournament achievements.",
+        pageDescription: "Complete archive of Raider Robotics competitive robot platforms, custom sub-assemblies, mechanical specifications, awards, and open-source codebases.",
+        homeDescription: "Explore our competitive robot builds, custom mechanical sub-assemblies, open-source code repositories, and season tournament achievements.",
         cardCta: "Learn more in Projects",
         sourceLink: "Source Code & CAD",
         filterLabel: "Filter Season:",
@@ -64,8 +59,7 @@ export const locales = {
         previewTitle: "Meet The Board",
         pageTitle: "Meet The Team",
         previewCta: "View Full Team Roster & Alumni →",
-        pageDescription:
-            "The multidisciplinary engineers, developers, and builders shaping Raider Robotics across Controls, Design, and Executive Board.",
+        pageDescription: "The multidisciplinary engineers, developers, and builders shaping Raider Robotics across Controls, Design, and Executive Board.",
         cardCta: "View Profile",
         filterSubsystemLabel: "Subsystem:",
         filterStatusLabel: "Status:",
@@ -84,8 +78,7 @@ export const locales = {
     contact: {
         sectionSubtitle: "Connect With Raider Robotics",
         heading: "Interested in Joining or Sponsoring?",
-        description:
-            "Whether you are an incoming MSOE student looking to design robots or an industry partner wanting to support future engineers, we want to hear from you.",
+        description: "Whether you are an incoming MSOE student looking to design robots or an industry partner wanting to support future engineers, we want to hear from you.",
         discordButton: "Join Discord",
         emailButton: "Email: msoerobotics@gmail.com",
         githubButton: "GitHub @msoe-vex",
@@ -94,8 +87,8 @@ export const locales = {
         githubUrl: "https://github.com/msoe-vex"
     },
     footer: {
-        raiderCopyright: `© ${new Date().getFullYear()} Raider Robotics. All rights reserved.`,
-        msoeCopyright: `© ${new Date().getFullYear()} Milwaukee School of Engineering. All rights reserved.`,
+        raiderCopyright: "© 2026 Raider Robotics. All rights reserved.",
+        msoeCopyright: "© 2026 Milwaukee School of Engineering. All rights reserved.",
         vexDisclaimer: "VEX, VEX U, and VEX Robotics are registered trademarks of Innovation First International, Inc.",
         creatorName: "Avery Benjamin",
         creatorHandle: "@Akiisqt",
