@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { TARGET_ORG, TARGET_REPO, DEFAULT_AUTH_WORKER_URL } from "../auth/githubAuth";
+import {
+    TARGET_ORG,
+    TARGET_REPO,
+    DEFAULT_AUTH_WORKER_URL,
+    DEFAULT_GITHUB_CLIENT_ID,
+} from "../auth/githubAuth";
 
 interface AuthGateProps {
     onLogin: (token: string) => Promise<void>;
@@ -19,9 +24,13 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
     const [showConfigPrompt, setShowConfigPrompt] = useState(false);
     const [clientId, setClientId] = useState(() => {
         if (typeof window !== "undefined") {
-            return process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || localStorage.getItem("msoe_vex_gh_client_id") || "";
+            return (
+                process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID ||
+                localStorage.getItem("msoe_vex_gh_client_id") ||
+                DEFAULT_GITHUB_CLIENT_ID
+            );
         }
-        return process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || "";
+        return process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || DEFAULT_GITHUB_CLIENT_ID;
     });
     const [workerUrl, setWorkerUrl] = useState(() => {
         if (typeof window !== "undefined") {
@@ -35,13 +44,8 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
     });
 
     const handleOAuthClick = () => {
-        const activeClientId = clientId.trim();
-        const activeWorkerUrl = workerUrl.trim();
-
-        if (!activeClientId || !activeWorkerUrl) {
-            setShowConfigPrompt(true);
-            return;
-        }
+        const activeClientId = clientId.trim() || DEFAULT_GITHUB_CLIENT_ID;
+        const activeWorkerUrl = workerUrl.trim() || DEFAULT_AUTH_WORKER_URL;
 
         if (typeof window !== "undefined") {
             localStorage.setItem("msoe_vex_gh_client_id", activeClientId);
