@@ -38,7 +38,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2027,
         major: "Mechanical Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/branding/RR_Logo.png",
         linkedin: "https://www.linkedin.com/in/m-griesbach/"
     },
 {
@@ -87,7 +87,7 @@ export const members: Member[] = [
 {
         id: "corbin-schaffer",
         name: "Corbin Schaffer",
-        role: "Control Member",
+        role: "Controls Member",
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2028,
