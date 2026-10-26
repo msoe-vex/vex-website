@@ -53,17 +53,24 @@ const worker = {
                     }),
                 });
 
-                const ghData = (await ghResponse.json()) as {
+                const ghData = (await ghResponse.json().catch(() => ({}))) as {
                     access_token?: string;
                     error?: string;
                     error_description?: string;
                 };
 
-                if (ghData.error) {
-                    return jsonResponse({ error: ghData.error_description || ghData.error }, 400, origin);
+                if (ghData.error || !ghData.access_token) {
+                    return jsonResponse(
+                        { error: ghData.error_description || ghData.error || "GitHub did not return an access token" },
+                        400,
+                        origin
+                    );
                 }
 
-                return jsonResponse({ token: ghData.access_token }, 200, origin);
+                return jsonResponse({
+                    token: ghData.access_token,
+                    access_token: ghData.access_token,
+                }, 200, origin);
             } catch (err: unknown) {
                 return jsonResponse(
                     { error: err instanceof Error ? err.message : "Internal worker error" },

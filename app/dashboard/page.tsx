@@ -5,6 +5,7 @@ import {
     useEffect,
     useMemo,
     useCallback,
+    useRef,
     useSyncExternalStore,
 } from "react";
 import initialMembers, { Member } from "@/app/data/members";
@@ -97,9 +98,13 @@ export default function DashboardPage() {
     const [isReviewOpen, setIsReviewOpen] = useState(false);
     const [prSessionId, setPrSessionId] = useState(0);
     const [discardCounter, setDiscardCounter] = useState(0);
+    const authCheckInitiated = useRef(false);
 
     // Initial Auth Check & OAuth Code Callback
     useEffect(() => {
+        if (authCheckInitiated.current) return;
+        authCheckInitiated.current = true;
+
         const checkAuth = async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get("code");
@@ -113,6 +118,21 @@ export default function DashboardPage() {
                     const res = await verifyGitHubAuth(receivedToken);
                     setAuth({ ...res, loading: false });
                 } catch (err: unknown) {
+                    // Graceful fallback: If a concurrent request or prior exchange already saved a valid token
+                    const stored = getStoredToken();
+                    if (stored) {
+                        try {
+                            const res = await verifyGitHubAuth(stored);
+                            if (res.isAuthenticated) {
+                                setToken(stored);
+                                setAuth({ ...res, loading: false });
+                                return;
+                            }
+                        } catch {
+                            // Fall through to error
+                        }
+                    }
+
                     setAuth({
                         isAuthenticated: false,
                         isAuthorized: false,

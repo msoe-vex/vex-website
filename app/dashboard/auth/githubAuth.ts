@@ -56,12 +56,11 @@ export function clearStoredToken(): void {
 export async function exchangeOAuthCode(code: string): Promise<string> {
     const workerUrl =
         process.env.NEXT_PUBLIC_AUTH_WORKER_URL ||
-        (typeof window !== "undefined" ? localStorage.getItem("msoe_vex_auth_worker_url") : null) ||
         DEFAULT_AUTH_WORKER_URL;
 
     if (!workerUrl) {
         throw new Error(
-            "Cloudflare Auth Worker URL is not configured. Set NEXT_PUBLIC_AUTH_WORKER_URL or enter your worker URL in the dashboard."
+            "Cloudflare Auth Worker URL is not configured. Set NEXT_PUBLIC_AUTH_WORKER_URL or DEFAULT_AUTH_WORKER_URL in code."
         );
     }
 
@@ -78,11 +77,12 @@ export async function exchangeOAuthCode(code: string): Promise<string> {
         throw new Error(data.error || `OAuth token exchange failed (HTTP ${res.status})`);
     }
 
-    if (!data.token) {
-        throw new Error("No access token returned by OAuth worker");
+    const token = data.token || data.access_token;
+    if (!token) {
+        throw new Error(data.error || "No access token returned by OAuth worker");
     }
 
-    return data.token;
+    return token;
 }
 
 /**

@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
     TARGET_ORG,
     TARGET_REPO,
-    DEFAULT_AUTH_WORKER_URL,
     DEFAULT_GITHUB_CLIENT_ID,
 } from "../auth/githubAuth";
 
@@ -20,37 +19,8 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
     const [showToken, setShowToken] = useState(false);
     const [showManualToken, setShowManualToken] = useState(false);
 
-    // OAuth Settings State
-    const [showConfigPrompt, setShowConfigPrompt] = useState(false);
-    const [clientId, setClientId] = useState(() => {
-        if (typeof window !== "undefined") {
-            return (
-                process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID ||
-                localStorage.getItem("msoe_vex_gh_client_id") ||
-                DEFAULT_GITHUB_CLIENT_ID
-            );
-        }
-        return process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || DEFAULT_GITHUB_CLIENT_ID;
-    });
-    const [workerUrl, setWorkerUrl] = useState(() => {
-        if (typeof window !== "undefined") {
-            return (
-                process.env.NEXT_PUBLIC_AUTH_WORKER_URL ||
-                localStorage.getItem("msoe_vex_auth_worker_url") ||
-                DEFAULT_AUTH_WORKER_URL
-            );
-        }
-        return process.env.NEXT_PUBLIC_AUTH_WORKER_URL || DEFAULT_AUTH_WORKER_URL;
-    });
-
     const handleOAuthClick = () => {
-        const activeClientId = clientId.trim() || DEFAULT_GITHUB_CLIENT_ID;
-        const activeWorkerUrl = workerUrl.trim() || DEFAULT_AUTH_WORKER_URL;
-
-        if (typeof window !== "undefined") {
-            localStorage.setItem("msoe_vex_gh_client_id", activeClientId);
-            localStorage.setItem("msoe_vex_auth_worker_url", activeWorkerUrl);
-        }
+        const activeClientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || DEFAULT_GITHUB_CLIENT_ID;
 
         // On production, omit redirect_uri so GitHub automatically uses the configured OAuth App callback URL.
         // On localhost, specify the localhost callback URI.
@@ -119,78 +89,6 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
                         </svg>
                         <span>Sign In with GitHub</span>
                     </button>
-
-                    <div className="flex justify-end">
-                        <button
-                            type="button"
-                            onClick={() => setShowConfigPrompt(!showConfigPrompt)}
-                            className="text-[10px] text-gray-400 hover:text-white underline cursor-pointer"
-                        >
-                            {showConfigPrompt ? "Hide Settings" : "Configure OAuth / Check Callback URL"}
-                        </button>
-                    </div>
-
-                    {showConfigPrompt && (
-                        <div className="bg-[#1c1c20] border border-[#333] p-4 text-xs flex flex-col gap-3">
-                            <span className="text-gray-200 font-bold uppercase tracking-wider text-[11px]">
-                                Cloudflare Worker & GitHub OAuth Setup
-                            </span>
-
-                            <div className="bg-[#121215] border border-[#2c2c32] p-2.5">
-                                <span className="text-[10px] text-gray-400 block font-bold uppercase mb-1">
-                                    Your GitHub &quot;Authorization callback URL&quot; must be:
-                                </span>
-                                <code className="text-[#c5050c] font-mono text-xs select-all block break-all font-bold">
-                                    {typeof window !== "undefined" ? `${window.location.origin}/dashboard` : ""}
-                                </code>
-                                <span className="text-[10px] text-gray-500 mt-1 block">
-                                    Copy this exact URL into your GitHub OAuth App settings under &quot;Authorization callback URL&quot;.
-                                </span>
-                            </div>
-
-                            <div>
-                                <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
-                                    GitHub App Client ID (Public)
-                                </label>
-                                <input
-                                    type="text"
-                                    value={clientId}
-                                    onChange={(e) => setClientId(e.target.value)}
-                                    placeholder="e.g. Ov23li..."
-                                    className="w-full bg-[#121214] border border-[#333] px-2.5 py-1.5 text-xs text-white font-mono"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
-                                    Cloudflare Auth Worker URL
-                                </label>
-                                <input
-                                    type="url"
-                                    value={workerUrl}
-                                    onChange={(e) => setWorkerUrl(e.target.value)}
-                                    placeholder="https://raider-robotics-auth.<subdomain>.workers.dev"
-                                    className="w-full bg-[#121214] border border-[#333] px-2.5 py-1.5 text-xs text-white font-mono"
-                                />
-                            </div>
-                            <div className="flex justify-end gap-2 pt-1">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowConfigPrompt(false)}
-                                    className="text-gray-400 hover:text-white px-3 py-1 text-xs"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={handleOAuthClick}
-                                    disabled={!clientId.trim() || !workerUrl.trim()}
-                                    className="bg-[#c5050c] hover:bg-[#a0040a] disabled:opacity-50 text-white px-4 py-1.5 font-bold text-xs uppercase"
-                                >
-                                    Save & Authorize &rarr;
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
 
                 {/* Divider */}
