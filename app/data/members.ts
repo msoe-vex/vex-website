@@ -116,7 +116,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2028,
         major: "Computer Science",
-        image: "/branding/RR_Icon.png",
+        image: "/members/landon-van-mersbergen.png",
         linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/"
     },
 {
