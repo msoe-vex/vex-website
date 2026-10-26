@@ -90,9 +90,10 @@ export const members: Member[] = [
         role: "Control Member",
         subsystems: ["Controls"],
         status: "active",
-        gradYear: 2029,
+        gradYear: 2028,
         major: "Computer Science",
-        image: "/branding/RR_Icon.png",
+        image: "/members/corbin-schaffer.jpg",
+        github: "https://github.com/IVemesisRunner",
         linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/"
     },
 {
