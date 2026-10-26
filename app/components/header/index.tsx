@@ -13,8 +13,13 @@ const items = [
 ];
 
 export default function Header() {
+    const handleTopClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     return (
-        <header id="top">
+        <header id="site-header">
             <nav id="navheader">
                 <NavLink className="navbutton-logo" href="/home">
                     <Image
@@ -40,7 +45,12 @@ export default function Header() {
                 
                 <div className="navbutton-row">
                     {items.map((item) => (
-                        <NavLink key={item.label} href={item.href} className="navbutton-row-link">
+                        <NavLink
+                            key={item.label}
+                            href={item.href}
+                            className="navbutton-row-link"
+                            onClick={item.href === "#top" ? handleTopClick : undefined}
+                        >
                             <span>{item.label}</span>
                         </NavLink>
                     ))}

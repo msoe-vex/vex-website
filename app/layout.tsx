@@ -66,6 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-[#0d0d0d] text-white min-h-screen flex flex-col font-sans selection:bg-[#c5050c] selection:text-white">
+        {/* Document Top Anchor */}
+        <div id="top" className="absolute top-0 left-0 w-full h-0 pointer-events-none" />
+
         {/* Meeting Banner scrolls with document, above navbar */}
         <MeetingBanner />
 
