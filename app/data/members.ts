@@ -87,7 +87,7 @@ export const members: Member[] = [
 {
         id: "corbin-schaffer",
         name: "Corbin Schaffer",
-        role: "Control Member",
+        role: "Controls Member",
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2028,
