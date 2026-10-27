@@ -162,9 +162,11 @@ export const members: Member[] = [
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2030,
-        major: "Computer Science",
-        image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/tyler-dretske/"
+        major: "Computer Engineering",
+        image: "/members/tyler-dretske.jpg",
+        github: "https://github.com/dretsket",
+        linkedin: "https://www.linkedin.com/in/tyler-dretske/",
+        contributions: "Worked on custom controller UI and calibration testing software."
     },
 {
         id: "charles-malohn",
