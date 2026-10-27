@@ -113,10 +113,11 @@ export const members: Member[] = [
         name: "Davi Facchini",
         role: "Design Member",
         subsystems: ["Design"],
-        status: "alumni",
+        status: "active",
         gradYear: 2029,
         major: "Electrical Engineering",
-        image: "/branding/RR_Icon.png"
+        image: "/assets/members/davi-facchini.jpg",
+        contributions: "Designed Robots"
     },
 {
         id: "corbin-schaffer",
