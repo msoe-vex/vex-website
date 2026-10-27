@@ -44,6 +44,7 @@ export default function Home() {
                             alt="Raider Robotics"
                             fill
                             priority
+                            fetchPriority="high"
                             loading="eager"
                             sizes="(max-width: 640px) 288px, (max-width: 768px) 384px, 440px"
                             className="transition-opacity duration-300 group-hover:opacity-0"

@@ -34,6 +34,13 @@ const RULES: CompressionRule[] = [
         maxHeight: 900,
         quality: 82,
     },
+    {
+        // Minimal compression for branding: higher quality, no downscaling unless excessively oversized
+        folder: "public/branding",
+        maxWidth: 1200,
+        maxHeight: 1200,
+        quality: 92,
+    },
 ];
 
 async function optimizeImageFile(filePath: string, rule: CompressionRule): Promise<boolean> {

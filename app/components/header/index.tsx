@@ -24,6 +24,7 @@ export default function Header() {
                         width={500}
                         height={250}
                         priority
+                        fetchPriority="high"
                         loading="eager"
                         style={{ width: "auto", height: "auto", maxHeight: "40px" }}
                     />
