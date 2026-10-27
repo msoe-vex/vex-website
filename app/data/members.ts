@@ -68,11 +68,11 @@ export const members: Member[] = [
         id: "matthew-griesbach",
         name: "Matthew Griesbach",
         role: "Vice President",
-        subsystems: ["Eboard"],
+        subsystems: ["Eboard", "Design"],
         status: "active",
         gradYear: 2027,
         major: "Mechanical Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/assets/members/matthew-griesbach.jpg",
         linkedin: "https://www.linkedin.com/in/m-griesbach/"
     },
 {
