@@ -49,7 +49,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2027,
         major: "Computer Science",
-        image: "/branding/RR_Icon.png",
+        image: "/members/andrew-needham.jpg",
         github: "https://github.com/aneedham0577",
         linkedin: "https://www.linkedin.com/in/aneedham0577/"
     },
@@ -87,14 +87,15 @@ export const members: Member[] = [
 {
         id: "corbin-schaffer",
         name: "Corbin Schaffer",
-        role: "Control Member",
+        role: "Controls Member",
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2028,
         major: "Computer Science",
         image: "/members/corbin-schaffer.jpg",
         github: "https://github.com/IVemesisRunner",
-        linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/"
+        linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/",
+        contributions: "2nd year member, that works on the AI game layout and strategy.\n"
     },
 {
         id: "avery-benjamin",
