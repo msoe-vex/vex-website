@@ -27,7 +27,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Computer Science",
-        image: "/branding/RR_Icon.png",
+        image: "/members/evan-weiler.jpg",
         contributions: "AI Environments."
     },
 {
