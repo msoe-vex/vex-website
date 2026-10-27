@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback } from "react";
 import projects, { Project, getAvailableSeasons, getSortedProjects } from "@/app/data/projects";
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
 
                 {/* Season Filter Bar */}
                 <div className="flex items-center gap-2 bg-[#141416] p-3 border border-[#26262b]">
-                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mr-2">
+                    <span className="pub-filter-label">
                         {locales.projects.filterLabel}
                     </span>
                     {seasons.map((season) => (
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
                                 <div className="flex flex-col flex-1">
                                     {/* Header / Graphic */}
                                     <div className="relative h-44 w-full bg-[#0d0d0d] flex items-center justify-center p-4 border-b border-[#26262b] overflow-hidden flex-shrink-0">
-                                        <div className="absolute top-2 left-2 bg-[#c5050c] text-white text-xs font-bold px-2 py-0.5 tracking-wider uppercase z-10">
+                                        <div className="badge-season absolute top-2 left-2 z-10 px-2 py-0.5">
                                             {project.season}
                                         </div>
                                         {isSelected && (
@@ -117,7 +117,7 @@ export default function ProjectsPage() {
                                         {/* Highlights */}
                                         {project.highlights && project.highlights.length > 0 && (
                                             <div className="flex flex-col gap-1.5 pt-2 border-t border-[#26262b]">
-                                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                                                <span className="pub-subsection-label">
                                                     {locales.projects.technicalHighlights}
                                                 </span>
                                                 <ul className="text-xs text-gray-300 list-disc list-inside space-y-1">

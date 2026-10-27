@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -77,7 +77,7 @@ export default function RickRollRedirectPage() {
                     <div className="flex flex-wrap items-center justify-center gap-3 w-full pt-1">
                         <button
                             onClick={() => router.push("/home")}
-                            className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors clip-chamfer-btn shadow-lg"
+                            className="btn-primary px-5 py-2.5 clip-chamfer-btn shadow-lg"
                         >
                             Home →
                         </button>
@@ -85,7 +85,7 @@ export default function RickRollRedirectPage() {
                             href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                             target="_blank"
                             rel="noreferrer"
-                            className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors clip-chamfer-btn shadow-lg flex items-center gap-1.5"
+                            className="btn-primary px-5 py-2.5 clip-chamfer-btn shadow-lg flex items-center gap-1.5"
                         >
                             <span>Watch the Music Video</span>
                             <span>↗</span>

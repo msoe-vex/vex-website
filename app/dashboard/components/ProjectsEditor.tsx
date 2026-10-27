@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -92,12 +92,12 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
             {/* Left: Project Catalog List */}
             <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-black uppercase tracking-wider text-white">
-                        Robots & Projects ({projects.length})
+                    <h2 className="dash-section-title">
+                        Robots &amp; Projects ({projects.length})
                     </h2>
                     <button
                         onClick={handleAddNewProject}
-                        className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-[11px] font-bold px-3 py-1.5 uppercase tracking-wider transition-colors cursor-pointer"
+                        className="btn-add"
                     >
                         + Add Project
                     </button>
@@ -147,7 +147,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                 <div className="lg:col-span-5 dash-editor-card flex flex-col gap-4">
                     <div className="dash-editor-header">
                         <div>
-                            <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
+                            <span className="dash-eyebrow">
                                 Editing Robot / Project
                             </span>
                             <h3 className="text-lg font-bold text-white">{currentProject.title}</h3>
@@ -345,7 +345,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
             {/* Right: Live Preview Card */}
             {currentProject && (
                 <div className="lg:col-span-3 flex flex-col gap-3">
-                    <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                    <span className="dash-preview-label">
                         Live Card Preview
                     </span>
 

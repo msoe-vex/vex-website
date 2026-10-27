@@ -87,7 +87,7 @@ export default function FeaturesEditor({
             {/* Top Info Banner & Upload Zone */}
             <div className="dash-card p-6 flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
-                    <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest block mb-1">
+                    <span className="dash-eyebrow block mb-1">
                         Homepage Hero Carousel
                     </span>
                     <h2 className="text-xl font-black uppercase text-white">
@@ -114,7 +114,7 @@ export default function FeaturesEditor({
                     />
                     <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold px-4 py-2.5 uppercase tracking-wider cursor-pointer shadow-lg transition-colors flex items-center gap-2"
+                        className="btn-primary px-4 py-2.5 shadow-lg flex items-center gap-2"
                     >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -216,7 +216,7 @@ export default function FeaturesEditor({
 
                 {/* Selected Image Detailed Preview & Actions */}
                 <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
-                    <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest border-b border-[#2b2b2b] pb-2">
+                    <span className="dash-eyebrow border-b border-[#2b2b2b] pb-2">
                         Feature Details & Controls
                     </span>
 
@@ -272,7 +272,7 @@ export default function FeaturesEditor({
                                     href={getPreviewUrl(selectedFeature)}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="w-full text-center bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-[#333] text-xs font-bold py-2 uppercase tracking-wider transition-colors"
+                                    className="btn-secondary w-full text-center py-2"
                                 >
                                     View Full Size ↗
                                 </a>

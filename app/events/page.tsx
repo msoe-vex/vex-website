@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { recurringEvents, customEvents, DEFAULT_LOCATION, STEM_CENTER_URL } from "@/app/data/events";
 import locales from "@/app/data/locales";
@@ -31,7 +31,7 @@ export default function EventsPage() {
 
                     {/* Primary Location Card */}
                     <div className="bg-[#161619] border-l-4 border-[#c5050c] p-4 text-xs max-w-md shadow-lg clip-chamfer-btn">
-                        <span className="text-gray-400 uppercase font-bold tracking-wider block mb-1">
+                        <span className="pub-info-label">
                             {locales.events.homeLabLabel}
                         </span>
                         <p className="text-white font-semibold text-sm">
@@ -83,7 +83,7 @@ export default function EventsPage() {
                                         >
                                             <td className="py-3.5 px-4 font-bold text-white whitespace-nowrap">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="px-2 py-0.5 bg-[#c5050c] text-white text-[11px] uppercase tracking-wider inline-block">
+                                                    <span className="badge-season px-2 py-0.5 inline-block">
                                                         {event.dayOfWeek}
                                                     </span>
                                                     {isSelected && (

@@ -1,4 +1,4 @@
-import { Project, getSortedProjects } from "@/app/data/projects";
+﻿import { Project, getSortedProjects } from "@/app/data/projects";
 import locales from "@/app/data/locales";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export default function ProjectShowcase() {
                                 <div className="flex flex-col flex-1">
                                     {/* Card Image / Season Banner */}
                                     <div className="relative h-40 w-full bg-[#0d0d0d] flex items-center justify-center p-4 border-b border-[#2b2b2b] overflow-hidden flex-shrink-0">
-                                        <div className="absolute top-2 left-2 bg-[#c5050c] text-white text-xs font-bold px-2 py-0.5 tracking-wider uppercase z-10">
+                                        <div className="badge-season absolute top-2 left-2 z-10 px-2 py-0.5">
                                             {project.season}
                                         </div>
                                         {project.image && (
@@ -71,7 +71,7 @@ export default function ProjectShowcase() {
                                         {/* Highlights */}
                                         {project.highlights && project.highlights.length > 0 && (
                                             <div className="flex flex-col gap-1 pt-1.5 border-t border-[#26262b]">
-                                                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                                                <span className="pub-subsection-label">
                                                     Technical Highlights
                                                 </span>
                                                 <ul className="text-xs text-gray-300 list-disc list-inside space-y-0.5">

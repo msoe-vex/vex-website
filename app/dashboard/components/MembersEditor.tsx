@@ -84,12 +84,12 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
             {/* Left Sidebar: Member Directory */}
             <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-black uppercase tracking-wider text-white">
+                    <h2 className="dash-section-title">
                         Team Directory ({members.length})
                     </h2>
                     <button
                         onClick={handleAddNewMember}
-                        className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-[11px] font-bold px-3 py-1.5 uppercase tracking-wider transition-colors cursor-pointer"
+                        className="btn-add"
                     >
                         + Add Member
                     </button>
@@ -109,10 +109,10 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                             <button
                                 key={status}
                                 onClick={() => setFilterStatus(status)}
-                                className={`flex-1 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                                className={`dash-tab flex-1 py-1 text-[10px] ${
                                     filterStatus === status
-                                        ? "bg-[#c5050c] text-white"
-                                        : "bg-[#202022] text-gray-400 hover:text-white"
+                                        ? "dash-tab-active"
+                                        : "dash-tab-inactive"
                                 }`}
                             >
                                 {status}
@@ -174,7 +174,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                 <div className="lg:col-span-5 dash-editor-card flex flex-col gap-4">
                     <div className="dash-editor-header">
                         <div>
-                            <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
+                            <span className="dash-eyebrow">
                                 Editing Member
                             </span>
                             <h3 className="text-lg font-bold text-white">{currentMember.name}</h3>
@@ -383,7 +383,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
             {/* Right: Live Preview Card */}
             {currentMember && (
                 <div className="lg:col-span-3 flex flex-col gap-3">
-                    <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                    <span className="dash-preview-label">
                         Live Card Preview
                     </span>
 

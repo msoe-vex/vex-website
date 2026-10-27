@@ -79,21 +79,13 @@ export default function EventsEditor({
                 <div className="flex gap-2">
                     <button
                         onClick={() => setActiveTab("recurring")}
-                        className={`px-4 py-2 text-xs font-bold uppercase tracking-wider cursor-pointer ${
-                            activeTab === "recurring"
-                                ? "bg-[#c5050c] text-white"
-                                : "bg-[#202022] text-gray-400 hover:text-white"
-                        }`}
+                        className={`dash-tab px-4 py-2 ${activeTab === "recurring" ? "dash-tab-active" : "dash-tab-inactive"}`}
                     >
                         Recurring Weekly Meetings ({recurringEvents.length})
                     </button>
                     <button
                         onClick={() => setActiveTab("custom")}
-                        className={`px-4 py-2 text-xs font-bold uppercase tracking-wider cursor-pointer ${
-                            activeTab === "custom"
-                                ? "bg-[#c5050c] text-white"
-                                : "bg-[#202022] text-gray-400 hover:text-white"
-                        }`}
+                        className={`dash-tab px-4 py-2 ${activeTab === "custom" ? "dash-tab-active" : "dash-tab-inactive"}`}
                     >
                         Upcoming Competitions & Dates ({customEvents.length})
                     </button>
@@ -101,7 +93,7 @@ export default function EventsEditor({
 
                 <button
                     onClick={activeTab === "recurring" ? handleAddRecurring : handleAddCustom}
-                    className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold px-3 py-2 uppercase tracking-wider cursor-pointer"
+                    className="btn-add px-3 py-2"
                 >
                     + Add {activeTab === "recurring" ? "Meeting" : "Event"}
                 </button>

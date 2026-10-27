@@ -157,7 +157,7 @@ export default function DonorScroller() {
                         </p>
                         <a
                             href={`mailto:${locales.contact.emailAddress}?subject=${encodeURIComponent(locales.donors.donorSubject)}`}
-                            className="inline-flex items-center px-4 py-1.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors clip-chamfer-btn select-text"
+                            className="btn-primary px-4 py-1.5 clip-chamfer-btn select-text"
                         >
                             {locales.donors.ctaButton}
                         </a>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { locales as defaultLocales } from "@/app/data/locales";
@@ -47,10 +47,10 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                         <button
                             key={tab.id}
                             onClick={() => setActiveSection(tab.id as typeof activeSection)}
-                            className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider cursor-pointer ${
+                            className={`dash-tab px-3 py-1.5 ${
                                 activeSection === tab.id
-                                    ? "bg-[#c5050c] text-white"
-                                    : "bg-[#202022] text-gray-400 hover:text-white"
+                                    ? "dash-tab-active"
+                                    : "dash-tab-inactive"
                             }`}
                         >
                             {tab.label}
@@ -107,13 +107,13 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {/* Discord */}
-                            <div className="bg-[#1c1c20] border border-[#2e2e34] p-4 flex flex-col gap-3">
+                            <div className="dash-channel-card">
                                 <div className="flex items-center gap-2">
                                     <span className="w-2.5 h-2.5 rounded-full bg-[#5865F2]" />
                                     <span className="text-xs font-bold uppercase text-white">Discord</span>
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Invite Link
                                     </label>
                                     <input
@@ -124,7 +124,7 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Button Text
                                     </label>
                                     <input
@@ -137,13 +137,13 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                             </div>
 
                             {/* Email */}
-                            <div className="bg-[#1c1c20] border border-[#2e2e34] p-4 flex flex-col gap-3">
+                            <div className="dash-channel-card">
                                 <div className="flex items-center gap-2">
                                     <span className="w-2.5 h-2.5 rounded-full bg-[#c5050c]" />
                                     <span className="text-xs font-bold uppercase text-white">Email Contact</span>
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Email Address
                                     </label>
                                     <input
@@ -154,7 +154,7 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Button Text
                                     </label>
                                     <input
@@ -167,13 +167,13 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                             </div>
 
                             {/* GitHub */}
-                            <div className="bg-[#1c1c20] border border-[#2e2e34] p-4 flex flex-col gap-3">
+                            <div className="dash-channel-card">
                                 <div className="flex items-center gap-2">
                                     <span className="w-2.5 h-2.5 rounded-full bg-gray-400" />
                                     <span className="text-xs font-bold uppercase text-white">GitHub Page</span>
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Organization URL
                                     </label>
                                     <input
@@ -184,7 +184,7 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">
+                                    <label className="dash-label">
                                         Button Text
                                     </label>
                                     <input

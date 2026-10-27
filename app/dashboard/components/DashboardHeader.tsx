@@ -70,7 +70,7 @@ export default function DashboardHeader({
                         disabled={modifiedCount === 0}
                         className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
                             modifiedCount > 0
-                                ? "bg-[#c5050c] hover:bg-[#a0040a] text-white shadow-lg cursor-pointer"
+                                ? "btn-primary shadow-lg cursor-pointer"
                                 : "bg-[#252525] text-gray-500 cursor-not-allowed"
                         }`}
                     >
@@ -106,7 +106,7 @@ export default function DashboardHeader({
                 <div className="modal-overlay">
                     <div className="dash-card w-full max-w-md p-6 shadow-2xl flex flex-col gap-4">
                         <div className="flex flex-col gap-1">
-                            <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest">
+                            <span className="dash-eyebrow">
                                 Confirmation
                             </span>
                             <h3 className="text-lg font-black uppercase text-white">
@@ -120,7 +120,7 @@ export default function DashboardHeader({
                             <button
                                 type="button"
                                 onClick={() => setShowConfirmClear(false)}
-                                className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white bg-[#202022] hover:bg-[#28282b] cursor-pointer"
+                                className="btn-secondary px-3 py-1.5"
                             >
                                 Cancel
                             </button>

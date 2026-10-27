@@ -93,7 +93,7 @@ export default function ImageUploader({
 
     return (
         <div className="flex flex-col gap-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
+            <label className="dash-preview-label">
                 Image Asset
             </label>
 

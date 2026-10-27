@@ -156,7 +156,7 @@ export default function DiffReviewModal({
                 {/* Header */}
                 <div className="p-5 border-b border-[#2b2b2b] flex items-center justify-between">
                     <div>
-                        <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest block">
+                        <span className="dash-eyebrow block">
                             Pull Request Review
                         </span>
                         <h2 className="text-xl font-black uppercase text-white">
@@ -206,7 +206,7 @@ export default function DiffReviewModal({
                                 <button
                                     type="button"
                                     onClick={handleClose}
-                                    className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors cursor-pointer"
+                                    className="btn-primary px-5 py-2.5"
                                 >
                                     Start New Changes
                                 </button>
@@ -223,7 +223,7 @@ export default function DiffReviewModal({
 
                             {/* Changed Files summary */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
+                                <div className="dash-stat-box">
                                     <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
                                         Data Files to Update
                                     </span>
@@ -231,7 +231,7 @@ export default function DiffReviewModal({
                                         {pendingChanges.length}
                                     </span>
                                 </div>
-                                <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
+                                <div className="dash-stat-box">
                                     <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
                                         New Media Uploads
                                     </span>
@@ -240,7 +240,7 @@ export default function DiffReviewModal({
                                     </span>
                                 </div>
                                 {pendingDeletes.length > 0 && (
-                                    <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
+                                    <div className="dash-stat-box">
                                         <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
                                             Assets to Remove
                                         </span>
@@ -249,7 +249,7 @@ export default function DiffReviewModal({
                                         </span>
                                     </div>
                                 )}
-                                <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
+                                <div className="dash-stat-box">
                                     <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
                                         Target Branch
                                     </span>
@@ -289,7 +289,7 @@ export default function DiffReviewModal({
                             {pendingChanges.length > 0 && (
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center justify-between">
-                                        <label className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                                        <label className="dash-preview-label">
                                             Generated TypeScript Preview
                                         </label>
                                         <div className="flex gap-1">
@@ -300,8 +300,8 @@ export default function DiffReviewModal({
                                                     onClick={() => setPreviewingFile(c.filePath)}
                                                     className={`px-2 py-0.5 text-[10px] font-mono cursor-pointer ${
                                                         activePreviewPath === c.filePath
-                                                            ? "bg-[#c5050c] text-white"
-                                                            : "bg-[#252528] text-gray-400 hover:text-white"
+                                                            ? "dash-tab-active"
+                                                            : "dash-tab-inactive"
                                                     }`}
                                                 >
                                                     {c.filePath.split("/").pop()}
@@ -331,7 +331,7 @@ export default function DiffReviewModal({
                     {createdPr ? (
                         <button
                             onClick={handleClose}
-                            className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 cursor-pointer transition-colors"
+                            className="btn-primary px-5 py-2.5"
                         >
                             Start New Changes / Close
                         </button>
@@ -347,7 +347,7 @@ export default function DiffReviewModal({
                             <button
                                 onClick={handleSubmitPr}
                                 disabled={isSubmitting || pendingChanges.length === 0}
-                                className="bg-[#c5050c] hover:bg-[#a0040a] disabled:opacity-50 text-white text-xs font-bold uppercase tracking-widest px-6 py-2.5 transition-colors cursor-pointer flex items-center gap-2"
+                                className="btn-primary disabled:opacity-50 px-6 py-2.5 flex items-center gap-2"
                             >
                                 {isSubmitting ? (
                                     <>

@@ -52,12 +52,12 @@ export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
             {/* List */}
             <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-black uppercase tracking-wider text-white">
+                    <h2 className="dash-section-title">
                         Donors ({donors.length})
                     </h2>
                     <button
                         onClick={handleAdd}
-                        className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-[11px] font-bold px-3 py-1.5 uppercase tracking-wider cursor-pointer"
+                        className="btn-add"
                     >
                         + Add Donor
                     </button>
@@ -110,7 +110,7 @@ export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
                 <div className="lg:col-span-8 dash-editor-card flex flex-col gap-4">
                     <div className="dash-editor-header">
                         <div>
-                            <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
+                            <span className="dash-eyebrow">
                                 Editing Donor
                             </span>
                             <h3 className="text-lg font-bold text-white">{currentDonor.alt}</h3>

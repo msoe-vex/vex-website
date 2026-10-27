@@ -1,4 +1,4 @@
-import locales from "@/app/data/locales";
+﻿import locales from "@/app/data/locales";
 
 export default function SubFooter() {
     return (
@@ -35,7 +35,7 @@ export default function SubFooter() {
                     </a>
                     <a
                         href={`mailto:${locales.contact.emailAddress}`}
-                        className="px-5 py-2.5 bg-[#c5050c] hover:bg-[#a0040a] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2 clip-chamfer-btn"
+                        className="btn-primary px-5 py-2.5 shadow-lg flex items-center gap-2 clip-chamfer-btn"
                     >
                         <span>{locales.contact.emailButton}</span>
                         <span>↗</span>

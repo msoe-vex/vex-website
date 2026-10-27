@@ -49,7 +49,7 @@ export default function AnnouncementsEditor({
                 </div>
 
                 <div className="mt-2 pt-4 border-t border-[#26262a]">
-                    <span className="text-[10px] font-bold uppercase text-gray-400 tracking-wider block mb-2">
+                    <span className="dash-preview-label block mb-2">
                         Computed Banner Live Preview
                     </span>
 

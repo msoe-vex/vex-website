@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback } from "react";
 import members, { Member, SubsystemRole, MemberStatus, SUBSYSTEM_ROLES } from "@/app/data/members";
@@ -64,7 +64,7 @@ export default function MembersPage() {
                 <div className="flex flex-wrap items-center justify-between gap-4 bg-[#141416] p-4 border border-[#26262b]">
                     {/* Subsystem tabs */}
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mr-2">
+                        <span className="pub-filter-label">
                             {locales.members.filterSubsystemLabel}
                         </span>
                         {SUBSYSTEM_ROLES.map((sub) => (
@@ -84,7 +84,7 @@ export default function MembersPage() {
 
                     {/* Status tabs */}
                     <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mr-2">
+                        <span className="pub-filter-label">
                             {locales.members.filterStatusLabel}
                         </span>
                         {(["all", "active", "alumni"] as const).map((stat) => (
