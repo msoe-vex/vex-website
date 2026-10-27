@@ -50,7 +50,7 @@ export default function MemberPreview() {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.members.sectionSubtitle}
                             </span>
                         </div>
@@ -60,7 +60,7 @@ export default function MemberPreview() {
                     </div>
                     <Link
                         href="/members"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider transition-colors"
                     >
                         {locales.members.previewCta}
                     </Link>
@@ -83,7 +83,7 @@ export default function MemberPreview() {
                                             {member.subsystems.map((sub) => (
                                                 <span
                                                     key={sub}
-                                                    className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]"
+                                                    className="px-2 py-0.5 bg-[#252525] text-[#f87171] font-bold text-[10px] uppercase tracking-wider border border-[#333333]"
                                                 >
                                                     {sub}
                                                 </span>
@@ -110,10 +110,10 @@ export default function MemberPreview() {
                                             </div>
                                         )}
                                         <div className="flex flex-col flex-1 min-w-0">
-                                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#c5050c] transition-colors leading-tight">
+                                            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#f87171] transition-colors leading-tight">
                                                 {member.name}
                                             </h3>
-                                            <div className="text-xs text-[#c5050c] font-semibold mt-0.5">
+                                            <div className="text-xs text-[#f87171] font-semibold mt-0.5">
                                                 {member.role}
                                             </div>
                                             {member.major && (
@@ -131,7 +131,7 @@ export default function MemberPreview() {
                                 </div>
 
                                 {/* Bottom Card Prompt with darker background and clear divide matching ProjectShowcase */}
-                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#c5050c] group-hover:text-white uppercase tracking-wider">
+                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#f87171] group-hover:text-white uppercase tracking-wider">
                                     <span>{locales.members.cardCta}</span>
                                     <span>→</span>
                                 </div>

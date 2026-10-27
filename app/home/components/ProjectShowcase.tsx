@@ -14,7 +14,7 @@ export default function ProjectShowcase() {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.projects.sectionSubtitle}
                             </span>
                         </div>
@@ -24,7 +24,7 @@ export default function ProjectShowcase() {
                     </div>
                     <Link
                         href="/projects"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider transition-colors"
                     >
                         {locales.projects.recentCta}
                     </Link>
@@ -99,7 +99,7 @@ export default function ProjectShowcase() {
                                 </div>
 
                                 {/* Bottom Card Prompt */}
-                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#c5050c] group-hover:text-white uppercase tracking-wider">
+                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#f87171] group-hover:text-white uppercase tracking-wider">
                                     <span>{locales.projects.cardCta}</span>
                                     <span>→</span>
                                 </div>

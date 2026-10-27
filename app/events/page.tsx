@@ -20,7 +20,7 @@ export default function EventsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.events.sectionSubtitle}
                             </span>
                         </div>
@@ -41,7 +41,7 @@ export default function EventsPage() {
                             href={STEM_CENTER_URL}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-block mt-2 text-[#c5050c] hover:text-white underline font-bold uppercase tracking-wider transition-colors"
+                            className="inline-block mt-2 text-[#f87171] hover:text-white underline font-bold uppercase tracking-wider transition-colors"
                         >
                             {locales.events.directionsLink}
                         </a>
@@ -97,7 +97,7 @@ export default function EventsPage() {
                                                 {event.time}
                                             </td>
                                             <td className="py-3.5 px-4">
-                                                <div className={`font-bold transition-colors ${isSelected ? "text-[#c5050c]" : "text-white"}`}>
+                                                <div className={`font-bold transition-colors ${isSelected ? "text-[#f87171]" : "text-white"}`}>
                                                     {event.title}
                                                 </div>
                                                 {event.description && (
@@ -192,7 +192,7 @@ export default function EventsPage() {
                                                 </span>
                                             </td>
                                             <td className="py-3.5 px-4">
-                                                <div className={`font-bold transition-colors ${isSelected ? "text-[#c5050c]" : "text-white"}`}>
+                                                <div className={`font-bold transition-colors ${isSelected ? "text-[#f87171]" : "text-white"}`}>
                                                     {event.title}
                                                 </div>
                                                 <div className="text-gray-400 text-xs mt-0.5 leading-relaxed">

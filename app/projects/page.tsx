@@ -32,7 +32,7 @@ export default function ProjectsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.projects.pageSubtitle}
                             </span>
                         </div>
@@ -107,7 +107,7 @@ export default function ProjectsPage() {
 
                                     {/* Body (Text section) */}
                                     <div className="p-5 flex flex-col gap-3 flex-1">
-                                        <h2 className="text-xl font-bold text-white group-hover:text-[#c5050c] transition-colors">
+                                        <h2 className="text-xl font-bold text-white group-hover:text-[#f87171] transition-colors">
                                             {project.title}
                                         </h2>
                                         <p className="text-xs text-gray-300 leading-relaxed">
@@ -151,7 +151,7 @@ export default function ProjectsPage() {
                                             href={project.githubUrl}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="text-xs font-bold text-[#c5050c] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
+                                            className="text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
                                         >
                                             {locales.projects.sourceLink} ↗
                                         </a>

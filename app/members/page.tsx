@@ -35,7 +35,7 @@ export default function MembersPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.members.pageSubtitle}
                             </span>
                         </div>
@@ -118,7 +118,7 @@ export default function MembersPage() {
                                             {member.subsystems.map((sub) => (
                                                 <span
                                                     key={sub}
-                                                    className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[11px] uppercase tracking-wider border border-[#333333]"
+                                                    className="px-2 py-0.5 bg-[#252525] text-[#f87171] font-bold text-[11px] uppercase tracking-wider border border-[#333333]"
                                                 >
                                                     {sub}
                                                 </span>
@@ -154,10 +154,10 @@ export default function MembersPage() {
                                             </div>
                                         )}
                                         <div className="flex flex-col flex-1 min-w-0">
-                                            <h2 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#c5050c] transition-colors leading-tight">
+                                            <h2 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#f87171] transition-colors leading-tight">
                                                 {member.name}
                                             </h2>
-                                            <div className="text-xs text-[#c5050c] font-semibold mt-0.5">
+                                            <div className="text-xs text-[#f87171] font-semibold mt-0.5">
                                                 {member.role}
                                             </div>
                                             {member.major && (
@@ -182,7 +182,7 @@ export default function MembersPage() {
                                                 href={member.github}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="text-[#c5050c] hover:text-white flex items-center gap-1 transition-colors"
+                                                className="text-[#f87171] hover:text-white flex items-center gap-1 transition-colors"
                                             >
                                                 <span>GitHub</span>
                                                 <span>↗</span>

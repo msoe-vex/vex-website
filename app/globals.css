@@ -9,6 +9,8 @@
   --brand-red-hover: #a0040a;
   --brand-red-dark: #7a0307;
   --brand-red-muted: rgba(197, 5, 12, 0.15);
+  /* Accessible high-contrast red for text on dark backgrounds (WCAG AAA 7:1+) */
+  --brand-red-text: #f87171;
 
   /* Dark Theme Surfaces */
   --surface-base: #0d0d0d;
@@ -41,6 +43,7 @@
   --color-brand-red-hover: var(--brand-red-hover);
   --color-brand-red-dark: var(--brand-red-dark);
   --color-brand-red-muted: var(--brand-red-muted);
+  --color-brand-red-text: var(--brand-red-text);
 
   /* Surface Palette */
   --color-surface-base: var(--surface-base);

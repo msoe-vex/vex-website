@@ -9,7 +9,7 @@ export default function SubFooter() {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#c5050c] uppercase font-bold text-xs tracking-widest">
+                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
                                 {locales.contact.sectionSubtitle}
                             </span>
                         </div>

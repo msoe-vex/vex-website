@@ -25,7 +25,7 @@ export default function MeetingBanner() {
                 </div>
                 <Link
                     href={details.link}
-                    className="text-[#c5050c] hover:text-white underline underline-offset-2 transition-colors uppercase font-bold text-xs"
+                    className="text-[#f87171] hover:text-white underline underline-offset-2 transition-colors uppercase font-bold text-xs"
                 >
                     {locales.events.bannerLink}
                 </Link>
