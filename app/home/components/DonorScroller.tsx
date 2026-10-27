@@ -18,16 +18,31 @@ export default function DonorScroller() {
     const movedDistanceRef = useRef(0);
     const prevTimestampRef = useRef<number | null>(null);
 
+    // Cache the total scroll loop width to avoid querying scrollWidth inside requestAnimationFrame
+    const loopWidthRef = useRef(0);
+
     const [isGrabbing, setIsGrabbing] = useState(false);
 
     useEffect(() => {
         const viewport = viewportRef.current;
         if (!viewport) return;
 
+        // Measure once after layout renders to avoid forced layout / reflow
+        const singleWidth = viewport.scrollWidth / 3;
+        loopWidthRef.current = singleWidth;
+
         // Start halfway through the duplicated sets so scrolling left or right loops smoothly
         if (viewport.scrollLeft === 0) {
-            viewport.scrollLeft = viewport.scrollWidth / 3;
+            viewport.scrollLeft = singleWidth;
         }
+
+        // Keep loopWidth updated when screen resizes without running in the animation loop
+        const resizeObserver = new ResizeObserver(() => {
+            if (viewport) {
+                loopWidthRef.current = viewport.scrollWidth / 3;
+            }
+        });
+        resizeObserver.observe(viewport);
 
         let animationFrameId: number;
         const scrollSpeedPxPerSec = 45; // Smooth automatic scroll rate
@@ -42,12 +57,14 @@ export default function DonorScroller() {
             if (viewport && !isInteractingRef.current) {
                 viewport.scrollLeft += scrollSpeedPxPerSec * delta;
 
-                // Seamless infinite wrap around boundary
-                const singleLoopWidth = viewport.scrollWidth / 3;
-                if (viewport.scrollLeft >= singleLoopWidth * 2) {
-                    viewport.scrollLeft -= singleLoopWidth;
-                } else if (viewport.scrollLeft <= 0) {
-                    viewport.scrollLeft += singleLoopWidth;
+                // Seamless infinite wrap around boundary using cached width
+                const singleLoopWidth = loopWidthRef.current;
+                if (singleLoopWidth > 0) {
+                    if (viewport.scrollLeft >= singleLoopWidth * 2) {
+                        viewport.scrollLeft -= singleLoopWidth;
+                    } else if (viewport.scrollLeft <= 0) {
+                        viewport.scrollLeft += singleLoopWidth;
+                    }
                 }
             }
 
@@ -57,6 +74,7 @@ export default function DonorScroller() {
         animationFrameId = requestAnimationFrame(step);
 
         return () => {
+            resizeObserver.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -85,14 +103,16 @@ export default function DonorScroller() {
         movedDistanceRef.current = Math.abs(distance);
         viewport.scrollLeft = scrollStartRef.current - distance;
 
-        // Wrap around dynamically while dragging
-        const singleLoopWidth = viewport.scrollWidth / 3;
-        if (viewport.scrollLeft >= singleLoopWidth * 2) {
-            viewport.scrollLeft -= singleLoopWidth;
-            scrollStartRef.current -= singleLoopWidth;
-        } else if (viewport.scrollLeft <= 0) {
-            viewport.scrollLeft += singleLoopWidth;
-            scrollStartRef.current += singleLoopWidth;
+        // Wrap around dynamically while dragging using cached width
+        const singleLoopWidth = loopWidthRef.current;
+        if (singleLoopWidth > 0) {
+            if (viewport.scrollLeft >= singleLoopWidth * 2) {
+                viewport.scrollLeft -= singleLoopWidth;
+                scrollStartRef.current -= singleLoopWidth;
+            } else if (viewport.scrollLeft <= 0) {
+                viewport.scrollLeft += singleLoopWidth;
+                scrollStartRef.current += singleLoopWidth;
+            }
         }
     };
 
