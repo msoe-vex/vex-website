@@ -12,7 +12,7 @@ import initialMembers, { Member } from "@/app/data/members";
 import initialProjects, { Project } from "@/app/data/projects";
 import { recurringEvents as initRecurring, customEvents as initCustom, RecurringEvent, CustomEvent } from "@/app/data/events";
 import { meetingAnnouncement as initAnnouncement } from "@/app/data/announcements";
-import initialSponsors, { Sponsor } from "@/app/data/sponsors";
+import initialDonors, { Donor } from "@/app/data/donors";
 import initialLocales, { locales as rawLocales } from "@/app/data/locales";
 
 import {
@@ -31,7 +31,7 @@ import MembersEditor from "./components/MembersEditor";
 import ProjectsEditor from "./components/ProjectsEditor";
 import EventsEditor from "./components/EventsEditor";
 import AnnouncementsEditor from "./components/AnnouncementsEditor";
-import SponsorsEditor from "./components/SponsorsEditor";
+import DonorsEditor from "./components/DonorsEditor";
 import LocalesEditor from "./components/LocalesEditor";
 import DiffReviewModal, { PendingFileChange } from "./components/DiffReviewModal";
 import type { PendingUpload } from "./components/ImageUploader";
@@ -41,7 +41,7 @@ import {
     generateProjectsTs,
     generateEventsTs,
     generateAnnouncementsTs,
-    generateSponsorsTs,
+    generateDonorsTs,
     generateLocalesTs,
 } from "./generators/codeGenerators";
 
@@ -55,7 +55,7 @@ function useIsClient() {
     );
 }
 
-type DashboardTab = "members" | "projects" | "events" | "announcements" | "sponsors" | "locales";
+type DashboardTab = "members" | "projects" | "events" | "announcements" | "donors" | "locales";
 
 export default function DashboardPage() {
     const isClient = useIsClient();
@@ -79,7 +79,7 @@ export default function DashboardPage() {
     const [recurringEvents, setRecurringEvents] = useState<RecurringEvent[]>(initRecurring);
     const [customEvents, setCustomEvents] = useState<CustomEvent[]>(initCustom);
     const [showBanner, setShowBanner] = useState<boolean>(initAnnouncement.show);
-    const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors);
+    const [donors, setDonors] = useState<Donor[]>(initialDonors);
     const [locales, setLocales] = useState<typeof rawLocales>(initialLocales);
 
     // Dynamic Baseline State (updated after PR creation to allow successive PRs)
@@ -88,7 +88,7 @@ export default function DashboardPage() {
     const [baselineRecurring, setBaselineRecurring] = useState<RecurringEvent[]>(initRecurring);
     const [baselineCustom, setBaselineCustom] = useState<CustomEvent[]>(initCustom);
     const [baselineBanner, setBaselineBanner] = useState<boolean>(initAnnouncement.show);
-    const [baselineSponsors, setBaselineSponsors] = useState<Sponsor[]>(initialSponsors);
+    const [baselineDonors, setBaselineDonors] = useState<Donor[]>(initialDonors);
     const [baselineLocales, setBaselineLocales] = useState<typeof rawLocales>(initialLocales);
 
     // Media Uploads
@@ -232,12 +232,12 @@ export default function DashboardPage() {
             });
         }
 
-        // 5. Sponsors
-        if (JSON.stringify(sponsors) !== JSON.stringify(baselineSponsors)) {
+        // 5. Donors
+        if (JSON.stringify(donors) !== JSON.stringify(baselineDonors)) {
             changes.push({
-                filePath: "app/data/sponsors.ts",
-                description: `Updated sponsor partners (${sponsors.length} sponsors)`,
-                generatedContent: generateSponsorsTs(sponsors),
+                filePath: "app/data/donors.ts",
+                description: `Updated donors (${donors.length} donors)`,
+                generatedContent: generateDonorsTs(donors),
             });
         }
 
@@ -262,8 +262,8 @@ export default function DashboardPage() {
         baselineCustom,
         showBanner,
         baselineBanner,
-        sponsors,
-        baselineSponsors,
+        donors,
+        baselineDonors,
         locales,
         baselineLocales,
     ]);
@@ -274,12 +274,12 @@ export default function DashboardPage() {
             const webPath = u.targetPath.replace(/^public/, "");
             const inMembers = members.some((m) => m.image === webPath);
             const inProjects = projects.some((p) => p.image === webPath);
-            const inSponsors = sponsors.some(
-                (s) => s.img === webPath || `/sponsors/${s.img}` === webPath || s.img === webPath.replace(/^\/sponsors\//, "")
+            const inDonors = donors.some(
+                (d) => d.img === webPath || `/donors/${d.img}` === webPath || d.img === webPath.replace(/^\/donors\//, "")
             );
-            return inMembers || inProjects || inSponsors;
+            return inMembers || inProjects || inDonors;
         });
-    }, [pendingUploads, members, projects, sponsors]);
+    }, [pendingUploads, members, projects, donors]);
 
     const totalModifiedCount = pendingChanges.length + activeUploads.length;
 
@@ -290,7 +290,7 @@ export default function DashboardPage() {
         setBaselineRecurring(JSON.parse(JSON.stringify(recurringEvents)));
         setBaselineCustom(JSON.parse(JSON.stringify(customEvents)));
         setBaselineBanner(showBanner);
-        setBaselineSponsors(JSON.parse(JSON.stringify(sponsors)));
+        setBaselineDonors(JSON.parse(JSON.stringify(donors)));
         setBaselineLocales(JSON.parse(JSON.stringify(locales)));
         // Clear pending uploads
         setPendingUploads([]);
@@ -305,7 +305,7 @@ export default function DashboardPage() {
         setRecurringEvents(JSON.parse(JSON.stringify(baselineRecurring)));
         setCustomEvents(JSON.parse(JSON.stringify(baselineCustom)));
         setShowBanner(baselineBanner);
-        setSponsors(JSON.parse(JSON.stringify(baselineSponsors)));
+        setDonors(JSON.parse(JSON.stringify(baselineDonors)));
         setLocales(JSON.parse(JSON.stringify(baselineLocales)));
         // Clear any staged media uploads
         setPendingUploads([]);
@@ -357,7 +357,7 @@ export default function DashboardPage() {
                         { id: "projects", label: "Robots & Projects", count: projects.length },
                         { id: "events", label: "Calendar & Meetings", count: recurringEvents.length + customEvents.length },
                         { id: "announcements", label: "Meeting Banner", count: showBanner ? 1 : 0 },
-                        { id: "sponsors", label: "Sponsors & Partners", count: sponsors.length },
+                        { id: "donors", label: "Donors", count: donors.length },
                         { id: "locales", label: "Site Copy (Locales)" },
                     ].map((tab) => {
                         const isActive = activeTab === tab.id;
@@ -423,11 +423,11 @@ export default function DashboardPage() {
                     />
                 )}
 
-                {activeTab === "sponsors" && (
-                    <SponsorsEditor
-                        sponsors={sponsors}
+                {activeTab === "donors" && (
+                    <DonorsEditor
+                        donors={donors}
                         onChange={(updated, upload) => {
-                            setSponsors(updated);
+                            setDonors(updated);
                             recordUpload(upload);
                         }}
                     />

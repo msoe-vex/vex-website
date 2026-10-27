@@ -12,7 +12,7 @@ export interface PendingUpload {
 interface ImageUploaderProps {
     currentPath?: string;
     previewOverride?: string; // Optional direct dataUrl preview
-    targetDirectory: "members" | "projects" | "sponsors";
+    targetDirectory: "members" | "projects" | "donors";
     itemIdentifier: string; // e.g. member id or project id
     onImageSelected: (imagePath: string, pendingUpload?: PendingUpload) => void;
 }

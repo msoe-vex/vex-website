@@ -5,7 +5,7 @@ import HeaderBackground, { set_mouse_position } from "./components/HeaderBackgro
 import "./local.css";
 import RandomFeature from "../util/featured_images";
 import MissionStatement from "./components/MissionStatement";
-import SponsorScroller from "./components/SponsorScroller";
+import DonorScroller from "./components/DonorScroller";
 import ProjectShowcase from "./components/ProjectShowcase";
 import MemberPreview from "./components/MemberPreview";
 import SubFooter from "../components/subfooter";
@@ -65,8 +65,8 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* VERTICAL SPONSOR SCROLLER */}
-            <SponsorScroller />
+            {/* DONOR SCROLLER */}
+            <DonorScroller />
 
             {/* PROJECTS & ROBOTS SHOWCASE */}
             <ProjectShowcase />

@@ -200,35 +200,35 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
 
                     <div className="border-t border-[#26262a] pt-4">
                         <span className="text-xs font-bold uppercase tracking-wider text-[#c5050c] block mb-1">
-                            Sponsorship Call-To-Action (Sponsors Section)
+                            Donation Call-To-Action (Donors Section)
                         </span>
                         <p className="text-[11px] text-gray-400 mb-3">
-                            Configures the sponsor inquiry email button shown on the homepage sponsors scroller. It automatically addresses inquiries to your configured email above.
+                            Configures the donation inquiry email button shown on the homepage donors scroller. It automatically addresses inquiries to your configured email above.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="dash-label">
-                                    Sponsor Button Label
+                                    Donor Button Label
                                 </label>
                                 <input
                                     type="text"
-                                    value={locales.sponsors.ctaButton}
-                                    onChange={(e) => updateNested(["sponsors", "ctaButton"], e.target.value)}
-                                    placeholder="Become a Sponsor →"
+                                    value={locales.donors.ctaButton}
+                                    onChange={(e) => updateNested(["donors", "ctaButton"], e.target.value)}
+                                    placeholder="Become a Donor →"
                                     className="dash-input"
                                 />
                             </div>
 
                             <div>
                                 <label className="dash-label">
-                                    Sponsorship Email Subject Line
+                                    Donation Email Subject Line
                                 </label>
                                 <input
                                     type="text"
-                                    value={locales.sponsors.sponsorSubject}
-                                    onChange={(e) => updateNested(["sponsors", "sponsorSubject"], e.target.value)}
-                                    placeholder="Sponsorship Inquiry"
+                                    value={locales.donors.donorSubject}
+                                    onChange={(e) => updateNested(["donors", "donorSubject"], e.target.value)}
+                                    placeholder="Donation Inquiry"
                                     className="dash-input"
                                 />
                             </div>
@@ -395,48 +395,48 @@ export default function LocalesEditor({ locales, onChange }: LocalesEditorProps)
 
                     <div>
                         <label className="dash-label">
-                            Sponsors Section Subtitle
+                            Donors Section Subtitle
                         </label>
                         <input
                             type="text"
-                            value={locales.sponsors.sectionSubtitle}
-                            onChange={(e) => updateNested(["sponsors", "sectionSubtitle"], e.target.value)}
+                            value={locales.donors.sectionSubtitle}
+                            onChange={(e) => updateNested(["donors", "sectionSubtitle"], e.target.value)}
                             className="dash-input"
                         />
                     </div>
 
                     <div>
                         <label className="dash-label">
-                            Sponsors Section Title
+                            Donors Section Title
                         </label>
                         <input
                             type="text"
-                            value={locales.sponsors.sectionTitle}
-                            onChange={(e) => updateNested(["sponsors", "sectionTitle"], e.target.value)}
+                            value={locales.donors.sectionTitle}
+                            onChange={(e) => updateNested(["donors", "sectionTitle"], e.target.value)}
                             className="dash-input"
                         />
                     </div>
 
                     <div className="md:col-span-2">
                         <label className="dash-label">
-                            Sponsors Section Description (Homepage)
+                            Donors Section Description (Homepage)
                         </label>
                         <textarea
                             rows={2}
-                            value={locales.sponsors.description}
-                            onChange={(e) => updateNested(["sponsors", "description"], e.target.value)}
+                            value={locales.donors.description}
+                            onChange={(e) => updateNested(["donors", "description"], e.target.value)}
                             className="dash-input"
                         />
                     </div>
 
                     <div className="md:col-span-2">
                         <label className="dash-label">
-                            Sponsors Long Description
+                            Donors Long Description
                         </label>
                         <textarea
                             rows={3}
-                            value={locales.sponsors.longDescription}
-                            onChange={(e) => updateNested(["sponsors", "longDescription"], e.target.value)}
+                            value={locales.donors.longDescription}
+                            onChange={(e) => updateNested(["donors", "longDescription"], e.target.value)}
                             className="dash-input"
                         />
                     </div>

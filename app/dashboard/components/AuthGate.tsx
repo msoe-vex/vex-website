@@ -22,14 +22,16 @@ export default function AuthGate({ onLogin, loading, error }: AuthGateProps) {
     const handleOAuthClick = () => {
         const activeClientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || DEFAULT_GITHUB_CLIENT_ID;
 
-        // On production, omit redirect_uri so GitHub automatically uses the configured OAuth App callback URL.
+        // On production, omit redirect_uri so GitHub automatically uses the configured App callback URL.
         // On localhost, specify the localhost callback URI.
         const isLocalhost =
             typeof window !== "undefined" &&
             (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
 
         const redirectUri = isLocalhost ? `${window.location.origin}/dashboard` : "";
-        const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${activeClientId}&scope=repo,read:org${
+        // Modern GitHub Apps configure fine-grained permissions and repository scope directly on the App,
+        // so no broad legacy `scope` parameter (e.g. scope=repo) is needed.
+        const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${activeClientId}${
             redirectUri ? `&redirect_uri=${encodeURIComponent(redirectUri)}` : ""
         }`;
 

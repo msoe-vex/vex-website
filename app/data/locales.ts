@@ -32,13 +32,13 @@ export const locales = {
             }
         ]
     },
-    sponsors: {
-        sectionSubtitle: "Partners & Backers",
-        sectionTitle: "Our Sponsors",
-        description: "Industry leaders and educational foundations powering materials, travel, and student engineering.",
-        longDescription: "Raider Robotics is powered by pioneering industry leaders, educational supporters, and local community foundations. Their commitment fuels our materials, manufacturing, competition travel, and student mentorship.",
-        ctaButton: "Become a Sponsor ↗",
-        sponsorSubject: "Sponsorship Inquiry"
+    donors: {
+        sectionSubtitle: "Donors & Supporters",
+        sectionTitle: "Our Donors",
+        description: "Generous donors, engineering organizations, and educational foundations powering materials, travel, and student engineering.",
+        longDescription: "Raider Robotics is powered by generous donors, engineering supporters, and local community foundations. Their commitment fuels our materials, manufacturing, competition travel, and student mentorship.",
+        ctaButton: "Become a Donor ↗",
+        donorSubject: "Donation Inquiry"
     },
     projects: {
         sectionSubtitle: "Engineering & Legacy",
@@ -77,8 +77,8 @@ export const locales = {
     },
     contact: {
         sectionSubtitle: "Connect With Raider Robotics",
-        heading: "Interested in Joining or Sponsoring?",
-        description: "Whether you are an incoming MSOE student looking to design robots or an industry partner wanting to support future engineers, we want to hear from you.",
+        heading: "Interested in Joining or Donating?",
+        description: "Whether you are an incoming MSOE student looking to design robots or a prospective donor wanting to support future engineers, we want to hear from you.",
         discordButton: "Join Discord",
         emailButton: "Email: msoerobotics@gmail.com",
         githubButton: "GitHub @msoe-vex",

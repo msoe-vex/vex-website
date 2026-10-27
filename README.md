@@ -57,7 +57,7 @@ All static website content, rosters, project catalogs, and UI copy are centraliz
 | [`app/data/members.ts`](app/data/members.ts) | **Team Roster** | Current & alumni member profiles, roles, subsystems (`Controls`, `Design`, `Eboard`), graduation year, GitHub, and LinkedIn links. |
 | [`app/data/events.ts`](app/data/events.ts) | **Calendar & Schedule** | Recurring weekly meetings, competition dates, workshop sessions, and room locations. |
 | [`app/data/announcements.ts`](app/data/announcements.ts) | **Meeting Banner** | Top announcement bar logic computing the next meeting day (Tuesday/Thursday) and location. |
-| [`app/data/sponsors.ts`](app/data/sponsors.ts) | **Sponsors Marquee** | Company names, logo image filenames in `public/sponsors/`, and external partner URLs. |
+| [`app/data/donors.ts`](app/data/donors.ts) | **Donors Marquee** | Organization and company names, logo image filenames in `public/donors/`, and external donor URLs. |
 
 ---
 

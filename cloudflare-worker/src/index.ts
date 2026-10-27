@@ -38,7 +38,7 @@ const worker = {
                     );
                 }
 
-                // Exchange authorization code with GitHub OAuth
+                // Exchange authorization code with GitHub OAuth / GitHub App endpoint
                 const ghResponse = await fetch("https://github.com/login/oauth/access_token", {
                     method: "POST",
                     headers: {
@@ -55,6 +55,11 @@ const worker = {
 
                 const ghData = (await ghResponse.json().catch(() => ({}))) as {
                     access_token?: string;
+                    token_type?: string;
+                    scope?: string;
+                    expires_in?: number;
+                    refresh_token?: string;
+                    refresh_token_expires_in?: number;
                     error?: string;
                     error_description?: string;
                 };
@@ -70,6 +75,8 @@ const worker = {
                 return jsonResponse({
                     token: ghData.access_token,
                     access_token: ghData.access_token,
+                    expires_in: ghData.expires_in,
+                    refresh_token: ghData.refresh_token,
                 }, 200, origin);
             } catch (err: unknown) {
                 return jsonResponse(
@@ -82,7 +89,7 @@ const worker = {
 
         return jsonResponse(
             {
-                message: "Raider Robotics GitHub OAuth Worker",
+                message: "Raider Robotics GitHub Auth Worker",
                 usage: "Send POST to /token with { code: 'github_oauth_code' }",
             },
             200,
