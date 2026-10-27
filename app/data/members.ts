@@ -30,6 +30,18 @@ export const members: Member[] = [
         image: "/branding/RR_Icon.png",
         github: "https://github.com/Edubs4444",
         contributions: "AI environments."
+},
+  { 
+        id: "megan-cranston",
+        name: "Megan Cranston",
+        role: "Controls Member",
+        subsystems: ["Controls"],
+        status: "active",
+        gradYear: 2028,
+        major: "Computer Engineering",
+        image: "/branding/RR_Icon.png",
+        linkedin: "www.linkedin.com/in/megan-m-cranston",
+        contributions: "Redesigned the UI for the brain."
     },
 {
         id: "paul-majka",
@@ -176,7 +188,11 @@ export const members: Member[] = [
         role: "Design Member",
         subsystems: ["Design"],
         status: "active",
-        image: "/branding/RR_Icon.png"
+        gradYear: 2030,
+        major: "Electrical Engineering",
+        image: "/branding/RR_Icon.png",
+        github: "https://github.com/DavidM-37",
+        contributions: "Designed and built our passive toggling mechanism."
     },
 {
         id: "harlan-danes",
