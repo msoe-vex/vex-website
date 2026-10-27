@@ -1,15 +1,15 @@
-.sponsor-marquee-viewport {
+.donor-marquee-viewport {
     /* Negative slope chamfer on bottom-left */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
-.sponsor-track-horizontal {
+.donor-track-horizontal {
     display: flex;
     width: max-content;
     animation: scrollHorizontal 28s linear infinite;
 }
 
-.sponsor-marquee-viewport:hover .sponsor-track-horizontal {
+.donor-marquee-viewport:hover .donor-track-horizontal {
     animation-play-state: paused;
 }
 

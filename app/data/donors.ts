@@ -1,10 +1,10 @@
-export interface Sponsor {
+export interface Donor {
     alt: string;
     img: string;
     link: string;
-};
+}
 
-const sponsors : Sponsor[] = [
+export const donors: Donor[] = [
     {
         alt: "MSOE",
         img: "MSOE.png",
@@ -47,4 +47,4 @@ const sponsors : Sponsor[] = [
     },
 ];
 
-export default sponsors;
+export default donors;

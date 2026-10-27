@@ -33,7 +33,7 @@ const worker = {
                     );
                 }
 
-                // Exchange authorization code with GitHub OAuth
+                // Exchange authorization code with GitHub OAuth / GitHub App endpoint
                 const ghResponse = await fetch("https://github.com/login/oauth/access_token", {
                     method: "POST",
                     headers: {
@@ -48,13 +48,18 @@ const worker = {
                     }),
                 });
 
-                const ghData = await ghResponse.json();
+                const ghData = await ghResponse.json().catch(() => ({}));
 
-                if (ghData.error) {
-                    return jsonResponse({ error: ghData.error_description || ghData.error }, 400, origin);
+                if (ghData.error || !ghData.access_token) {
+                    return jsonResponse({ error: ghData.error_description || ghData.error || "GitHub did not return an access token" }, 400, origin);
                 }
 
-                return jsonResponse({ token: ghData.access_token }, 200, origin);
+                return jsonResponse({
+                    token: ghData.access_token,
+                    access_token: ghData.access_token,
+                    expires_in: ghData.expires_in,
+                    refresh_token: ghData.refresh_token,
+                }, 200, origin);
             } catch (err) {
                 return jsonResponse(
                     { error: err?.message || "Internal worker error" },
@@ -66,7 +71,7 @@ const worker = {
 
         return jsonResponse(
             {
-                message: "Raider Robotics GitHub OAuth Worker",
+                message: "Raider Robotics GitHub Auth Worker",
                 usage: "Send POST to /token with { code: 'github_oauth_code' }",
             },
             200,

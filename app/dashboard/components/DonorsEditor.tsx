@@ -2,46 +2,46 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { Sponsor } from "@/app/data/sponsors";
+import type { Donor } from "@/app/data/donors";
 import ImageUploader, { PendingUpload } from "./ImageUploader";
 
-interface SponsorsEditorProps {
-    sponsors: Sponsor[];
-    onChange: (updated: Sponsor[], pendingUpload?: PendingUpload) => void;
+interface DonorsEditorProps {
+    donors: Donor[];
+    onChange: (updated: Donor[], pendingUpload?: PendingUpload) => void;
 }
 
-export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorProps) {
+export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
     const [selectedIdx, setSelectedIdx] = useState<number>(0);
     const [previewUrls, setPreviewUrls] = useState<Record<string, string>>({});
 
-    const currentSponsor = sponsors[selectedIdx] || sponsors[0];
+    const currentDonor = donors[selectedIdx] || donors[0];
 
-    const getSponsorImage = (s: Sponsor, idx: number) => {
-        const key = `sponsor-${idx}`;
-        const cleanImg = s.img.startsWith("/") || s.img.startsWith("http") ? s.img : `/sponsors/${s.img}`;
+    const getDonorImage = (d: Donor, idx: number) => {
+        const key = `donor-${idx}`;
+        const cleanImg = d.img.startsWith("/") || d.img.startsWith("http") ? d.img : `/donors/${d.img}`;
         return previewUrls[key] || previewUrls[cleanImg] || cleanImg;
     };
 
-    const handleUpdate = <K extends keyof Sponsor>(field: K, val: Sponsor[K]) => {
-        if (!currentSponsor) return;
-        const next = sponsors.map((s, idx) => (idx === selectedIdx ? { ...s, [field]: val } : s));
+    const handleUpdate = <K extends keyof Donor>(field: K, val: Donor[K]) => {
+        if (!currentDonor) return;
+        const next = donors.map((d, idx) => (idx === selectedIdx ? { ...d, [field]: val } : d));
         onChange(next);
     };
 
     const handleAdd = () => {
-        const newSponsor: Sponsor = {
-            alt: "New Sponsor Partner",
+        const newDonor: Donor = {
+            alt: "New Donor",
             img: "RR_Logo.png",
             link: "https://",
         };
-        const next = [...sponsors, newSponsor];
+        const next = [...donors, newDonor];
         onChange(next);
         setSelectedIdx(next.length - 1);
     };
 
     const handleDelete = (index: number) => {
-        if (confirm("Remove this sponsor?")) {
-            const next = sponsors.filter((_, i) => i !== index);
+        if (confirm("Remove this donor?")) {
+            const next = donors.filter((_, i) => i !== index);
             onChange(next);
             setSelectedIdx(Math.max(0, index - 1));
         }
@@ -53,22 +53,22 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
             <div className="lg:col-span-4 dash-sidebar-card flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-sm font-black uppercase tracking-wider text-white">
-                        Sponsors & Partners ({sponsors.length})
+                        Donors ({donors.length})
                     </h2>
                     <button
                         onClick={handleAdd}
                         className="bg-[#c5050c] hover:bg-[#a0040a] text-white text-[11px] font-bold px-3 py-1.5 uppercase tracking-wider cursor-pointer"
                     >
-                        + Add Sponsor
+                        + Add Donor
                     </button>
                 </div>
 
                 <div className="flex flex-col gap-1.5 max-h-[600px] overflow-y-auto pr-1">
-                    {sponsors.map((s, idx) => {
+                    {donors.map((d, idx) => {
                         const isSelected = idx === selectedIdx;
                         return (
                             <div
-                                key={`sponsor-${s.alt || idx}`}
+                                key={`donor-${d.alt || idx}`}
                                 onClick={() => setSelectedIdx(idx)}
                                 className={`dash-list-item ${
                                     isSelected
@@ -79,14 +79,14 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                                 <div className="flex items-center gap-3 min-w-0">
                                     <div className="relative w-10 h-10 bg-white/5 border border-[#333] p-1 flex-shrink-0 overflow-hidden">
                                         <Image
-                                            src={getSponsorImage(s, idx)}
-                                            alt={s.alt}
+                                            src={getDonorImage(d, idx)}
+                                            alt={d.alt}
                                             fill
                                             sizes="40px"
                                             style={{ objectFit: "contain", padding: "2px" }}
                                             unoptimized={
-                                                getSponsorImage(s, idx).startsWith("data:") ||
-                                                getSponsorImage(s, idx).startsWith("blob:")
+                                                getDonorImage(d, idx).startsWith("data:") ||
+                                                getDonorImage(d, idx).startsWith("blob:")
                                             }
                                             onError={(e) => {
                                                 // fallback
@@ -95,8 +95,8 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                                         />
                                     </div>
                                     <div className="min-w-0">
-                                        <p className="text-xs font-bold truncate leading-tight">{s.alt}</p>
-                                        <p className="text-[10px] text-gray-400 truncate">{s.link}</p>
+                                        <p className="text-xs font-bold truncate leading-tight">{d.alt}</p>
+                                        <p className="text-[10px] text-gray-400 truncate">{d.link}</p>
                                     </div>
                                 </div>
                             </div>
@@ -106,14 +106,14 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
             </div>
 
             {/* Form */}
-            {currentSponsor && (
+            {currentDonor && (
                 <div className="lg:col-span-8 dash-editor-card flex flex-col gap-4">
                     <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-3">
                         <div>
                             <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
-                                Editing Sponsor Partner
+                                Editing Donor
                             </span>
-                            <h3 className="text-lg font-bold text-white">{currentSponsor.alt}</h3>
+                            <h3 className="text-lg font-bold text-white">{currentDonor.alt}</h3>
                         </div>
                         <button
                             onClick={() => handleDelete(selectedIdx)}
@@ -126,11 +126,11 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2 sm:col-span-1">
                             <label className="dash-label">
-                                Company / Partner Name
+                                Donor / Organization Name
                             </label>
                             <input
                                 type="text"
-                                value={currentSponsor.alt}
+                                value={currentDonor.alt}
                                 onChange={(e) => handleUpdate("alt", e.target.value)}
                                 className="dash-input"
                             />
@@ -138,11 +138,11 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
 
                         <div className="col-span-2 sm:col-span-1">
                             <label className="dash-label">
-                                Partner Website URL
+                                Donor Website URL
                             </label>
                             <input
                                 type="url"
-                                value={currentSponsor.link}
+                                value={currentDonor.link}
                                 onChange={(e) => handleUpdate("link", e.target.value)}
                                 className="dash-input"
                             />
@@ -154,7 +154,7 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                             </label>
                             <input
                                 type="text"
-                                value={currentSponsor.img}
+                                value={currentDonor.img}
                                 onChange={(e) => handleUpdate("img", e.target.value)}
                                 placeholder="e.g. Milwaukee_Tool.png"
                                 className="dash-input font-mono"
@@ -163,24 +163,24 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
 
                         <div className="col-span-2">
                             <ImageUploader
-                                key={`sponsor-img-${selectedIdx}-${currentSponsor.alt}`}
+                                key={`donor-img-${selectedIdx}-${currentDonor.alt}`}
                                 currentPath={
-                                    currentSponsor.img.startsWith("/")
-                                        ? currentSponsor.img
-                                        : `/sponsors/${currentSponsor.img}`
+                                    currentDonor.img.startsWith("/")
+                                        ? currentDonor.img
+                                        : `/donors/${currentDonor.img}`
                                 }
-                                previewOverride={previewUrls[`sponsor-${selectedIdx}`]}
-                                targetDirectory="sponsors"
-                                itemIdentifier={currentSponsor.alt.toLowerCase().replace(/\s+/g, "-")}
+                                previewOverride={previewUrls[`donor-${selectedIdx}`]}
+                                targetDirectory="donors"
+                                itemIdentifier={currentDonor.alt.toLowerCase().replace(/\s+/g, "-")}
                                 onImageSelected={(path, upload) => {
-                                    const key = `sponsor-${selectedIdx}`;
-                                    const bare = path.replace(/^\/sponsors\//, "");
+                                    const key = `donor-${selectedIdx}`;
+                                    const bare = path.replace(/^\/donors\//, "");
                                     if (upload?.previewUrl) {
                                         setPreviewUrls((prev) => ({
                                             ...prev,
                                             [key]: upload.previewUrl,
                                             [path]: upload.previewUrl,
-                                            [`/sponsors/${bare}`]: upload.previewUrl,
+                                            [`/donors/${bare}`]: upload.previewUrl,
                                         }));
                                     } else {
                                         setPreviewUrls((prev) => {
@@ -190,8 +190,8 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
                                             return copy;
                                         });
                                     }
-                                    const next = sponsors.map((s, idx) =>
-                                        idx === selectedIdx ? { ...s, img: bare } : s
+                                    const next = donors.map((d, idx) =>
+                                        idx === selectedIdx ? { ...d, img: bare } : d
                                     );
                                     onChange(next, upload);
                                 }}
@@ -203,4 +203,3 @@ export default function SponsorsEditor({ sponsors, onChange }: SponsorsEditorPro
         </div>
     );
 }
-

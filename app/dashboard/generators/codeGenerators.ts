@@ -1,7 +1,7 @@
 import type { Member } from "@/app/data/members";
 import type { Project } from "@/app/data/projects";
 import type { RecurringEvent, CustomEvent } from "@/app/data/events";
-import type { Sponsor } from "@/app/data/sponsors";
+import type { Donor } from "@/app/data/donors";
 import { locales } from "@/app/data/locales";
 
 function formatJsObject(obj: unknown, indent = 4): string {
@@ -204,20 +204,20 @@ export default eventsData;
 `;
 }
 
-export function generateSponsorsTs(sponsors: Sponsor[]): string {
-    const sponsorsContent = sponsors.map((s) => formatJsObject(s, 4)).join(",\n");
+export function generateDonorsTs(donors: Donor[]): string {
+    const donorsContent = donors.map((d) => formatJsObject(d, 4)).join(",\n");
 
-    return `export interface Sponsor {
+    return `export interface Donor {
     alt: string;
     img: string;
     link: string;
 };
 
-const sponsors : Sponsor[] = [
-${sponsorsContent}
+export const donors: Donor[] = [
+${donorsContent}
 ];
 
-export default sponsors;
+export default donors;
 `;
 }
 
