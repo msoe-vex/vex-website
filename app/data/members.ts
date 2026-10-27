@@ -63,8 +63,7 @@ export const members: Member[] = [
         major: "Computer Science",
         image: "/members/andrew-needham.jpg",
         github: "https://github.com/aneedham0577",
-        linkedin: "https://www.linkedin.com/in/aneedham0577/",
-        contributions: "Team lead for the controls/programming sub team. Led development for VEX AI competition and engineering notebook editor website."
+        linkedin: "https://www.linkedin.com/in/aneedham0577/"
     },
 {
         id: "oliver-rohwer",
@@ -174,7 +173,11 @@ export const members: Member[] = [
         role: "Design Member",
         subsystems: ["Design"],
         status: "active",
-        image: "/branding/RR_Icon.png"
+        gradYear: 2030,
+        major: "Electrical Engineering",
+        image: "/branding/RR_Icon.png",
+        github: "https://github.com/DavidM-37",
+        contributions: "Designed and built our passive toggling mechanism."
     },
 {
         id: "harlan-danes",
