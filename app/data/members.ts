@@ -20,6 +20,18 @@ export interface Member {
 
 export const members: Member[] = [
 {
+        id: "megan-cranston",
+        name: "Megan Cranston",
+        role: "Controls Member",
+        subsystems: ["Controls"],
+        status: "active",
+        gradYear: 2028,
+        major: "Computer Engineering",
+        image: "/branding/RR_Icon.png",
+        linkedin: "www.linkedin.com/in/megan-m-cranston",
+        contributions: "Redesigned the UI for the brain."
+    },
+{
         id: "paul-majka",
         name: "Paul Majka",
         role: "President",
