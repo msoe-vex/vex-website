@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import type { PendingUpload } from "./ImageUploader";
+import { compressClientImage } from "../util/compressClientImage";
 
 interface FeaturesEditorProps {
     features: string[];
@@ -34,26 +35,25 @@ export default function FeaturesEditor({
         }
     }
 
-    const handleFile = (file: File) => {
+    const handleFile = async (file: File) => {
         if (!file.type.startsWith("image/")) {
             alert("Please select an image file (PNG, JPG, WebP).");
             return;
         }
 
-        // Clean filename and ensure extension
-        const rawName = file.name.toLowerCase().replace(/[^a-z0-9_.-]/g, "-");
-        const filename = rawName.includes(".") ? rawName : `${rawName}.jpg`;
-        const targetPath = `public/assets/features/${filename}`;
+        try {
+            // Compress hero background to max 1920px width/height and 82% quality
+            const compressed = await compressClientImage(file, 1920, 0.82);
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const dataUrl = e.target?.result as string;
-            const base64Data = dataUrl.split(",")[1];
+            // Clean filename and ensure extension
+            const rawName = file.name.toLowerCase().replace(/\.[^/.]+$/, "").replace(/[^a-z0-9_-]/g, "-");
+            const filename = `${rawName}.${compressed.extension}`;
+            const targetPath = `public/assets/features/${filename}`;
 
             onAddImage(filename, {
                 targetPath,
-                base64Content: base64Data,
-                previewUrl: dataUrl,
+                base64Content: compressed.base64Data,
+                previewUrl: compressed.dataUrl,
             });
 
             setSelectedFeature(filename);
@@ -61,8 +61,10 @@ export default function FeaturesEditor({
             if (fileInputRef.current) {
                 fileInputRef.current.value = "";
             }
-        };
-        reader.readAsDataURL(file);
+        } catch (err) {
+            console.error("Hero image processing error", err);
+            alert("Failed to process image file.");
+        }
     };
 
     const handleDrop = (e: React.DragEvent) => {

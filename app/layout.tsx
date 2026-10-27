@@ -10,11 +10,13 @@ import siteConfig, { getOrganizationSchema } from "@/app/data/seo";
 const noto = Noto_Sans_Display({
   variable: "--font-noto-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const baloo = Baloo_Tamma_2({
   variable: "--font-baloo-tamma",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

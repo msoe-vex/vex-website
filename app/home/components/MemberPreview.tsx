@@ -103,8 +103,6 @@ export default function MemberPreview() {
                                                         src={member.image || "/branding/RR_Icon.png"}
                                                         alt={member.name}
                                                         fill
-                                                        priority
-                                                        loading="eager"
                                                         sizes="(max-width: 640px) 80px, 96px"
                                                         style={{ objectFit: "cover", objectPosition: "center" }}
                                                     />

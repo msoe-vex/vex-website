@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
+import { compressClientImage } from "../util/compressClientImage";
 
 export interface PendingUpload {
     targetPath: string; // e.g. "public/members/john-doe.png"
@@ -38,36 +39,48 @@ export default function ImageUploader({
         setPreview(previewOverride || currentPath || null);
     }
 
-    const handleFile = (file: File) => {
+    const handleFile = async (file: File) => {
         if (!file.type.startsWith("image/")) {
             alert("Please select an image file (PNG, JPG, WebP, SVG).");
             return;
         }
 
-        const ext = file.name.split(".").pop()?.toLowerCase() || "png";
-        const cleanId = (itemIdentifier || "upload").toLowerCase().replace(/[^a-z0-9_-]/g, "-");
-        const filename = `${cleanId}.${ext}`;
-        const targetPath = `public/${targetDirectory}/${filename}`;
-        const webPath = `/${targetDirectory}/${filename}`;
+        const maxDim = targetDirectory === "assets/members" || targetDirectory === "assets/donors" ? 800 : 1200;
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const dataUrl = e.target?.result as string;
-            const base64Data = dataUrl.split(",")[1];
-            setPreview(dataUrl);
+        try {
+            const compressed = await compressClientImage(file, maxDim, 0.85);
+
+            // If the item already has an existing file extension (e.g. replacing an avatar),
+            // and neither was converted format-wise, retain clean consistency.
+            // Otherwise use the compressed output extension (jpg, png, webp, svg).
+            let ext = compressed.extension;
+            if (currentPath) {
+                const currentExt = currentPath.split(".").pop()?.toLowerCase();
+                // If both are png or both are jpg/jpeg, keep the existing extension to overwrite the file cleanly in-place
+                if (currentExt === "png" && compressed.extension === "png") ext = "png";
+                else if ((currentExt === "jpg" || currentExt === "jpeg") && compressed.extension === "jpg") ext = currentExt as "jpg";
+            }
+
+            const cleanId = (itemIdentifier || "upload").toLowerCase().replace(/[^a-z0-9_-]/g, "-");
+            const filename = `${cleanId}.${ext}`;
+            const targetPath = `public/${targetDirectory}/${filename}`;
+            const webPath = `/${targetDirectory}/${filename}`;
+
+            setPreview(compressed.dataUrl);
 
             onImageSelected(webPath, {
                 targetPath,
-                base64Content: base64Data,
-                previewUrl: dataUrl,
+                base64Content: compressed.base64Data,
+                previewUrl: compressed.dataUrl,
             });
 
-            // Clear input value so selecting the same file again triggers change event
             if (fileInputRef.current) {
                 fileInputRef.current.value = "";
             }
-        };
-        reader.readAsDataURL(file);
+        } catch (err) {
+            console.error("Image processing error", err);
+            alert("Failed to process image file.");
+        }
     };
 
     const handleDrop = (e: React.DragEvent) => {
