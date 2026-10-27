@@ -1,23 +1,16 @@
 .donor-marquee-viewport {
     /* Negative slope chamfer on bottom-left */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+.donor-marquee-viewport::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .donor-track-horizontal {
     display: flex;
     width: max-content;
-    animation: scrollHorizontal 28s linear infinite;
-}
-
-.donor-marquee-viewport:hover .donor-track-horizontal {
-    animation-play-state: paused;
-}
-
-@keyframes scrollHorizontal {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+    will-change: transform;
 }
