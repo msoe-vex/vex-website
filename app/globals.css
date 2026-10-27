@@ -146,6 +146,37 @@ h1,h2,h3,h4,h5,h6 {
 /* ==========================================================================
    Section Layout & Typography Components
    ========================================================================== */
+.section-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-eyebrow-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-content-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1 1 0%;
+}
+
 .section-header-row {
   display: flex;
   flex-direction: column;
@@ -285,6 +316,51 @@ h1,h2,h3,h4,h5,h6 {
   background-color: var(--surface-card);
   border: 1px solid var(--border-card);
   padding: 1.5rem;
+}
+
+.dash-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-card);
+  padding-bottom: 0.75rem;
+}
+
+.dash-delete-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ef4444;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color 0.15s ease;
+}
+
+.dash-delete-btn:hover {
+  color: #f87171;
+}
+
+.dash-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 /* ==========================================================================

@@ -8,11 +8,11 @@ export default function ProjectShowcase() {
 
     return (
         <section id="projects" className="py-8 px-4 bg-[#111111] text-white">
-            <div className="max-w-7xl mx-auto flex flex-col gap-6">
+            <div className="section-container">
                 {/* Section Header */}
                 <div className="section-header-row">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="section-eyebrow-row">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.projects.sectionSubtitle}

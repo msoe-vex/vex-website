@@ -137,11 +137,11 @@ export default function DonorScroller() {
 
     return (
         <section id="donors" className="py-8 px-4 bg-[#0d0d0f] text-white overflow-hidden border-t border-b border-[#1f1f23] select-none">
-            <div className="max-w-7xl mx-auto flex flex-col gap-6">
+            <div className="section-container">
                 {/* Section Header */}
                 <div className="section-header-row">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="section-eyebrow-row">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.donors.sectionSubtitle}

@@ -103,7 +103,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                     </button>
                 </div>
 
-                <div className="flex flex-col gap-1.5 max-h-[600px] overflow-y-auto pr-1">
+                <div className="dash-list-container">
                     {projects.map((p) => {
                         const isSelected = p.id === currentProject?.id;
                         return (
@@ -145,7 +145,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
             {/* Middle: Edit Form */}
             {currentProject && (
                 <div className="lg:col-span-5 dash-editor-card flex flex-col gap-4">
-                    <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-3">
+                    <div className="dash-editor-header">
                         <div>
                             <span className="text-[10px] text-[#c5050c] font-bold uppercase tracking-widest">
                                 Editing Robot / Project
@@ -154,7 +154,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                         </div>
                         <button
                             onClick={() => handleDeleteProject(currentProject.id)}
-                            className="text-xs text-red-500 hover:text-red-400 font-bold uppercase tracking-wider cursor-pointer"
+                            className="dash-delete-btn"
                         >
                             Delete
                         </button>

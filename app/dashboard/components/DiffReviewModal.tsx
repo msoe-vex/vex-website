@@ -151,7 +151,7 @@ export default function DiffReviewModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="modal-overlay">
             <div className="dash-card w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl relative">
                 {/* Header */}
                 <div className="p-5 border-b border-[#2b2b2b] flex items-center justify-between">

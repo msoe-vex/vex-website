@@ -75,7 +75,7 @@ export default function EventsEditor({
 
     return (
         <div className="dash-editor-card flex flex-col gap-6">
-            <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-4">
+            <div className="dash-editor-header">
                 <div className="flex gap-2">
                     <button
                         onClick={() => setActiveTab("recurring")}
@@ -175,7 +175,7 @@ export default function EventsEditor({
                             <div className="md:col-span-1 flex items-end justify-end">
                                 <button
                                     onClick={() => handleDeleteRecurring(idx)}
-                                    className="text-red-500 hover:text-red-400 text-xs font-bold uppercase p-1.5"
+                                    className="dash-delete-btn p-1.5"
                                 >
                                     Delete
                                 </button>
@@ -279,7 +279,7 @@ export default function EventsEditor({
                             <div className="md:col-span-1 flex items-end justify-end">
                                 <button
                                     onClick={() => handleDeleteCustom(idx)}
-                                    className="text-red-500 hover:text-red-400 text-xs font-bold uppercase p-1.5"
+                                    className="dash-delete-btn p-1.5"
                                 >
                                     Delete
                                 </button>

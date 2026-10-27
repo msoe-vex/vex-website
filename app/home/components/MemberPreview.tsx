@@ -44,11 +44,11 @@ export default function MemberPreview() {
 
     return (
         <section id="members-preview" className="py-8 px-4 bg-[#0d0d0d] text-white border-t border-[#1f1f23]">
-            <div className="max-w-7xl mx-auto flex flex-col gap-6">
+            <div className="section-container">
                 {/* Section Header */}
                 <div className="section-header-row">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="section-eyebrow-row">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.members.sectionSubtitle}
@@ -77,7 +77,7 @@ export default function MemberPreview() {
                                 href={`/members#select#${member.id}`}
                                 className="chamfer-card-inner bg-[#161619] flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                             >
-                                <div className="p-5 flex flex-col gap-3 flex-1">
+                                <div className="card-content-body">
                                     <div className="flex items-center justify-between gap-2">
                                         <div className="flex flex-wrap items-center gap-1.5">
                                             {member.subsystems.map((sub) => (

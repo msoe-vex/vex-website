@@ -15,7 +15,7 @@ export default function AnnouncementsEditor({
 
     return (
         <div className="dash-editor-card flex flex-col gap-6">
-            <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-4">
+            <div className="dash-editor-header">
                 <div>
                     <h2 className="text-base font-black uppercase tracking-tight text-white">
                         Meeting Announcement Banner

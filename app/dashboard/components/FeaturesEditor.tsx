@@ -151,7 +151,7 @@ export default function FeaturesEditor({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Images Grid */}
                 <div className="lg:col-span-8 dash-editor-card flex flex-col gap-4">
-                    <div className="flex items-center justify-between border-b border-[#2b2b2b] pb-3">
+                    <div className="dash-editor-header">
                         <span className="text-xs font-bold uppercase tracking-wider text-gray-300">
                             Active Hero Features ({features.length})
                         </span>

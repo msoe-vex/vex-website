@@ -30,7 +30,7 @@ export default function ProjectsPage() {
                 {/* Header */}
                 <div className="border-b-2 border-[#2b2b2b] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="section-eyebrow-container">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.projects.pageSubtitle}
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
                                     </div>
 
                                     {/* Body (Text section) */}
-                                    <div className="p-5 flex flex-col gap-3 flex-1">
+                                    <div className="card-content-body">
                                         <h2 className="text-xl font-bold text-white group-hover:text-[#f87171] transition-colors">
                                             {project.title}
                                         </h2>

@@ -103,7 +103,7 @@ export default function DashboardHeader({
 
             {/* Clear Changes Confirmation Menu Modal */}
             {showConfirmClear && (
-                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+                <div className="modal-overlay">
                     <div className="dash-card w-full max-w-md p-6 shadow-2xl flex flex-col gap-4">
                         <div className="flex flex-col gap-1">
                             <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest">

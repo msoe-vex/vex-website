@@ -45,7 +45,7 @@ export default function MembersPage() {
                 {/* Header */}
                 <div className="border-b-2 border-[#2b2b2b] pb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="section-eyebrow-container">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.members.pageSubtitle}
@@ -124,7 +124,7 @@ export default function MembersPage() {
                                     id={member.id}
                                     className="chamfer-card-inner bg-[#161616] flex flex-col justify-between overflow-hidden h-full"
                                 >
-                                <div className="p-5 flex flex-col gap-3 flex-1">
+                                <div className="card-content-body">
                                     <div className="flex items-center justify-between gap-2">
                                         <div className="flex flex-wrap items-center gap-1.5">
                                             {member.subsystems.map((sub) => (

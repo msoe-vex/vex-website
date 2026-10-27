@@ -3,11 +3,11 @@ import locales from "@/app/data/locales";
 export default function SubFooter() {
     return (
         <section id="contact" className="py-8 px-4 bg-[#141416] border-t-2 border-[#2b2b2b] text-white">
-            <div className="max-w-7xl mx-auto flex flex-col gap-6">
+            <div className="section-container">
                 {/* Section Header: Aligned identically with Donors, Projects, and Members */}
                 <div className="section-header-row">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="section-eyebrow-row">
                             <span className="section-diamond" />
                             <span className="section-eyebrow">
                                 {locales.contact.sectionSubtitle}
