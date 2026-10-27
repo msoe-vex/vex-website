@@ -20,12 +20,24 @@ export default function MembersPage() {
 
     const highlightedId = useHashSelection(onHashSelect);
 
-    const filteredMembers = members.filter((member) => {
-        const matchesSubsystem =
-            selectedSubsystem === "All" || member.subsystems.includes(selectedSubsystem);
-        const matchesStatus = statusFilter === "all" || member.status === statusFilter;
-        return matchesSubsystem && matchesStatus;
-    });
+    const filteredMembers = members
+        .filter((member) => {
+            const matchesSubsystem =
+                selectedSubsystem === "All" || member.subsystems.includes(selectedSubsystem);
+            const matchesStatus = statusFilter === "all" || member.status === statusFilter;
+            return matchesSubsystem && matchesStatus;
+        })
+        .sort((a, b) => {
+            const aIsEboard = a.subsystems.includes("Eboard");
+            const bIsEboard = b.subsystems.includes("Eboard");
+
+            // Eboard members come first
+            if (aIsEboard && !bIsEboard) return -1;
+            if (!aIsEboard && bIsEboard) return 1;
+
+            // Alphabetical by name within each group
+            return a.name.localeCompare(b.name);
+        });
 
     return (
         <main className="min-h-screen bg-[#0d0d0d] text-white py-16 px-4">
