@@ -190,7 +190,7 @@ export const members: Member[] = [
         role: "Notebook Manager",
         subsystems: ["Eboard"],
         status: "active",
-        gradYear: 2029,
+        gradYear: 2030,
         major: "Software Engineering",
         image: "/branding/RR_Icon.png",
         linkedin: "https://www.linkedin.com/in/adamerdmann/"
