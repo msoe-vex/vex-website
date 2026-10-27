@@ -190,10 +190,10 @@ export const members: Member[] = [
         id: "adam-erdmann",
         name: "Adam Erdmann",
         role: "Notebook Manager",
-        subsystems: ["Eboard"],
+        subsystems: ["Design"],
         status: "active",
         gradYear: 2030,
-        major: "Software Engineering",
+        major: "Software/Computer Engineering Dual Major",
         image: "/branding/RR_Icon.png",
         linkedin: "https://www.linkedin.com/in/adamerdmann/"
     }
