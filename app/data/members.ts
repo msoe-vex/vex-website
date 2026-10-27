@@ -119,8 +119,7 @@ export const members: Member[] = [
         gradYear: 2028,
         major: "Computer Science",
         image: "/members/landon-van-mersbergen.png",
-        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/",
-        contributions: "Worked extensively on the hardware and software for the robots year after year. "
+        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/"
     },
 {
         id: "tyler-dretske",
@@ -194,8 +193,10 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Software/Computer Engineering Dual Major",
-        image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/adamerdmann/"
+        image: "/members/adam-erdmann.jpg",
+        github: "https://github.com/adsadsadse",
+        linkedin: "https://www.linkedin.com/in/adamerdmann/",
+        contributions: "Documented most of Design Team's contributions"
     }
 ];
 
