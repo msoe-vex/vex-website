@@ -19,7 +19,7 @@ export interface Member {
 }
 
 export const members: Member[] = [
-{
+    {
         id: "member-0162",
         name: "William Bruch",
         role: "Controls and Design Member",
@@ -27,10 +27,10 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2029,
         major: "Mechanical Engineering",
-        image: "/members/member-0162.jpg",
-        contributions: "Designed and built parts of the robots."
+        image: "/assets/members/member-0162.jpg",
+        contributions: "Designed and built parts of the robots.",
     },
-{
+    {
         id: "evan-weiler",
         name: "Evan Weiler",
         role: "Controls Member",
@@ -38,10 +38,10 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Computer Science",
-        image: "/members/evan-weiler.jpg",
-        contributions: "AI Environments."
+        image: "/assets/members/evan-weiler.jpg",
+        contributions: "AI Environments.",
     },
-{
+    {
         id: "megan-cranston",
         name: "Megan Cranston",
         role: "Controls Member",
@@ -50,10 +50,10 @@ export const members: Member[] = [
         gradYear: 2028,
         major: "Computer Engineering",
         image: "/branding/RR_Icon.png",
-        linkedin: "www.linkedin.com/in/megan-m-cranston",
-        contributions: "Redesigned the UI for the brain."
+        linkedin: "https://www.linkedin.com/in/megan-m-cranston",
+        contributions: "Redesigned the UI for the brain.",
     },
-{
+    {
         id: "paul-majka",
         name: "Paul Majka",
         role: "President",
@@ -62,9 +62,9 @@ export const members: Member[] = [
         gradYear: 2027,
         major: "Mechanical Engineering",
         image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/paulmajka/"
+        linkedin: "https://www.linkedin.com/in/paulmajka/",
     },
-{
+    {
         id: "matthew-griesbach",
         name: "Matthew Griesbach",
         role: "Vice President",
@@ -73,9 +73,9 @@ export const members: Member[] = [
         gradYear: 2027,
         major: "Mechanical Engineering",
         image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/m-griesbach/"
+        linkedin: "https://www.linkedin.com/in/m-griesbach/",
     },
-{
+    {
         id: "andrew-needham",
         name: "Andrew Needham",
         role: "Controls Lead",
@@ -83,11 +83,11 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2027,
         major: "Computer Science",
-        image: "/members/andrew-needham.jpg",
+        image: "/assets/members/andrew-needham.jpg",
         github: "https://github.com/aneedham0577",
-        linkedin: "https://www.linkedin.com/in/aneedham0577/"
+        linkedin: "https://www.linkedin.com/in/aneedham0577/",
     },
-{
+    {
         id: "oliver-rohwer",
         name: "Oliver Rohwer",
         role: "Design Lead",
@@ -96,9 +96,9 @@ export const members: Member[] = [
         gradYear: 2027,
         major: "Mechanical Engineering",
         image: "/assets/members/oliver-rohwer.jpg",
-        linkedin: "https://www.linkedin.com/in/oliver-rohwer/"
+        linkedin: "https://www.linkedin.com/in/oliver-rohwer/",
     },
-{
+    {
         id: "jacob-mcgovern",
         name: "Jacob McGovern",
         role: "Treasurer",
@@ -106,9 +106,9 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2028,
         major: "Mechanical Engineering",
-        image: "/assets/members/jacob-mcgovern.jpg"
+        image: "/assets/members/jacob-mcgovern.jpg",
     },
-{
+    {
         id: "davi-facchini",
         name: "Davi Facchini",
         role: "Design Member",
@@ -116,9 +116,9 @@ export const members: Member[] = [
         status: "alumni",
         gradYear: 2029,
         major: "Electrical Engineering",
-        image: "/branding/RR_Icon.png"
+        image: "/branding/RR_Icon.png",
     },
-{
+    {
         id: "corbin-schaffer",
         name: "Corbin Schaffer",
         role: "Controls Member",
@@ -126,12 +126,12 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2028,
         major: "Computer Science",
-        image: "/members/corbin-schaffer.jpg",
+        image: "/assets/members/corbin-schaffer.jpg",
         github: "https://github.com/IVemesisRunner",
         linkedin: "https://www.linkedin.com/in/corbin-schaffer-1b0a4b1b9/",
-        contributions: "2nd year member, that works on the AI game layout and strategy.\n"
+        contributions: "2nd year member, that works on the AI game layout and strategy.",
     },
-{
+    {
         id: "avery-benjamin",
         name: "Avery Benjamin",
         role: "Controls Member",
@@ -142,9 +142,9 @@ export const members: Member[] = [
         image: "/assets/members/avery-benjamin.jpg",
         github: "https://github.com/Akiisqt",
         linkedin: "https://www.linkedin.com/in/Akiisqt",
-        contributions: "Website Development, and AI Object Detection."
+        contributions: "Website Development, and AI Object Detection.",
     },
-{
+    {
         id: "landon-van-mersbergen",
         name: "Landon Van Mersbergen",
         role: "Controls Member",
@@ -152,10 +152,10 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2028,
         major: "Computer Science",
-        image: "/members/landon-van-mersbergen.png",
-        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/"
+        image: "/assets/members/landon-van-mersbergen.png",
+        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/",
     },
-{
+    {
         id: "tyler-dretske",
         name: "Tyler Dretske",
         role: "Controls Member",
@@ -163,12 +163,12 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Computer Engineering",
-        image: "/members/tyler-dretske.jpg",
+        image: "/assets/members/tyler-dretske.jpg",
         github: "https://github.com/dretsket",
         linkedin: "https://www.linkedin.com/in/tyler-dretske/",
-        contributions: "Worked on custom controller UI and calibration testing software."
+        contributions: "Worked on custom controller UI and calibration testing software.",
     },
-{
+    {
         id: "charles-malohn",
         name: "Charles Malohn",
         role: "Controls Member",
@@ -176,11 +176,11 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2029,
         major: "Computer Engineering",
-        image: "/members/charles-malohn.jpg",
+        image: "/assets/members/charles-malohn.jpg",
         github: "https://github.com/CMalohn16",
-        linkedin: "https://www.linkedin.com/in/6charles-malohn6/"
+        linkedin: "https://www.linkedin.com/in/6charles-malohn6/",
     },
-{
+    {
         id: "ben-reiser",
         name: "Ben Reiser",
         role: "Strategist",
@@ -188,10 +188,10 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Industrial Engineering",
-        image: "/members/ben-reiser.jpg",
-        linkedin: "https://www.linkedin.com/in/benjreiser/"
+        image: "/assets/members/ben-reiser.jpg",
+        linkedin: "https://www.linkedin.com/in/benjreiser/",
     },
-{
+    {
         id: "david-mews",
         name: "David Mews",
         role: "Design Member",
@@ -199,20 +199,20 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Electrical Engineering",
-        image: "/members/david-mews.jpg",
+        image: "/assets/members/david-mews.jpg",
         github: "https://github.com/DavidM-37",
-        contributions: "Designed and built our passive toggling mechanism."
+        contributions: "Designed and built our passive toggling mechanism.",
     },
-{
+    {
         id: "harlan-danes",
         name: "Harlan Danes",
         role: "Design Member",
         subsystems: ["Design"],
         status: "active",
         gradYear: 2030,
-        image: "/branding/RR_Icon.png"
+        image: "/branding/RR_Icon.png",
     },
-{
+    {
         id: "hunter-van-mersbergen",
         name: "Hunter Van Mersbergen",
         role: "Design Member",
@@ -221,9 +221,9 @@ export const members: Member[] = [
         gradYear: 2028,
         major: "Computer Engineering",
         image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/hunter-van-mersbergen/"
+        linkedin: "https://www.linkedin.com/in/hunter-van-mersbergen/",
     },
-{
+    {
         id: "adam-erdmann",
         name: "Adam Erdmann",
         role: "Notebook Manager",
@@ -232,8 +232,8 @@ export const members: Member[] = [
         gradYear: 2029,
         major: "Software Engineering",
         image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/adamerdmann/"
-    }
+        linkedin: "https://www.linkedin.com/in/adamerdmann/",
+    },
 ];
 
 export default members;

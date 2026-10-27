@@ -318,3 +318,11 @@ export default locales;
 `;
 }
 
+export function generateFeaturesTs(featuresList: string[]): string {
+    const sorted = [...featuresList].sort();
+    return `const features: string[] = ${JSON.stringify(sorted)};
+
+export default features;
+`;
+}
+

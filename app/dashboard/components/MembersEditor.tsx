@@ -351,7 +351,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                     previewUrls[currentMember.id] ||
                                     (currentMember.image ? previewUrls[currentMember.image] : undefined)
                                 }
-                                targetDirectory="members"
+                                targetDirectory="assets/members"
                                 itemIdentifier={currentMember.id}
                                 onImageSelected={(path, upload) => {
                                     if (!currentMember) return;

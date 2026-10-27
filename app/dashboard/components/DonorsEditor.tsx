@@ -18,7 +18,7 @@ export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
 
     const getDonorImage = (d: Donor, idx: number) => {
         const key = `donor-${idx}`;
-        const cleanImg = d.img.startsWith("/") || d.img.startsWith("http") ? d.img : `/donors/${d.img}`;
+        const cleanImg = d.img.startsWith("/") || d.img.startsWith("http") ? d.img : `/assets/donors/${d.img}`;
         return previewUrls[key] || previewUrls[cleanImg] || cleanImg;
     };
 
@@ -167,20 +167,20 @@ export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
                                 currentPath={
                                     currentDonor.img.startsWith("/")
                                         ? currentDonor.img
-                                        : `/donors/${currentDonor.img}`
+                                        : `/assets/donors/${currentDonor.img}`
                                 }
                                 previewOverride={previewUrls[`donor-${selectedIdx}`]}
-                                targetDirectory="donors"
+                                targetDirectory="assets/donors"
                                 itemIdentifier={currentDonor.alt.toLowerCase().replace(/\s+/g, "-")}
                                 onImageSelected={(path, upload) => {
                                     const key = `donor-${selectedIdx}`;
-                                    const bare = path.replace(/^\/donors\//, "");
+                                    const bare = path.replace(/^\/assets\/donors\//, "").replace(/^\/donors\//, "");
                                     if (upload?.previewUrl) {
                                         setPreviewUrls((prev) => ({
                                             ...prev,
                                             [key]: upload.previewUrl,
                                             [path]: upload.previewUrl,
-                                            [`/donors/${bare}`]: upload.previewUrl,
+                                            [`/assets/donors/${bare}`]: upload.previewUrl,
                                         }));
                                     } else {
                                         setPreviewUrls((prev) => {

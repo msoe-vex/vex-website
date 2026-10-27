@@ -57,7 +57,7 @@ export default function DonorScroller() {
                                     <div className="flex items-center gap-3">
                                         <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center overflow-hidden">
                                             <Image
-                                                src={`/donors/${donor.img}`}
+                                                src={`/assets/donors/${donor.img}`}
                                                 alt={donor.alt}
                                                 fill
                                                 sizes="64px"

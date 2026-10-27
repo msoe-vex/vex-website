@@ -174,6 +174,52 @@ export async function commitFile(
 }
 
 /**
+ * Deletes a file from a branch.
+ */
+export async function deleteFile(
+    token: string,
+    branch: string,
+    filePath: string,
+    commitMessage: string
+): Promise<void> {
+    const checkUrl = `https://api.github.com/repos/${TARGET_REPO}/contents/${filePath}?ref=${branch}`;
+    const checkRes = await fetch(checkUrl, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github.v3+json",
+        },
+    });
+
+    if (!checkRes.ok) {
+        // File does not exist on this branch, nothing to delete
+        return;
+    }
+
+    const checkData = await checkRes.json();
+    const sha = checkData.sha;
+
+    const delUrl = `https://api.github.com/repos/${TARGET_REPO}/contents/${filePath}`;
+    const delRes = await fetch(delUrl, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github.v3+json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            message: commitMessage,
+            sha,
+            branch,
+        }),
+    });
+
+    if (!delRes.ok) {
+        const err = await delRes.json().catch(() => ({}));
+        throw new Error(`Failed to delete ${filePath}: ${err.message || delRes.status}`);
+    }
+}
+
+/**
  * Creates a Pull Request on msoe-vex/website.
  */
 export async function createPullRequest(

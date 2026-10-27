@@ -5,6 +5,7 @@ import type { PendingUpload } from "./ImageUploader";
 import {
     createBranch,
     commitFile,
+    deleteFile,
     createPullRequest,
     PullRequestResult,
 } from "../services/githubApi";
@@ -21,6 +22,7 @@ interface DiffReviewModalProps {
     token: string;
     pendingChanges: PendingFileChange[];
     pendingUploads: PendingUpload[];
+    pendingDeletes?: string[];
     onPrCreatedSuccess: () => void;
 }
 
@@ -30,6 +32,7 @@ export default function DiffReviewModal({
     token,
     pendingChanges,
     pendingUploads,
+    pendingDeletes = [],
     onPrCreatedSuccess,
 }: DiffReviewModalProps) {
     const [prTitle, setPrTitle] = useState(
@@ -93,6 +96,17 @@ export default function DiffReviewModal({
                 );
             }
 
+            // 2b. Delete removed files if any
+            for (const deletePath of pendingDeletes) {
+                setStatusMessage(`Removing ${deletePath}...`);
+                await deleteFile(
+                    token,
+                    branchName,
+                    deletePath,
+                    `Remove asset ${deletePath} via Dashboard`
+                );
+            }
+
             // 3. Commit updated TypeScript files
             for (const change of pendingChanges) {
                 setStatusMessage(`Committing ${change.filePath}...`);
@@ -114,6 +128,12 @@ export default function DiffReviewModal({
                 pendingUploads.length > 0
                     ? `\n\n### New Media Assets:\n${pendingUploads
                           .map((u) => `- \`${u.targetPath}\``)
+                          .join("\n")}`
+                    : ""
+            }${
+                pendingDeletes.length > 0
+                    ? `\n\n### Removed Assets:\n${pendingDeletes
+                          .map((d) => `- \`${d}\``)
                           .join("\n")}`
                     : ""
             }\n\n*Created with Raider Robotics Dashboard*`;
@@ -219,6 +239,16 @@ export default function DiffReviewModal({
                                         {pendingUploads.length}
                                     </span>
                                 </div>
+                                {pendingDeletes.length > 0 && (
+                                    <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
+                                        <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
+                                            Assets to Remove
+                                        </span>
+                                        <span className="text-xl font-black text-red-400">
+                                            {pendingDeletes.length}
+                                        </span>
+                                    </div>
+                                )}
                                 <div className="bg-[#1a1a1d] border border-[#2b2b2b] p-3">
                                     <span className="text-[10px] text-gray-400 uppercase font-bold block mb-1">
                                         Target Branch

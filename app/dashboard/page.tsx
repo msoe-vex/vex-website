@@ -14,6 +14,7 @@ import { recurringEvents as initRecurring, customEvents as initCustom, Recurring
 import { meetingAnnouncement as initAnnouncement } from "@/app/data/announcements";
 import initialDonors, { Donor } from "@/app/data/donors";
 import initialLocales, { locales as rawLocales } from "@/app/data/locales";
+import initialFeatures from "@/app/data/features";
 
 import {
     getStoredToken,
@@ -33,6 +34,7 @@ import EventsEditor from "./components/EventsEditor";
 import AnnouncementsEditor from "./components/AnnouncementsEditor";
 import DonorsEditor from "./components/DonorsEditor";
 import LocalesEditor from "./components/LocalesEditor";
+import FeaturesEditor from "./components/FeaturesEditor";
 import DiffReviewModal, { PendingFileChange } from "./components/DiffReviewModal";
 import type { PendingUpload } from "./components/ImageUploader";
 
@@ -43,6 +45,7 @@ import {
     generateAnnouncementsTs,
     generateDonorsTs,
     generateLocalesTs,
+    generateFeaturesTs,
 } from "./generators/codeGenerators";
 
 const emptySubscribe = () => () => {};
@@ -55,7 +58,7 @@ function useIsClient() {
     );
 }
 
-type DashboardTab = "members" | "projects" | "events" | "announcements" | "donors" | "locales";
+type DashboardTab = "members" | "projects" | "events" | "announcements" | "donors" | "locales" | "features";
 
 export default function DashboardPage() {
     const isClient = useIsClient();
@@ -81,6 +84,7 @@ export default function DashboardPage() {
     const [showBanner, setShowBanner] = useState<boolean>(initAnnouncement.show);
     const [donors, setDonors] = useState<Donor[]>(initialDonors);
     const [locales, setLocales] = useState<typeof rawLocales>(initialLocales);
+    const [features, setFeatures] = useState<string[]>(initialFeatures);
 
     // Dynamic Baseline State (updated after PR creation to allow successive PRs)
     const [baselineMembers, setBaselineMembers] = useState<Member[]>(initialMembers);
@@ -90,9 +94,11 @@ export default function DashboardPage() {
     const [baselineBanner, setBaselineBanner] = useState<boolean>(initAnnouncement.show);
     const [baselineDonors, setBaselineDonors] = useState<Donor[]>(initialDonors);
     const [baselineLocales, setBaselineLocales] = useState<typeof rawLocales>(initialLocales);
+    const [baselineFeatures, setBaselineFeatures] = useState<string[]>(initialFeatures);
 
-    // Media Uploads
+    // Media Uploads & Deletions
     const [pendingUploads, setPendingUploads] = useState<PendingUpload[]>([]);
+    const [pendingDeletes, setPendingDeletes] = useState<string[]>([]);
 
     // Review Modal Session
     const [isReviewOpen, setIsReviewOpen] = useState(false);
@@ -250,6 +256,15 @@ export default function DashboardPage() {
             });
         }
 
+        // 7. Features
+        if (JSON.stringify(features) !== JSON.stringify(baselineFeatures)) {
+            changes.push({
+                filePath: "app/data/features.ts",
+                description: `Updated homepage hero feature photos (${features.length} images)`,
+                generatedContent: generateFeaturesTs(features),
+            });
+        }
+
         return changes;
     }, [
         members,
@@ -266,6 +281,8 @@ export default function DashboardPage() {
         baselineDonors,
         locales,
         baselineLocales,
+        features,
+        baselineFeatures,
     ]);
 
     // Only commit uploads that are actively referenced in current state
@@ -275,13 +292,22 @@ export default function DashboardPage() {
             const inMembers = members.some((m) => m.image === webPath);
             const inProjects = projects.some((p) => p.image === webPath);
             const inDonors = donors.some(
-                (d) => d.img === webPath || `/donors/${d.img}` === webPath || d.img === webPath.replace(/^\/donors\//, "")
+                (d) =>
+                    d.img === webPath ||
+                    `/assets/donors/${d.img}` === webPath ||
+                    `/donors/${d.img}` === webPath ||
+                    d.img === webPath.replace(/^\/assets\/donors\//, "").replace(/^\/donors\//, "")
             );
-            return inMembers || inProjects || inDonors;
+            const inFeatures = features.some(
+                (f) =>
+                    u.targetPath === `public/assets/features/${f}` ||
+                    webPath === `/assets/features/${f}`
+            );
+            return inMembers || inProjects || inDonors || inFeatures;
         });
-    }, [pendingUploads, members, projects, donors]);
+    }, [pendingUploads, members, projects, donors, features]);
 
-    const totalModifiedCount = pendingChanges.length + activeUploads.length;
+    const totalModifiedCount = pendingChanges.length + activeUploads.length + pendingDeletes.length;
 
     const handlePrSuccess = () => {
         // Reset diff baselines to current edited values so user can make another PR immediately
@@ -292,8 +318,10 @@ export default function DashboardPage() {
         setBaselineBanner(showBanner);
         setBaselineDonors(JSON.parse(JSON.stringify(donors)));
         setBaselineLocales(JSON.parse(JSON.stringify(locales)));
-        // Clear pending uploads
+        setBaselineFeatures(JSON.parse(JSON.stringify(features)));
+        // Clear pending uploads and deletes
         setPendingUploads([]);
+        setPendingDeletes([]);
         // Force the next review modal mount to be completely clean
         setPrSessionId((prev) => prev + 1);
     };
@@ -307,8 +335,10 @@ export default function DashboardPage() {
         setShowBanner(baselineBanner);
         setDonors(JSON.parse(JSON.stringify(baselineDonors)));
         setLocales(JSON.parse(JSON.stringify(baselineLocales)));
-        // Clear any staged media uploads
+        setFeatures(JSON.parse(JSON.stringify(baselineFeatures)));
+        // Clear any staged media uploads and deletes
         setPendingUploads([]);
+        setPendingDeletes([]);
         // Remount active editor to clear internal preview caches
         setDiscardCounter((prev) => prev + 1);
     };
@@ -355,6 +385,7 @@ export default function DashboardPage() {
                     {[
                         { id: "members", label: "Team Members", count: members.length },
                         { id: "projects", label: "Robots & Projects", count: projects.length },
+                        { id: "features", label: "Hero Features", count: features.length },
                         { id: "events", label: "Calendar & Meetings", count: recurringEvents.length + customEvents.length },
                         { id: "announcements", label: "Meeting Banner", count: showBanner ? 1 : 0 },
                         { id: "donors", label: "Donors", count: donors.length },
@@ -405,6 +436,34 @@ export default function DashboardPage() {
                     />
                 )}
 
+                {activeTab === "features" && (
+                    <FeaturesEditor
+                        features={features}
+                        pendingUploads={pendingUploads}
+                        pendingDeletes={pendingDeletes}
+                        onAddImage={(filename, upload) => {
+                            if (!features.includes(filename)) {
+                                setFeatures((prev) => [...prev, filename]);
+                            }
+                            setPendingDeletes((prev) => prev.filter((p) => p !== `public/assets/features/${filename}`));
+                            recordUpload(upload);
+                        }}
+                        onRemoveImage={(filename) => {
+                            setFeatures((prev) => prev.filter((f) => f !== filename));
+                            const deletePath = `public/assets/features/${filename}`;
+                            if (!pendingDeletes.includes(deletePath)) {
+                                setPendingDeletes((prev) => [...prev, deletePath]);
+                            }
+                        }}
+                        onRestoreImage={(filename) => {
+                            if (!features.includes(filename)) {
+                                setFeatures((prev) => [...prev, filename]);
+                            }
+                            setPendingDeletes((prev) => prev.filter((p) => p !== `public/assets/features/${filename}`));
+                        }}
+                    />
+                )}
+
                 {activeTab === "events" && (
                     <EventsEditor
                         recurringEvents={recurringEvents}
@@ -450,6 +509,7 @@ export default function DashboardPage() {
                     token={token}
                     pendingChanges={pendingChanges}
                     pendingUploads={activeUploads}
+                    pendingDeletes={pendingDeletes}
                     onPrCreatedSuccess={handlePrSuccess}
                 />
             )}

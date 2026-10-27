@@ -313,7 +313,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                     previewUrls[currentProject.id] ||
                                     (currentProject.image ? previewUrls[currentProject.image] : undefined)
                                 }
-                                targetDirectory="projects"
+                                targetDirectory="assets/projects"
                                 itemIdentifier={currentProject.id}
                                 onImageSelected={(path, upload) => {
                                     if (!currentProject) return;

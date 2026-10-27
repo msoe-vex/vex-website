@@ -19,7 +19,7 @@ export default function Footer() {
                             className="relative w-24 sm:w-28 h-8 inline-block opacity-85 hover:opacity-100 transition-opacity"
                         >
                             <Image
-                                src="/donors/MSOE.png"
+                                src="/assets/donors/MSOE.png"
                                 alt="Milwaukee School of Engineering"
                                 fill
                                 sizes="(max-width: 640px) 96px, 112px"
