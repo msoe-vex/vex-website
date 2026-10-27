@@ -11,37 +11,36 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-    {
+{
         id: "high-stakes-15",
         title: "High Stakes 15\" Robot",
         season: "2024-2025",
         orderIndex: 2,
-        description: "Our 15-inch compact robot designed for rapid ring scoring, high-stake ladder climbs, and precision mobile goal control.",
+        description: "Our 15-inch compact robot designed to climb the 4' tall ladder at the center of the field, then later pull up our 24\" robot for a high-scoring buddy climb.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
         awards: ["Design Award Finalist"],
         highlights: [
-            "Pneumatic ring intake clamp",
-            "Custom 6-motor 450 RPM direct drive base",
-            "Sub-system odometry tracking with dual optical encoders"
+            "Hot-swappable wing mechanism capable of scoring on the high stake",
+            "Custom 10-motor block used to power the climb and pull"
         ]
     },
-    {
+{
         id: "high-stakes-24",
         title: "High Stakes 24\" Robot",
         season: "2024-2025",
         orderIndex: 1,
-        description: "The primary 24-inch robot built for expansive field coverage, mobile goal manipulation, and multi-tier ladder traversal.",
+        description: "The primary 24-inch robot built for mobile goal manipulation, consistent ring scoring, and drivetrain supremacy.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
         awards: ["Tournament Finalist"],
         highlights: [
-            "Heavy-duty planetary gear lift mechanism",
-            "Multi-sensor autonomous ring filtering",
-            "Reinforced aluminum chassis with low center-of-gravity"
+            "Automatic ring color sorting",
+            "Heavy-duty PTO between the drivetrain and lift arms",
+            "Transmission capable of switching drivetrain between 600 and 120 rpm"
         ]
     },
-    {
+{
         id: "over-under-robot",
         title: "Over Under Robot",
         season: "2023-2024",
@@ -56,7 +55,7 @@ export const projects: Project[] = [
             "Full PID autonomous positioning"
         ]
     },
-    {
+{
         id: "spin-up-robot",
         title: "Spin Up Robot",
         season: "2022-2023",
@@ -71,7 +70,7 @@ export const projects: Project[] = [
             "Optical sensor disc indexing"
         ]
     },
-    {
+{
         id: "tipping-point-robot",
         title: "Tipping Point Robot",
         season: "2021-2022",
