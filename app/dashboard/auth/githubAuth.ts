@@ -18,7 +18,7 @@ export interface AuthStatus {
 const STORAGE_KEY = "msoe_vex_gh_token";
 export const TARGET_ORG = "msoe-vex";
 export const TARGET_REPO = "msoe-vex/vex-website";
-export const DEFAULT_AUTH_WORKER_URL = "https://raider-robotics.brightneonlights1.workers.dev";
+export const DEFAULT_AUTH_WORKER_URL = "https://website.msoevex.workers.dev";
 export const DEFAULT_GITHUB_CLIENT_ID = "Iv23lidYCHFKccOqquno";
 
 export function getStoredToken(): string | null {
