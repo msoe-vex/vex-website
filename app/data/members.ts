@@ -21,14 +21,14 @@ export interface Member {
 export const members: Member[] = [
 {
         id: "member-0162",
-        name: "william bruch",
-        role: "Design Member",
+        name: "William Bruch",
+        role: "Controls and Design Member",
         subsystems: ["Controls", "Design"],
         status: "active",
         gradYear: 2029,
-        major: "mechanical Engineering",
+        major: "Mechanical Engineering",
         image: "/members/member-0162.jpg",
-        contributions: "Helped build and design robots"
+        contributions: "Designed and built parts of the robots."
     },
 {
         id: "evan-weiler",
