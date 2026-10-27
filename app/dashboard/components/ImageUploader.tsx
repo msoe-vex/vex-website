@@ -106,7 +106,7 @@ export default function ImageUploader({
                             alt="Preview"
                             fill
                             sizes="80px"
-                            style={{ objectFit: "cover" }}
+                            className="object-cover"
                             unoptimized={preview.startsWith("data:")}
                         />
                     ) : (

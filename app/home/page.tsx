@@ -47,8 +47,7 @@ export default function Home() {
                             fetchPriority="high"
                             loading="eager"
                             sizes="(max-width: 640px) 288px, (max-width: 768px) 384px, 440px"
-                            className="transition-opacity duration-300 group-hover:opacity-0"
-                            style={{ objectFit: "contain" }}
+                            className="object-contain transition-opacity duration-300 group-hover:opacity-0"
                         />
                         <Image
                             src="/branding/RR_Logo.png"
@@ -56,8 +55,7 @@ export default function Home() {
                             fill
                             loading="eager"
                             sizes="(max-width: 640px) 288px, (max-width: 768px) 384px, 440px"
-                            className="opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
-                            style={{ objectFit: "contain" }}
+                            className="object-contain opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
                         />
                     </div>
 

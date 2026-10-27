@@ -10,21 +10,21 @@ export default function ProjectShowcase() {
         <section id="projects" className="py-8 px-4 bg-[#111111] text-white">
             <div className="max-w-7xl mx-auto flex flex-col gap-6">
                 {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
+                <div className="section-header-row">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.projects.sectionSubtitle}
                             </span>
                         </div>
-                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
+                        <h2 className="section-title">
                             {locales.projects.recentTitle}
                         </h2>
                     </div>
                     <Link
                         href="/projects"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider transition-colors"
+                        className="section-link"
                     >
                         {locales.projects.recentCta}
                     </Link>
@@ -99,7 +99,7 @@ export default function ProjectShowcase() {
                                 </div>
 
                                 {/* Bottom Card Prompt */}
-                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#f87171] group-hover:text-white uppercase tracking-wider">
+                                <div className="card-prompt-bar">
                                     <span>{locales.projects.cardCta}</span>
                                     <span>→</span>
                                 </div>

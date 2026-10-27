@@ -186,7 +186,7 @@ export default function FeaturesEditor({
                                         alt={filename}
                                         fill
                                         sizes="(max-width: 768px) 50vw, 25vw"
-                                        style={{ objectFit: "cover" }}
+                                        className="object-cover"
                                         unoptimized={previewSrc.startsWith("data:")}
                                     />
 
@@ -228,7 +228,7 @@ export default function FeaturesEditor({
                                     alt={selectedFeature}
                                     fill
                                     sizes="350px"
-                                    style={{ objectFit: "contain" }}
+                                    className="object-contain"
                                     unoptimized={getPreviewUrl(selectedFeature).startsWith("data:")}
                                 />
                             </div>

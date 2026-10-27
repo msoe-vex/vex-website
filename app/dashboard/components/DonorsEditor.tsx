@@ -83,7 +83,7 @@ export default function DonorsEditor({ donors, onChange }: DonorsEditorProps) {
                                             alt={d.alt}
                                             fill
                                             sizes="40px"
-                                            style={{ objectFit: "contain", padding: "2px" }}
+                                            className="object-contain p-0.5"
                                             unoptimized={
                                                 getDonorImage(d, idx).startsWith("data:") ||
                                                 getDonorImage(d, idx).startsWith("blob:")

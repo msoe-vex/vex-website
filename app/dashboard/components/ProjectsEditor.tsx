@@ -123,7 +123,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                             alt={p.title}
                                             fill
                                             sizes="40px"
-                                            style={{ objectFit: "contain" }}
+                                            className="object-contain"
                                             unoptimized={
                                                 getProjectImage(p).startsWith("data:") ||
                                                 getProjectImage(p).startsWith("blob:")
@@ -352,7 +352,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                     <div className="chamfer-card-outer">
                         <div className="chamfer-card-inner bg-[#161616] p-5 flex flex-col gap-3">
                             <div className="flex items-center justify-between">
-                                <span className="px-2 py-0.5 bg-[#252525] text-[#c5050c] font-bold text-[10px] uppercase tracking-wider border border-[#333333]">
+                                <span className="subsystem-tag">
                                     {currentProject.season}
                                 </span>
                                 <span className="text-[10px] font-mono text-gray-400">
@@ -366,7 +366,7 @@ export default function ProjectsEditor({ projects, onChange }: ProjectsEditorPro
                                     alt={currentProject.title}
                                     fill
                                     sizes="250px"
-                                    style={{ objectFit: "contain" }}
+                                    className="object-contain"
                                     unoptimized={
                                         getProjectImage(currentProject).startsWith("data:") ||
                                         getProjectImage(currentProject).startsWith("blob:")

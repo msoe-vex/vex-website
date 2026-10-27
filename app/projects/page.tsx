@@ -32,7 +32,7 @@ export default function ProjectsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.projects.pageSubtitle}
                             </span>
                         </div>
@@ -151,7 +151,7 @@ export default function ProjectsPage() {
                                             href={project.githubUrl}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider flex items-center gap-1 transition-colors"
+                                            className="section-link"
                                         >
                                             {locales.projects.sourceLink} ↗
                                         </a>

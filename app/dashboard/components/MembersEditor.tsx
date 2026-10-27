@@ -142,7 +142,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                             alt={m.name}
                                             fill
                                             sizes="32px"
-                                            style={{ objectFit: "cover" }}
+                                            className="object-cover"
                                             unoptimized={
                                                 getMemberImage(m).startsWith("data:") ||
                                                 getMemberImage(m).startsWith("blob:")
@@ -415,7 +415,7 @@ export default function MembersEditor({ members, onChange }: MembersEditorProps)
                                             alt={currentMember.name}
                                             fill
                                             sizes="80px"
-                                            style={{ objectFit: "cover" }}
+                                            className="object-cover"
                                             unoptimized={
                                                 getMemberImage(currentMember).startsWith("data:") ||
                                                 getMemberImage(currentMember).startsWith("blob:")

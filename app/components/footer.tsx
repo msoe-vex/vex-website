@@ -23,7 +23,7 @@ export default function Footer() {
                                 alt="Milwaukee School of Engineering"
                                 fill
                                 sizes="(max-width: 640px) 96px, 112px"
-                                style={{ objectFit: "contain" }}
+                                className="object-contain"
                             />
                         </a>
 
@@ -36,7 +36,7 @@ export default function Footer() {
                                 alt="Raider Robotics Red Logo"
                                 fill
                                 sizes="(max-width: 640px) 112px, 144px"
-                                style={{ objectFit: "contain" }}
+                                className="object-contain"
                             />
                         </Link>
 
@@ -54,7 +54,7 @@ export default function Footer() {
                                 alt="VEX Robotics"
                                 fill
                                 sizes="(max-width: 640px) 96px, 112px"
-                                style={{ objectFit: "contain" }}
+                                className="object-contain"
                             />
                         </a>
                     </div>

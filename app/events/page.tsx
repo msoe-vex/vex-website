@@ -20,7 +20,7 @@ export default function EventsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.events.sectionSubtitle}
                             </span>
                         </div>

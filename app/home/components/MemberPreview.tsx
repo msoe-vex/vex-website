@@ -46,21 +46,21 @@ export default function MemberPreview() {
         <section id="members-preview" className="py-8 px-4 bg-[#0d0d0d] text-white border-t border-[#1f1f23]">
             <div className="max-w-7xl mx-auto flex flex-col gap-6">
                 {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
+                <div className="section-header-row">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.members.sectionSubtitle}
                             </span>
                         </div>
-                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
+                        <h2 className="section-title">
                             {locales.members.previewTitle}
                         </h2>
                     </div>
                     <Link
                         href="/members"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f87171] hover:text-white uppercase tracking-wider transition-colors"
+                        className="section-link"
                     >
                         {locales.members.previewCta}
                     </Link>
@@ -83,7 +83,7 @@ export default function MemberPreview() {
                                             {member.subsystems.map((sub) => (
                                                 <span
                                                     key={sub}
-                                                    className="px-2 py-0.5 bg-[#252525] text-[#f87171] font-bold text-[10px] uppercase tracking-wider border border-[#333333]"
+                                                    className="subsystem-tag"
                                                 >
                                                     {sub}
                                                 </span>
@@ -104,7 +104,7 @@ export default function MemberPreview() {
                                                         alt={member.name}
                                                         fill
                                                         sizes="(max-width: 640px) 80px, 96px"
-                                                        style={{ objectFit: "cover", objectPosition: "center" }}
+                                                        className="object-cover object-center"
                                                     />
                                                 </div>
                                             </div>
@@ -131,7 +131,7 @@ export default function MemberPreview() {
                                 </div>
 
                                 {/* Bottom Card Prompt with darker background and clear divide matching ProjectShowcase */}
-                                <div className="p-3 bg-[#141416] border-t border-[#2b2b2b] flex items-center justify-between text-xs font-bold text-[#f87171] group-hover:text-white uppercase tracking-wider">
+                                <div className="card-prompt-bar">
                                     <span>{locales.members.cardCta}</span>
                                     <span>→</span>
                                 </div>

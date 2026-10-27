@@ -139,15 +139,15 @@ export default function DonorScroller() {
         <section id="donors" className="py-8 px-4 bg-[#0d0d0f] text-white overflow-hidden border-t border-b border-[#1f1f23] select-none">
             <div className="max-w-7xl mx-auto flex flex-col gap-6">
                 {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#2b2b2b] pb-3 gap-2">
+                <div className="section-header-row">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.donors.sectionSubtitle}
                             </span>
                         </div>
-                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
+                        <h2 className="section-title">
                             {locales.donors.sectionTitle}
                         </h2>
                     </div>
@@ -209,7 +209,7 @@ export default function DonorScroller() {
                                                 fill
                                                 sizes="64px"
                                                 draggable={false}
-                                                style={{ objectFit: "contain", padding: "2px" }}
+                                                className="object-contain p-0.5"
                                             />
                                         </div>
                                         <span className="font-semibold text-xs sm:text-sm text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">

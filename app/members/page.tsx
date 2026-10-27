@@ -35,11 +35,11 @@ export default function MembersPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-2">
                             <span className="section-diamond" />
-                            <span className="text-[#f87171] uppercase font-bold text-xs tracking-widest">
+                            <span className="section-eyebrow">
                                 {locales.members.pageSubtitle}
                             </span>
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
+                        <h1 className="section-title">
                             {locales.members.pageTitle}
                         </h1>
                     </div>
@@ -118,7 +118,7 @@ export default function MembersPage() {
                                             {member.subsystems.map((sub) => (
                                                 <span
                                                     key={sub}
-                                                    className="px-2 py-0.5 bg-[#252525] text-[#f87171] font-bold text-[11px] uppercase tracking-wider border border-[#333333]"
+                                                    className="subsystem-tag"
                                                 >
                                                     {sub}
                                                 </span>
@@ -148,7 +148,7 @@ export default function MembersPage() {
                                                         priority={index < 3}
                                                         loading={index < 3 ? "eager" : "lazy"}
                                                         sizes="(max-width: 640px) 96px, 112px"
-                                                        style={{ objectFit: "cover", objectPosition: "center" }}
+                                                        className="object-cover object-center"
                                                     />
                                                 </div>
                                             </div>

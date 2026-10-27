@@ -107,7 +107,7 @@ export default function RandomFeature({ id = "", className = "" }: { id?: string
                         fill
                         priority
                         fetchPriority="high"
-                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        className="object-cover object-center"
                     />
                 </div>
             )}
@@ -127,7 +127,7 @@ export default function RandomFeature({ id = "", className = "" }: { id?: string
                         alt="Raider Robotics Feature"
                         fill
                         priority
-                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        className="object-cover object-center"
                     />
                 </div>
             )}
