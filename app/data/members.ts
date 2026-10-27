@@ -20,18 +20,6 @@ export interface Member {
 
 export const members: Member[] = [
 {
-        id: "evan-weiler",
-        name: "Evan Weiler",
-        role: "Controls Member",
-        subsystems: ["Controls"],
-        status: "active",
-        gradYear: 2030,
-        major: "Computer Science",
-        image: "/branding/RR_Icon.png",
-        github: "https://github.com/Edubs4444",
-        contributions: "AI environments."
-},
-  { 
         id: "megan-cranston",
         name: "Megan Cranston",
         role: "Controls Member",
@@ -143,8 +131,7 @@ export const members: Member[] = [
         gradYear: 2028,
         major: "Computer Science",
         image: "/members/landon-van-mersbergen.png",
-        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/",
-        contributions: "Worked extensively on the hardware and software for the robots year after year. "
+        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/"
     },
 {
         id: "tyler-dretske",
@@ -153,11 +140,9 @@ export const members: Member[] = [
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2030,
-        major: "Computer Engineering",
-        image: "/members/tyler-dretske.jpg",
-        github: "https://github.com/dretsket",
-        linkedin: "https://www.linkedin.com/in/tyler-dretske/",
-        contributions: "Worked on custom controller UI and calibration testing software."
+        major: "Computer Science",
+        image: "/branding/RR_Icon.png",
+        linkedin: "https://www.linkedin.com/in/tyler-dretske/"
     },
 {
         id: "charles-malohn",
@@ -190,7 +175,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Electrical Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/members/david-mews.jpg",
         github: "https://github.com/DavidM-37",
         contributions: "Designed and built our passive toggling mechanism."
     },
@@ -220,7 +205,7 @@ export const members: Member[] = [
         role: "Notebook Manager",
         subsystems: ["Eboard"],
         status: "active",
-        gradYear: 2030,
+        gradYear: 2029,
         major: "Software Engineering",
         image: "/branding/RR_Icon.png",
         linkedin: "https://www.linkedin.com/in/adamerdmann/"
