@@ -4,7 +4,7 @@ import locales from "@/app/data/locales";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#0b0b0d] border-t-2 border-[#1f1f23] text-gray-400 text-xs py-4 px-4">
+        <footer className="bg-[#0b0b0d] border-t-2 border-[#1f1f23] text-gray-300 text-xs py-4 px-4">
             <div className="max-w-7xl mx-auto flex flex-col gap-2.5">
                 
                 {/* Single Combined Inline Row: Logos + Compact Inline Copyrights */}
@@ -59,22 +59,22 @@ export default function Footer() {
                         </a>
                     </div>
 
-                    {/* Compact Copyrights */}
-                    <div className="flex flex-col text-[11px] text-gray-400 leading-tight">
-                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-0">
+                    {/* Compact Copyrights with Accessible WCAG Contrast */}
+                    <div className="flex flex-col text-[11px] text-gray-300 leading-normal">
+                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-0.5">
                             <span>{locales.footer.raiderCopyright}</span>
-                            <span className="text-gray-600">•</span>
+                            <span className="text-gray-400">•</span>
                             <span>{locales.footer.msoeCopyright}</span>
                         </div>
-                        <p className="text-[10px] text-gray-500 m-0 p-0 leading-tight">
+                        <p className="text-[10px] text-gray-300 m-0 p-0 leading-normal">
                             {locales.footer.vexDisclaimer}
                         </p>
                     </div>
                 </div>
 
                 {/* Developer Credit */}
-                <div className="border-t border-[#1a1a1e] pt-2 w-full text-center text-[11px] text-gray-500 m-0">
-                    Built by {locales.footer.creatorName} (<a href={locales.footer.creatorUrl} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline">{locales.footer.creatorHandle}</a>)
+                <div className="border-t border-[#1a1a1e] pt-2 w-full text-center text-[11px] text-gray-300 m-0">
+                    Built by {locales.footer.creatorName} (<a href={locales.footer.creatorUrl} target="_blank" rel="noreferrer" className="text-gray-200 hover:text-white underline">{locales.footer.creatorHandle}</a>)
                 </div>
             </div>
         </footer>
