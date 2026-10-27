@@ -1,6 +1,14 @@
+/* Outer chamfer border wrapper providing a continuous border along all sides including the diagonal cut */
+.donor-marquee-outer {
+    position: relative;
+    padding: 2px;
+    background-color: var(--border-card);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
 .donor-marquee-viewport {
     /* Negative slope chamfer on bottom-left */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(18px - 0.8px) 100%, 0 calc(100% - (18px - 0.8px)));
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
 }

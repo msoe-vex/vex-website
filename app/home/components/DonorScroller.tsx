@@ -166,61 +166,63 @@ export default function DonorScroller() {
 
                 {/* Horizontal Marquee / Interactive Drag Scroller Viewport */}
                 <div className="w-full">
-                    <div
-                        ref={viewportRef}
-                        onPointerDown={handlePointerDown}
-                        onPointerMove={handlePointerMove}
-                        onPointerUp={handlePointerUp}
-                        onPointerCancel={handlePointerUp}
-                        onMouseEnter={() => {
-                            isInteractingRef.current = true;
-                        }}
-                        onMouseLeave={() => {
-                            if (!isDraggingRef.current) {
-                                isInteractingRef.current = false;
-                            }
-                        }}
-                        className={`donor-marquee-viewport relative w-full overflow-x-auto border-2 border-[#2b2b2b] bg-[#161619] shadow-2xl py-4 px-2 ${
-                            isGrabbing ? "cursor-grabbing" : "cursor-grab"
-                        }`}
-                        title="Click and drag or swipe to explore donors"
-                    >
-                        {/* Left & Right gradient fades */}
-                        <div className="pointer-events-none absolute left-0 inset-y-0 w-16 bg-gradient-to-r from-[#161619] to-transparent z-10" />
-                        <div className="pointer-events-none absolute right-0 inset-y-0 w-16 bg-gradient-to-l from-[#161619] to-transparent z-10" />
+                    <div className="donor-marquee-outer shadow-2xl">
+                        <div
+                            ref={viewportRef}
+                            onPointerDown={handlePointerDown}
+                            onPointerMove={handlePointerMove}
+                            onPointerUp={handlePointerUp}
+                            onPointerCancel={handlePointerUp}
+                            onMouseEnter={() => {
+                                isInteractingRef.current = true;
+                            }}
+                            onMouseLeave={() => {
+                                if (!isDraggingRef.current) {
+                                    isInteractingRef.current = false;
+                                }
+                            }}
+                            className={`donor-marquee-viewport relative w-full overflow-x-auto bg-[#161619] py-4 px-2 ${
+                                isGrabbing ? "cursor-grabbing" : "cursor-grab"
+                            }`}
+                            title="Click and drag or swipe to explore donors"
+                        >
+                            {/* Left & Right gradient fades */}
+                            <div className="pointer-events-none absolute left-0 inset-y-0 w-16 bg-gradient-to-r from-[#161619] to-transparent z-10" />
+                            <div className="pointer-events-none absolute right-0 inset-y-0 w-16 bg-gradient-to-l from-[#161619] to-transparent z-10" />
 
-                        {/* Horizontal scrolling track */}
-                        <div className="donor-track-horizontal flex items-center gap-4">
-                            {loopedDonors.map((donor, index) => (
-                                <a
-                                    key={`${donor.alt}-${index}`}
-                                    href={donor.link}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={handleCardClick}
-                                    draggable={false}
-                                    className="donor-card group flex items-center justify-between gap-4 p-3 bg-[#1e1e22] hover:bg-[#28282e] border-l-4 border-transparent hover:border-[#c5050c] transition-all duration-200 flex-shrink-0 min-w-[220px] clip-chamfer-btn pointer-events-auto"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center overflow-hidden">
-                                            <Image
-                                                src={`/assets/donors/${donor.img}`}
-                                                alt={donor.alt}
-                                                fill
-                                                sizes="64px"
-                                                draggable={false}
-                                                className="object-contain p-0.5"
-                                            />
+                            {/* Horizontal scrolling track */}
+                            <div className="donor-track-horizontal flex items-center gap-4">
+                                {loopedDonors.map((donor, index) => (
+                                    <a
+                                        key={`${donor.alt}-${index}`}
+                                        href={donor.link}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        onClick={handleCardClick}
+                                        draggable={false}
+                                        className="donor-card group flex items-center justify-between gap-4 p-3 bg-[#1e1e22] hover:bg-[#28282e] border-l-4 border-transparent hover:border-[#c5050c] transition-all duration-200 flex-shrink-0 min-w-[220px] clip-chamfer-btn pointer-events-auto"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <div className="relative w-16 h-10 flex-shrink-0 bg-white/95 p-1 rounded-sm flex items-center justify-center overflow-hidden">
+                                                <Image
+                                                    src={`/assets/donors/${donor.img}`}
+                                                    alt={donor.alt}
+                                                    fill
+                                                    sizes="64px"
+                                                    draggable={false}
+                                                    className="object-contain p-0.5"
+                                                />
+                                            </div>
+                                            <span className="font-semibold text-xs sm:text-sm text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">
+                                                {donor.alt}
+                                            </span>
                                         </div>
-                                        <span className="font-semibold text-xs sm:text-sm text-gray-200 group-hover:text-white transition-colors whitespace-nowrap">
-                                            {donor.alt}
+                                        <span className="text-xs text-[#f87171] group-hover:translate-x-0.5 transition-transform font-bold">
+                                            ↗
                                         </span>
-                                    </div>
-                                    <span className="text-xs text-[#f87171] group-hover:translate-x-0.5 transition-transform font-bold">
-                                        ↗
-                                    </span>
-                                </a>
-                            ))}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
