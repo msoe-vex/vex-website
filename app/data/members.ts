@@ -119,7 +119,8 @@ export const members: Member[] = [
         gradYear: 2028,
         major: "Computer Science",
         image: "/members/landon-van-mersbergen.png",
-        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/"
+        linkedin: "https://www.linkedin.com/in/landon-van-mersbergen/",
+        contributions: "Worked extensively on the hardware and software for the robots year after year. "
     },
 {
         id: "tyler-dretske",
