@@ -51,7 +51,8 @@ export const members: Member[] = [
         major: "Computer Science",
         image: "/members/andrew-needham.jpg",
         github: "https://github.com/aneedham0577",
-        linkedin: "https://www.linkedin.com/in/aneedham0577/"
+        linkedin: "https://www.linkedin.com/in/aneedham0577/",
+        contributions: "Team lead for the controls/programming sub team. Led development for VEX AI competition and engineering notebook editor website."
     },
 {
         id: "oliver-rohwer",
@@ -128,11 +129,9 @@ export const members: Member[] = [
         subsystems: ["Controls"],
         status: "active",
         gradYear: 2030,
-        major: "Computer Engineering",
-        image: "/members/tyler-dretske.jpg",
-        github: "https://github.com/dretsket",
-        linkedin: "https://www.linkedin.com/in/tyler-dretske/",
-        contributions: "Worked on custom controller UI and calibration testing software."
+        major: "Computer Science",
+        image: "/branding/RR_Icon.png",
+        linkedin: "https://www.linkedin.com/in/tyler-dretske/"
     },
 {
         id: "charles-malohn",
@@ -189,14 +188,12 @@ export const members: Member[] = [
         id: "adam-erdmann",
         name: "Adam Erdmann",
         role: "Notebook Manager",
-        subsystems: ["Design"],
+        subsystems: ["Eboard"],
         status: "active",
-        gradYear: 2030,
-        major: "Software/Computer Engineering Dual Major",
-        image: "/members/adam-erdmann.jpg",
-        github: "https://github.com/adsadsadse",
-        linkedin: "https://www.linkedin.com/in/adamerdmann/",
-        contributions: "Documented most of Design Team's contributions"
+        gradYear: 2029,
+        major: "Software Engineering",
+        image: "/branding/RR_Icon.png",
+        linkedin: "https://www.linkedin.com/in/adamerdmann/"
     }
 ];
 
