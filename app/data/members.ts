@@ -20,6 +20,17 @@ export interface Member {
 
 export const members: Member[] = [
 {
+        id: "evan-weiler",
+        name: "Evan Weiler",
+        role: "Controls Member",
+        subsystems: ["Controls"],
+        status: "active",
+        gradYear: 2030,
+        major: "Computer Science",
+        image: "/branding/RR_Icon.png",
+        contributions: "AI Environments."
+    },
+{
         id: "megan-cranston",
         name: "Megan Cranston",
         role: "Controls Member",
