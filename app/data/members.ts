@@ -93,7 +93,7 @@ export const members: Member[] = [
         role: "Design Lead",
         subsystems: ["Design", "Eboard"],
         status: "active",
-        gradYear: 2028,
+        gradYear: 2027,
         major: "Mechanical Engineering",
         image: "/assets/members/oliver-rohwer.jpg",
         linkedin: "https://www.linkedin.com/in/oliver-rohwer/"
@@ -116,7 +116,7 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2029,
         major: "Electrical Engineering",
-        image: "/assets/members/davi-facchini.jpg",
+        image: "/branding/RR_Icon.png",
         contributions: "Designed Robots"
     },
 {
