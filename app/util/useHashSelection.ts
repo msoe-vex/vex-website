@@ -10,7 +10,10 @@ export interface ArchiveNavigationOptions {
 export function useHashSelection(onSelectOrOptions?: ((targetId: string) => void) | ArchiveNavigationOptions): string | null {
     const [highlightedId, setHighlightedId] = useState<string | null>(null);
     const callbackRef = useRef(onSelectOrOptions);
-    callbackRef.current = onSelectOrOptions;
+
+    useEffect(() => {
+        callbackRef.current = onSelectOrOptions;
+    }, [onSelectOrOptions]);
 
     useEffect(() => {
         let frame = 0;
