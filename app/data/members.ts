@@ -61,8 +61,9 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2027,
         major: "Mechanical Engineering",
-        image: "/branding/RR_Icon.png",
-        linkedin: "https://www.linkedin.com/in/paulmajka/"
+        image: "/assets/members/paul-majka.jpg",
+        linkedin: "https://www.linkedin.com/in/paulmajka/",
+        contributions: "Administrative work."
     },
 {
         id: "matthew-griesbach",
