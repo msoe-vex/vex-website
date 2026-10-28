@@ -93,7 +93,7 @@ export const members: Member[] = [
         role: "Design Lead",
         subsystems: ["Design", "Eboard"],
         status: "active",
-        gradYear: 2027,
+        gradYear: 2028,
         major: "Mechanical Engineering",
         image: "/assets/members/oliver-rohwer.jpg",
         linkedin: "https://www.linkedin.com/in/oliver-rohwer/"
