@@ -14,7 +14,11 @@ test.describe("Website Smoke & Usability Test", () => {
       await expect(page.locator("header")).toBeVisible();
     }
 
-    // 3. Navigation interaction works
+    // 3. Archive deep links synchronize selection and navigation
+    await page.goto("/projects#select#high-stakes-15");
+    await expect(page.locator("#high-stakes-15").locator("..")).toHaveClass(/selected/);
+
+    // 4. Navigation interaction works
     const projectsLink = page.locator('header a[href*="/projects"]').first();
     if (await projectsLink.isVisible()) {
       await projectsLink.click();

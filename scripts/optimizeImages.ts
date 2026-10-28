@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import { ASSET_POLICIES, ASSET_DIRECTORIES } from "../app/util/assetPolicy";
 
 interface CompressionRule {
     folder: string;
@@ -9,39 +10,25 @@ interface CompressionRule {
     quality: number;
 }
 
-const RULES: CompressionRule[] = [
-    {
-        folder: "public/assets/members",
-        maxWidth: 800,
-        maxHeight: 800,
-        quality: 82,
-    },
-    {
-        folder: "public/assets/features",
-        maxWidth: 1920,
-        maxHeight: 1080,
-        quality: 80,
-    },
-    {
-        folder: "public/assets/donors",
-        maxWidth: 800,
-        maxHeight: 800,
-        quality: 85,
-    },
-    {
-        folder: "public/assets/projects",
-        maxWidth: 1200,
-        maxHeight: 900,
-        quality: 82,
-    },
+const RULES: CompressionRule[] = ASSET_DIRECTORIES.map((directory) => {
+    const policy = ASSET_POLICIES[directory];
+    return {
+        folder: `public/${directory}`,
+        maxWidth: policy.maxDimension,
+        maxHeight: policy.maxDimension,
+        quality: Math.round(policy.quality * 100),
+    };
+});
+
+RULES.push(
     {
         // Minimal compression for branding: higher quality, no downscaling unless excessively oversized
         folder: "public/branding",
         maxWidth: 1200,
         maxHeight: 1200,
         quality: 92,
-    },
-];
+    }
+);
 
 async function optimizeImageFile(filePath: string, rule: CompressionRule): Promise<boolean> {
     try {

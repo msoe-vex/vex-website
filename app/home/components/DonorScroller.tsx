@@ -46,6 +46,12 @@ export default function DonorScroller() {
 
         let animationFrameId: number;
         const scrollSpeedPxPerSec = 45; // Smooth automatic scroll rate
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        const handleVisibility = () => {
+            prevTimestampRef.current = null;
+        };
+        document.addEventListener("visibilitychange", handleVisibility);
 
         const step = (timestamp: number) => {
             if (prevTimestampRef.current === null) {
@@ -54,7 +60,7 @@ export default function DonorScroller() {
             const delta = (timestamp - prevTimestampRef.current) / 1000;
             prevTimestampRef.current = timestamp;
 
-            if (viewport && !isInteractingRef.current) {
+            if (viewport && !isInteractingRef.current && !document.hidden && !prefersReducedMotion.matches) {
                 viewport.scrollLeft += scrollSpeedPxPerSec * delta;
 
                 // Seamless infinite wrap around boundary using cached width
@@ -75,6 +81,7 @@ export default function DonorScroller() {
 
         return () => {
             resizeObserver.disconnect();
+            document.removeEventListener("visibilitychange", handleVisibility);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);

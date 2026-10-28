@@ -41,9 +41,6 @@ export default function DiffReviewModal({
     const [prDescription, setPrDescription] = useState(
         "Automated content update submitted via Raider Robotics Web Dashboard."
     );
-    const [previewingFile, setPreviewingFile] = useState<string | null>(
-        pendingChanges[0]?.filePath || null
-    );
     const [statusMessage, setStatusMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [createdPr, setCreatedPr] = useState<PullRequestResult | null>(null);
@@ -61,14 +58,6 @@ export default function DiffReviewModal({
         setPrDescription("Automated content update submitted via Raider Robotics Web Dashboard.");
         onClose();
     };
-
-    const activePreviewPath =
-        pendingChanges.some((c) => c.filePath === previewingFile)
-            ? previewingFile
-            : pendingChanges[0]?.filePath || null;
-
-    const currentPreviewContent =
-        pendingChanges.find((c) => c.filePath === activePreviewPath)?.generatedContent || "";
 
     const handleSubmitPr = async () => {
         setIsSubmitting(true);
@@ -284,37 +273,6 @@ export default function DiffReviewModal({
                                     />
                                 </div>
                             </div>
-
-                            {/* Code Preview Section */}
-                            {pendingChanges.length > 0 && (
-                                <div className="flex flex-col gap-2">
-                                    <div className="flex items-center justify-between">
-                                        <label className="dash-preview-label">
-                                            Generated TypeScript Preview
-                                        </label>
-                                        <div className="flex gap-1">
-                                            {pendingChanges.map((c) => (
-                                                <button
-                                                    key={c.filePath}
-                                                    type="button"
-                                                    onClick={() => setPreviewingFile(c.filePath)}
-                                                    className={`px-2 py-0.5 text-[10px] font-mono cursor-pointer ${
-                                                        activePreviewPath === c.filePath
-                                                            ? "dash-tab-active"
-                                                            : "dash-tab-inactive"
-                                                    }`}
-                                                >
-                                                    {c.filePath.split("/").pop()}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-[#0e0e10] border border-[#2b2b2b] p-3 max-h-56 overflow-y-auto font-mono text-[11px] text-gray-300 whitespace-pre">
-                                        {currentPreviewContent || "No preview available."}
-                                    </div>
-                                </div>
-                            )}
 
                             {statusMessage && (
                                 <div className="p-3 bg-blue-950/40 border border-blue-700/50 text-blue-200 text-xs flex items-center gap-2">

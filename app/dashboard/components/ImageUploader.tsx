@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { compressClientImage } from "../util/compressClientImage";
+import { getAssetPolicy } from "@/app/util/assetPolicy";
 
 export interface PendingUpload {
     targetPath: string; // e.g. "public/members/john-doe.png"
@@ -45,10 +46,10 @@ export default function ImageUploader({
             return;
         }
 
-        const maxDim = targetDirectory === "assets/members" || targetDirectory === "assets/donors" ? 800 : 1200;
+        const policy = getAssetPolicy(targetDirectory);
 
         try {
-            const compressed = await compressClientImage(file, maxDim, 0.85);
+            const compressed = await compressClientImage(file, policy.maxDimension, policy.quality);
 
             // If the item already has an existing file extension (e.g. replacing an avatar),
             // and neither was converted format-wise, retain clean consistency.

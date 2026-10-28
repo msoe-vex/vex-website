@@ -1,0 +1,21 @@
+/* Dashboard visual module. Shared tokens are supplied by app/globals.css. */
+.dash-card,.dash-sidebar-card,.dash-editor-card{background-color:var(--surface-card);border:1px solid var(--border-card)}
+.dash-sidebar-card{padding:1rem}.dash-editor-card{padding:1.5rem}
+.dash-editor-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-card);padding-bottom:.75rem}
+.dash-delete-btn{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#ef4444;cursor:pointer;background:transparent;border:none;transition:color .15s ease}.dash-delete-btn:hover{color:#f87171}
+.dash-list-container{display:flex;flex-direction:column;gap:.375rem;max-height:600px;overflow-y:auto;padding-right:.25rem}
+.modal-overlay{position:fixed;inset:0;z-index:50;background-color:rgba(0,0,0,.8);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:1rem}
+.dash-eyebrow,.dash-preview-label,.dash-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af}
+.dash-eyebrow{font-size:10px;color:var(--brand-red)}.dash-section-title{font-size:.875rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#fff}
+.dash-preview-label{color:#9ca3af}.dash-tab{padding:.5rem 1rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:background-color .15s ease,color .15s ease;border:none}
+.dash-tab-active{background-color:var(--brand-red);color:#fff}.dash-tab-inactive{background-color:#202022;color:#9ca3af}.dash-tab-inactive:hover{color:#fff}
+.dash-stat-box{background-color:#1a1a1d;border:1px solid var(--border-card);padding:.75rem}
+.btn-add{background-color:var(--brand-red);color:#fff;font-size:11px;font-weight:700;padding:.375rem .75rem;text-transform:uppercase;cursor:pointer;border:none;transition:background-color .15s ease}.btn-add:hover{background-color:var(--brand-red-hover)}
+.dash-channel-card{background-color:#1c1c20;border:1px solid #2e2e34;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.dash-label{display:block;margin-bottom:.25rem}.dash-input,.dash-textarea{width:100%;background-color:var(--surface-input);border:1px solid var(--border-input);padding:.5rem .75rem;font-size:.75rem;color:#fff;transition:border-color .15s ease}
+.dash-textarea{line-height:1.25rem}.dash-input:focus,.dash-textarea:focus{outline:none;border-color:var(--brand-red)}.dash-input::placeholder,.dash-textarea::placeholder{color:#6b7280}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;padding:.5rem 1rem;cursor:pointer;border:none;transition:background-color .15s ease,opacity .15s ease}
+.btn-primary{background-color:var(--brand-red);color:#fff}.btn-primary:hover:not(:disabled){background-color:var(--brand-red-hover)}.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-secondary{background-color:var(--surface-btn);color:#e5e7eb;padding:.5rem .75rem;border:1px solid var(--border-input)}.btn-secondary:hover:not(:disabled){background-color:var(--surface-btn-hover);color:#fff}.btn-secondary:disabled{opacity:.4;cursor:not-allowed}
+.dash-list-item{width:100%;text-align:left;padding:.625rem .75rem;border-left-width:4px;transition:all .15s ease;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.dash-list-item-active{background-color:var(--surface-hover);border-left-color:var(--brand-red);color:#fff}.dash-list-item-inactive{background-color:#18181b;border-left-color:transparent;color:#d1d5db}.dash-list-item-inactive:hover{border-left-color:var(--border-input)}
