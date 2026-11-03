@@ -232,7 +232,7 @@ export const members: Member[] = [
         id: "adam-erdmann",
         name: "Adam Erdmann",
         role: "Notebook Manager",
-        subsystems: ["Eboard"],
+        subsystems: ["Design"],
         status: "active",
         gradYear: 2029,
         major: "Software Engineering",
