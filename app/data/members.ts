@@ -213,9 +213,9 @@ export const members: Member[] = [
         status: "active",
         gradYear: 2030,
         major: "Mechanical Engineering",
-        image: "/branding/RR_Icon.png",
+        image: "/assets/members/harlan-danes.jpg",
         github: "https://github.com/Drake45Pat",
-        contributions: "Claw prototyping."
+        contributions: "Design Member"
     },
 {
         id: "hunter-van-mersbergen",
