@@ -238,7 +238,7 @@ export const members: Member[] = [
         image: "/assets/members/adam-erdmann.jpg",
         github: "https://github.com/adsadsadse",
         linkedin: "https://www.linkedin.com/in/adamerdmann/",
-        contributions: "Wrote a majority of the design team documentation in 2026"
+        contributions: "Wrote a majority of the design team documentation in 2026."
     }
 ];
 
