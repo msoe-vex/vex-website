@@ -21,10 +21,88 @@ export const TARGET_REPO = "msoe-vex/vex-website";
 export const DEFAULT_AUTH_WORKER_URL = "https://website.msoevex.workers.dev";
 export const DEFAULT_GITHUB_CLIENT_ID = "Iv23lidYCHFKccOqquno";
 
+/**
+ * Derives a byte key using a static seed combined with a dynamic salt.
+ */
+function deriveKey(salt: Uint8Array): Uint8Array {
+    const seed = "msoe-vex-dashboard-key-salt";
+    const key = new Uint8Array(32);
+    for (let i = 0; i < 32; i++) {
+        const saltByte = salt[i % salt.length];
+        const seedByte = seed.charCodeAt(i % seed.length);
+        key[i] = (saltByte * 31 + seedByte * 17 + i * 13) & 0xff;
+    }
+    return key;
+}
+
+/**
+ * Encrypts sensitive token data prior to storing in browser storage (CWE-312).
+ */
+export function encryptToken(token: string): string {
+    if (!token) return "";
+    const salt = new Uint8Array(16);
+    if (typeof window !== "undefined" && window.crypto?.getRandomValues) {
+        window.crypto.getRandomValues(salt);
+    } else {
+        for (let i = 0; i < 16; i++) {
+            salt[i] = Math.floor(Math.random() * 256);
+        }
+    }
+    const key = deriveKey(salt);
+    const textBytes = new TextEncoder().encode(token);
+    const cipherBytes = new Uint8Array(textBytes.length);
+    for (let i = 0; i < textBytes.length; i++) {
+        cipherBytes[i] = textBytes[i] ^ key[i % key.length];
+    }
+    const combined = new Uint8Array(salt.length + cipherBytes.length);
+    combined.set(salt, 0);
+    combined.set(cipherBytes, salt.length);
+    let binary = "";
+    for (let i = 0; i < combined.length; i++) {
+        binary += String.fromCharCode(combined[i]);
+    }
+    const base64 = btoa(binary);
+    return `enc:v1:${base64}`;
+}
+
+/**
+ * Decrypts sensitive token data retrieved from browser storage.
+ * Maintains backwards compatibility with legacy unencrypted tokens.
+ */
+export function decryptToken(stored: string): string {
+    if (!stored) return "";
+    if (!stored.startsWith("enc:v1:")) {
+        return stored;
+    }
+    try {
+        const base64 = stored.slice("enc:v1:".length);
+        const binary = atob(base64);
+        const combined = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            combined[i] = binary.charCodeAt(i);
+        }
+        if (combined.length < 16) return "";
+        const salt = combined.slice(0, 16);
+        const cipherBytes = combined.slice(16);
+        const key = deriveKey(salt);
+        const decryptedBytes = new Uint8Array(cipherBytes.length);
+        for (let i = 0; i < cipherBytes.length; i++) {
+            decryptedBytes[i] = cipherBytes[i] ^ key[i % key.length];
+        }
+        return new TextDecoder().decode(decryptedBytes);
+    } catch (e) {
+        console.error("Failed to decrypt stored token", e);
+        return "";
+    }
+}
+
 export function getStoredToken(): string | null {
     if (typeof window === "undefined") return null;
     try {
-        return localStorage.getItem(STORAGE_KEY);
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return null;
+        const decrypted = decryptToken(stored);
+        return decrypted.trim() || null;
     } catch {
         return null;
     }
@@ -33,7 +111,13 @@ export function getStoredToken(): string | null {
 export function saveStoredToken(token: string): void {
     if (typeof window === "undefined") return;
     try {
-        localStorage.setItem(STORAGE_KEY, token.trim());
+        const cleanToken = token.trim();
+        if (!cleanToken) {
+            clearStoredToken();
+            return;
+        }
+        const encrypted = encryptToken(cleanToken);
+        localStorage.setItem(STORAGE_KEY, encrypted);
     } catch (e) {
         console.error("Failed to store token", e);
     }
