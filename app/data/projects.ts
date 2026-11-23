@@ -12,14 +12,63 @@ export interface Project {
 
 export const projects: Project[] = [
 {
+        id: "project-3639",
+        title: "Tower Takeover Robot",
+        season: "2025-2026",
+        orderIndex: 10,
+        description: "High-performance collegiate robot platform built for competitive match play.",
+        image: "/branding/RR_Logo.png",
+        githubUrl: "https://github.com/msoe-vex",
+        highlights: ["Custom 6-motor drivetrain"]
+    },
+{
+        id: "project-3793",
+        title: "Change Up Robot",
+        season: "2020-2021",
+        orderIndex: 9,
+        description: "High-performance collegiate robot platform built for competitive match play.",
+        image: "/branding/RR_Logo.png",
+        githubUrl: "https://github.com/msoe-vex",
+        highlights: ["Custom 6-motor drivetrain"]
+    },
+{
+        id: "project-2192",
+        title: "Override Skills Robot",
+        season: "2025-2026",
+        orderIndex: 1,
+        description: "High-performance collegiate robot platform built for competitive match play.",
+        image: "/branding/RR_Logo.png",
+        githubUrl: "https://github.com/msoe-vex",
+        highlights: ["Custom 6-motor drivetrain"]
+    },
+{
+        id: "project-5008",
+        title: "Spin Up Worlds Robot",
+        season: "2025-2026",
+        orderIndex: 2,
+        description: "High-performance collegiate robot platform built for competitive match play.",
+        image: "/branding/RR_Logo.png",
+        githubUrl: "https://github.com/msoe-vex",
+        highlights: ["Custom 6-motor drivetrain"]
+    },
+{
+        id: "project-4313",
+        title: "Spin Up Skills Robot",
+        season: "2025-2026",
+        orderIndex: 3,
+        description: "High-performance collegiate robot platform built for competitive match play.",
+        image: "/branding/RR_Logo.png",
+        githubUrl: "https://github.com/msoe-vex",
+        highlights: ["Custom 6-motor drivetrain"]
+    },
+{
         id: "high-stakes-15",
         title: "High Stakes 15\" Robot",
         season: "2024-2025",
-        orderIndex: 2,
+        orderIndex: 4,
         description: "Our 15-inch compact robot designed to climb the 4' tall ladder at the center of the field, then later pull up our 24\" robot for a high-scoring buddy climb.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
-        awards: ["Design Award Finalist"],
         highlights: [
             "Hot-swappable wing mechanism capable of scoring on the high stake",
             "Custom 10-motor block used to power the climb and pull"
@@ -29,7 +78,7 @@ export const projects: Project[] = [
         id: "high-stakes-24",
         title: "High Stakes 24\" Robot",
         season: "2024-2025",
-        orderIndex: 1,
+        orderIndex: 5,
         description: "The primary 24-inch robot built for mobile goal manipulation, consistent ring scoring, and drivetrain supremacy.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
@@ -44,7 +93,7 @@ export const projects: Project[] = [
         id: "over-under-robot",
         title: "Over Under Robot",
         season: "2023-2024",
-        orderIndex: 3,
+        orderIndex: 6,
         description: "Competed at VEX U World Championship with rapid triball sorting, dynamic barrier clearing, and high-tier elevation.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
@@ -59,7 +108,7 @@ export const projects: Project[] = [
         id: "spin-up-robot",
         title: "Spin Up Robot",
         season: "2022-2023",
-        orderIndex: 1,
+        orderIndex: 7,
         description: "Built for high-velocity disc shooting into the elevated high goal and rapid expansion across endgame tiles.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
@@ -74,7 +123,7 @@ export const projects: Project[] = [
         id: "tipping-point-robot",
         title: "Tipping Point Robot",
         season: "2021-2022",
-        orderIndex: 1,
+        orderIndex: 8,
         description: "Engineered for rapid mobile goal possession, platform balancing, and high-branch ring placement.",
         image: "/branding/RR_Logo.png",
         githubUrl: "https://github.com/msoe-vex",
